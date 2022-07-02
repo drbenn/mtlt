@@ -1,0 +1,24 @@
+<form [formGroup]="form1" (ngSubmit)="onSubmit()">
+  <label for="">Company</label>
+  <input type="text" placeholder="Company" formControlName="company" />
+  &nbsp;&nbsp;
+
+  <label for="">Address</label>
+  <input type="text" placeholder="Address" formControlName="address" />
+
+  &nbsp;&nbsp;Add a new user
+  <button type="button" (click)="addUser()">Add</button>
+  <br />
+
+  <br />
+
+  <div *ngFor="let u of userArray.controls; index as i">
+    <span>Set {{ i + 1 }}</span>
+    <app-input [index]="i + 1" [inputFormGroup]="$any(u)"></app-input>
+    <button (click)="removeUser(i)" *ngIf="activeRow === i + 1">Delete</button>
+    <p>{{ i }}</p>
+  </div>
+
+  <button type="submit">Submit</button>
+  <p>form group values: {{ form1.value | json }}</p>
+</form>

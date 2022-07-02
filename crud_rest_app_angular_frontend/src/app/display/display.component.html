@@ -1,0 +1,5 @@
+<p>display works!</p>
+<div *ngFor="let item of users$ | async">
+  <div>{{ item.username }}</div>
+  <div>{{ item.description }}</div>
+</div>

@@ -9,7 +9,6 @@ import { FormFactoryService } from 'src/app/core/services/exerciseInput.service'
 })
 export class InputArrayComponent implements OnInit {
   exerciseForm: FormGroup = new FormGroup({});
-  activeRow: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -21,23 +20,21 @@ export class InputArrayComponent implements OnInit {
       date: new Date(),
       exerciseType: [''],
       exercise: [''],
-      userArray: new FormArray([]),
+      setArray: new FormArray([]),
     });
   }
 
-  get userArray() {
-    return <FormArray>this.exerciseForm.get('userArray');
+  get setArray() {
+    return <FormArray>this.exerciseForm.get('setArray');
   }
 
-  addUser() {
-    this.activeRow += 1;
+  addSet() {
     let newSet = this.formFactoryService.getSetForm();
-    this.userArray.push(newSet);
+    this.setArray.push(newSet);
   }
 
   removeUser(i: number) {
-    this.activeRow -= 1;
-    this.userArray.removeAt(i);
+    this.setArray.removeAt(i);
   }
 
   onSubmit() {

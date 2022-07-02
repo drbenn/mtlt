@@ -11,7 +11,13 @@ import { FormFactoryService } from 'src/app/core/services/exerciseInput.service'
 })
 export class InputComponent implements OnInit {
   @Input() inputFormGroup = this.fb.group({});
-  @Input() index: number;
+
+  @Input() set i(value: number) {
+    this.index = value;
+    this.inputFormGroup.get('setNumber')?.setValue(value);
+  }
+
+  index: number;
 
   // workingSets = [1];
   // workingVolDisplay: number = 0;
@@ -32,9 +38,5 @@ export class InputComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.inputFormGroup.get('setNumber')?.setValue(this.index);
-    // let setNumber = this.inputFormGroup.get('setNumber');
-    // if (setNumber) {
-    //   setNumber.setValue(this.index);
-    // }
   }
 }

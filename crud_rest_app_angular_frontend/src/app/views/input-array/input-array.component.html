@@ -1,21 +1,25 @@
 <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
-  <label for="">Exerise Type</label>
-  <input type="text" placeholder="Exerise Type" formControlName="exeriseType" />
+  <label for="">Exercise Type</label>
+  <input
+    type="text"
+    placeholder="Execise Type"
+    formControlName="exerciseType"
+  />
   &nbsp;&nbsp;
 
   <label for="">Exercise</label>
   <input type="text" placeholder="Exercise" formControlName="exercise" />
 
-  &nbsp;&nbsp;Add a new user
-  <button type="button" (click)="addUser()">Add</button>
+  &nbsp;&nbsp;Add Set
+  <button type="button" (click)="addSet()">Add</button>
   <br />
 
   <br />
 
-  <div *ngFor="let u of userArray.controls; index as i">
+  <div *ngFor="let s of setArray.controls; index as i">
     <span>Set {{ i + 1 }}</span>
-    <app-input [index]="i + 1" [inputFormGroup]="$any(u)"></app-input>
-    <button (click)="removeUser(i)" *ngIf="activeRow === i + 1">Delete</button>
+    <app-input [i]="i + 1" [inputFormGroup]="$any(s)"></app-input>
+    <button (click)="removeUser(i)">Delete</button>
     <p>{{ i }}</p>
   </div>
 

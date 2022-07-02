@@ -8,7 +8,7 @@ import { FormFactoryService } from 'src/app/core/services/exerciseInput.service'
   styleUrls: ['./input-array.component.scss'],
 })
 export class InputArrayComponent implements OnInit {
-  form1: FormGroup = new FormGroup({});
+  exerciseForm: FormGroup = new FormGroup({});
   activeRow: number = 0;
 
   constructor(
@@ -17,21 +17,21 @@ export class InputArrayComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form1 = this.fb.group({
+    this.exerciseForm = this.fb.group({
       date: new Date(),
-      company: [''],
-      address: [''],
+      exerciseType: [''],
+      exercise: [''],
       userArray: new FormArray([]),
     });
   }
 
   get userArray() {
-    return <FormArray>this.form1.get('userArray');
+    return <FormArray>this.exerciseForm.get('userArray');
   }
 
   addUser() {
     this.activeRow += 1;
-    let newSet = this.formFactoryService.getUserForm();
+    let newSet = this.formFactoryService.getSetForm();
     this.userArray.push(newSet);
   }
 
@@ -42,6 +42,6 @@ export class InputArrayComponent implements OnInit {
 
   onSubmit() {
     console.log('form submitted');
-    console.log(this.form1.value);
+    console.log(this.exerciseForm.value);
   }
 }

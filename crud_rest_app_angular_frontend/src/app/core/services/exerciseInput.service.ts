@@ -7,11 +7,11 @@ import { FormBuilder } from '@angular/forms';
 export class FormFactoryService {
   constructor(private fb: FormBuilder) {}
 
-  getUserForm() {
+  getSetForm() {
     return this.fb.group({
       setNumber: [''],
-      name: [''],
-      gender: [''],
+      weight: [''],
+      reps: [''],
     });
   }
 }

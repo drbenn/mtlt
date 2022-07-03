@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormFactoryService } from 'src/app/core/services/exerciseInput.service';
 
 @Component({
@@ -17,9 +17,9 @@ export class InputArrayComponent implements OnInit {
 
   ngOnInit(): void {
     this.exerciseForm = this.fb.group({
-      date: new Date(),
-      exerciseType: [''],
-      exercise: [''],
+      exerciseDate: new Date(),
+      exerciseType: ['', [Validators.required, Validators.minLength(3)]],
+      exercise: ['', [Validators.required, Validators.minLength(3)]],
       setArray: new FormArray([]),
     });
   }
@@ -31,6 +31,7 @@ export class InputArrayComponent implements OnInit {
   addSet() {
     let newSet = this.formFactoryService.getSetForm();
     this.setArray.push(newSet);
+    console.log(this.exerciseForm);
   }
 
   removeUser(i: number) {
@@ -38,7 +39,14 @@ export class InputArrayComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('form submitted');
+    console.warn('form submitted');
     console.log(this.exerciseForm.value);
+  }
+
+  closeExercise() {
+    console.log('exercise closing');
+    alert(
+      'Are you really done? This will also remove the exercise for editing'
+    );
   }
 }

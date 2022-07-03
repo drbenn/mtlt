@@ -11,6 +11,8 @@
   placeholder="Set Number"
   [formControl]="$any(inputFormGroup.controls['setNumber'])"
   type="number"
+  required
+  maxlength="1"
 />
 
 <label>Weight</label>
@@ -19,6 +21,8 @@
   placeholder="Weight"
   [formControl]="$any(inputFormGroup.controls['weight'])"
   type="number"
+  required
+  maxlength="2"
 />
 &nbsp;&nbsp;
 <label>Reps</label>
@@ -26,4 +30,6 @@
   placeholder="Reps"
   [formControl]="$any(inputFormGroup.controls['reps'])"
   type="number"
+  required
+  maxlength="15"
 />

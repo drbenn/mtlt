@@ -70,6 +70,8 @@ export class InputComponent implements OnInit {
   }
 
   outputVolumeToParentForDisplay(vol: string) {
+    console.log(`outputvole: ${vol}`);
+
     this.exerciseTotalVolume.emit(vol);
   }
 }

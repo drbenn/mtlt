@@ -11,7 +11,7 @@ export class InputArrayComponent implements OnInit {
   exerciseForm: FormGroup = new FormGroup({});
 
   setAdded_activateTotalVolDisplay: boolean = false;
-  volumeForSet: string = '';
+  volumeForSet: number = 0;
   constructor(
     private fb: FormBuilder,
     private formFactoryService: FormFactoryService
@@ -56,17 +56,31 @@ export class InputArrayComponent implements OnInit {
   }
 
   removeSet(i: number) {
+    let setVolume: number = Number(this.setArray.value[i].volume) * -1;
+    console.log(`remove vol ; ${setVolume}`);
+
     this.setArray.removeAt(i);
+    this.updateSetVolume(setVolume);
+  }
+
+  testSet() {
+    console.log();
   }
 
   receiveSetVolume(textFromInput: string) {
     console.log(this.setAdded_activateTotalVolDisplay);
     if (textFromInput !== 'NaN') {
-      this.volumeForSet = textFromInput;
-      this.setAdded_activateTotalVolDisplay = true;
-      console.log(this.setAdded_activateTotalVolDisplay);
-      console.log(this.volumeForSet);
+      let setVolumeAsNumber: number = Number(textFromInput);
+      this.updateSetVolume(setVolumeAsNumber);
     }
+  }
+
+  updateSetVolume(setVolume: number) {
+    let newSetVolume: number = Number(setVolume);
+    this.volumeForSet = newSetVolume + this.volumeForSet;
+    this.setAdded_activateTotalVolDisplay = true;
+    console.log(this.setAdded_activateTotalVolDisplay);
+    console.log(this.volumeForSet);
   }
 
   onSubmit() {

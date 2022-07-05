@@ -23,7 +23,7 @@
   max="1500"
   required
   [(ngModel)]="weightInSet"
-  (keyup)="volumeCalc()"
+  (focusout)="volumeCalc()"
 />
 &nbsp;&nbsp;
 <label>Reps</label>
@@ -34,5 +34,5 @@
   max="250"
   required
   [(ngModel)]="repsInSet"
-  (keyup)="volumeCalc()"
+  (focusout)="volumeCalc()"
 />

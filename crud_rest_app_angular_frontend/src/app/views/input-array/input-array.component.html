@@ -4,25 +4,38 @@
     type="text"
     placeholder="Execise Type"
     formControlName="exerciseType"
+    required
+    maxlength="10"
   />
   &nbsp;&nbsp;
 
   <label for="">Exercise</label>
-  <input type="text" placeholder="Exercise" formControlName="exercise" />
+  <input
+    type="text"
+    placeholder="Exercise"
+    formControlName="exercise"
+    required
+    maxLength="10"
+  />
 
   &nbsp;&nbsp;Add Set
   <button type="button" (click)="addSet()">Add</button>
-  <br />
 
   <br />
 
   <div *ngFor="let s of setArray.controls; index as i">
     <span>Set {{ i + 1 }}</span>
-    <app-input [i]="i + 1" [inputFormGroup]="$any(s)"></app-input>
-    <button (click)="removeUser(i)">Delete</button>
+    <app-input
+      [i]="i + 1"
+      [inputFormGroup]="$any(s)"
+      (exerciseTotalVolume)="receiveSetVolume($event)"
+    ></app-input>
+    <button (click)="removeSet(i)">Delete</button>
     <p>{{ i }}</p>
   </div>
-
+  <div *ngIf="setAdded_activateTotalVolDisplay">
+    Total Volume = {{ volumeForSet }}
+  </div>
   <button type="submit">Save Progress</button>
   <button
     type="submit"
@@ -33,10 +46,20 @@
   </button>
 
   <p>form group values: {{ exerciseForm.value | json }}</p>
-  <div *ngIf="!exerciseForm.controls['exerciseType'].invalid">
+  <div
+    *ngIf="
+      exerciseForm.controls['exerciseType'].touched &&
+      exerciseForm.controls['exerciseType'].invalid
+    "
+  >
     Extype too long!
   </div>
-  <div *ngIf="!exerciseForm.controls['exercise'].invalid">
+  <div
+    *ngIf="
+      exerciseForm.controls['exercise'].touched &&
+      exerciseForm.controls['exercise'].invalid
+    "
+  >
     Exercise name too long!
   </div>
   <div
@@ -45,7 +68,7 @@
       exerciseForm.controls['setArray'].invalid
     "
   >
-    Hey stud! Only values less than 1000 lbs and less than 200 reps are
+    Hey stud! Only values less than 1500 lbs and less than 250 reps are
     accepted. Who do you think you are? David Goggins?
   </div>
   hello

@@ -12,7 +12,6 @@
   [formControl]="$any(inputFormGroup.controls['setNumber'])"
   type="number"
   required
-  maxlength="1"
 />
 
 <label>Weight</label>
@@ -21,8 +20,10 @@
   placeholder="Weight"
   [formControl]="$any(inputFormGroup.controls['weight'])"
   type="number"
+  max="1500"
   required
-  maxlength="2"
+  [(ngModel)]="weightInSet"
+  (keyup)="volumeCalc()"
 />
 &nbsp;&nbsp;
 <label>Reps</label>
@@ -30,6 +31,8 @@
   placeholder="Reps"
   [formControl]="$any(inputFormGroup.controls['reps'])"
   type="number"
+  max="250"
   required
-  maxlength="15"
+  [(ngModel)]="repsInSet"
+  (keyup)="volumeCalc()"
 />

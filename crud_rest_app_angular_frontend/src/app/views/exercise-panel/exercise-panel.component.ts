@@ -16,4 +16,15 @@ export class ExercisePanelComponent implements OnInit {
     this.exerciseInput.push(1);
     console.log(this.exerciseInput);
   }
+
+  // get setArray() {
+  //   return <FormArray>this.exerciseForm.get('setArray');
+  // }
+
+  removeExercise(i: number) {
+    console.log(i);
+    console.log(this.exerciseInput.splice(i, 1));
+
+    // this.exerciseInput.remove(i);
+  }
 }

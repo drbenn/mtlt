@@ -7,13 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExercisePanelComponent implements OnInit {
   exerciseInput: number[] = [];
+  exerciseInputIndex: number = 0;
   constructor() {}
 
   ngOnInit(): void {}
 
   addExerciseInput() {
     // console.log('addExercise button clicked');
-    this.exerciseInput.push(1);
+    this.exerciseInput.push(this.exerciseInputIndex);
+    this.exerciseInputIndex += 1;
     // console.log(this.exerciseInput);
   }
 
@@ -22,8 +24,8 @@ export class ExercisePanelComponent implements OnInit {
   // }
 
   removeExercise(i: number) {
-    // console.log(i);
-    // console.log(this.exerciseInput.splice(i, 1));
-    // this.exerciseInput.remove(i);
+    console.log(i);
+    this.exerciseInput.splice(i, 1);
+    this.exerciseInputIndex -= 1;
   }
 }

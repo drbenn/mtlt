@@ -144,8 +144,8 @@ export class InputArrayComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.warn('form submitted');
-    // console.log(this.exerciseForm.value);
+    console.warn('form submitted');
+    console.log(this.exerciseForm.value);
   }
 
   closeExercise() {

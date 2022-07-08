@@ -12,9 +12,9 @@ export class ExercisePanelComponent implements OnInit {
   ngOnInit(): void {}
 
   addExerciseInput() {
-    console.log('addExercise button clicked');
+    // console.log('addExercise button clicked');
     this.exerciseInput.push(1);
-    console.log(this.exerciseInput);
+    // console.log(this.exerciseInput);
   }
 
   // get setArray() {
@@ -22,9 +22,8 @@ export class ExercisePanelComponent implements OnInit {
   // }
 
   removeExercise(i: number) {
-    console.log(i);
-    console.log(this.exerciseInput.splice(i, 1));
-
+    // console.log(i);
+    // console.log(this.exerciseInput.splice(i, 1));
     // this.exerciseInput.remove(i);
   }
 }

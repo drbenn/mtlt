@@ -9,7 +9,7 @@ import { FormFactoryService } from 'src/app/core/services/exerciseInput.service'
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
-  @Output() exerciseTotalVolume = new EventEmitter<string>();
+  @Output() exerciseTotalVolume = new EventEmitter<string[]>();
 
   @Input() inputFormGroup = this.fb.group({});
 
@@ -70,8 +70,8 @@ export class InputComponent implements OnInit {
   }
 
   outputVolumeToParentForDisplay(vol: string) {
-    console.log(`outputvole: ${vol}`);
-
-    this.exerciseTotalVolume.emit(vol);
+    let setIndex: string = String(this.index);
+    let emitArray = [setIndex, vol];
+    this.exerciseTotalVolume.emit(emitArray);
   }
 }

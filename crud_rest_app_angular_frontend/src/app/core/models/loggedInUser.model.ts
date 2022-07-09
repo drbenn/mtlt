@@ -10,10 +10,15 @@ export interface LoggedInUser {
 
 export interface CustomExercise {
   exerciseType: string;
-  exerciseName: string;
+  exerciseName: string[] | BodyWeightProgression[];
 }
 
 export interface CustomWorkout {
   exerciseType: string[];
   exerciseName: string[];
+}
+
+export interface BodyWeightProgression {
+  exerciseVariation: string;
+  exercises: string[];
 }

@@ -48,8 +48,22 @@ export class InputComponent implements OnInit {
     this.inputFormGroup.get('setNumber')?.setValue(this.index);
   }
 
-  volumeCalc() {
-    // if bodyweight exercise will only count volume as reps, instead of reps x weight
+  /**
+   * Takes user input from form and places in set object
+   * @param setVolume
+   */
+  updateSetValue(setVolume: number): void {
+    this.inputFormGroup.get('volume')?.setValue(setVolume);
+    return;
+  }
+
+  /**
+   * If bodyweight exercise selected volume will be counted as reps, instead of
+   * reps*weight. Then volume passed to be emitted outside of component
+   * @returns
+   */
+  volumeCalc(): void {
+    // t
     let setVolume: number;
 
     this.bodyWeight
@@ -63,13 +77,15 @@ export class InputComponent implements OnInit {
     if (volumeAsString) {
       this.outputVolumeToParentForDisplay(volumeAsString);
     }
+    return;
   }
 
-  updateSetValue(setVolume: number) {
-    this.inputFormGroup.get('volume')?.setValue(setVolume);
-  }
-
-  outputVolumeToParentForDisplay(vol: string) {
+  /**
+   * Takes calculated volume and sends to input-array component for display
+   * and addition to form object
+   * @param vol
+   */
+  outputVolumeToParentForDisplay(vol: string): void {
     let setIndex: string = String(this.index);
     let emitArray = [setIndex, vol];
     this.exerciseTotalVolume.emit(emitArray);

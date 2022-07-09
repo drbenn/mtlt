@@ -1,22 +1,11 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, MaxLengthValidator, Validators } from '@angular/forms';
-import { FormArray } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormFactoryService {
   constructor(private fb: FormBuilder) {}
-
-  // getExerceriseForm() {
-  //   this.exerciseForm = this.fb.group({
-  //   return this.fb.group({
-  //     exerciseDate: new Date(),
-  //     exerciseType: [''],
-  //     exercise: [''],
-  //     setArray: new FormArray([]),
-  //   });
-  // }
 
   getSetForm() {
     return this.fb.group({
@@ -26,8 +15,4 @@ export class FormFactoryService {
       volume: ['', [Validators.required]],
     });
   }
-
-  // get weight() {
-  //   return this.setForm.controls['weight'];
-  // }
 }

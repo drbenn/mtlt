@@ -48,74 +48,81 @@ export class InputArrayComponent implements OnInit {
   }
 
   // Adds new set in display for input and also adds new setArray form for syncronous data collection on input
-  // No action upon user form data input
-  addSet() {
-    this.setAdded_activateTotalVolDisplay = true;
+  addSet(): void {
     let newSet = this.formFactoryService.getSetForm();
-    this.setArray.push(newSet);
+    return this.setArray.push(newSet);
   }
 
-  // Removes set at index in display then passes that index
-  removeSet(i: number) {
+  //
+  /**
+   * Removes set in display by index then passes index number for id purposes to update
+   * data form and volume calculation
+   * @param i
+   */
+  removeSet(i: number): void {
     this.setArray.removeAt(i);
     let setIndex: string = String(i + 1);
     this.removeExistingSetsVolume(setIndex);
     this.updateCurrentSetVolumesArrayAfterChange();
     this.updateExerciseTotalVolume();
+    return;
   }
 
-  testSet() {
-    // let setValues = this.setArray.value[1].volume;
-  }
-
-  // Upon receiving setVolume from form
-  receiveSetVolume(receiveArray: any) {
-    let setIndex = receiveArray[0];
-    let setVolume = receiveArray[1];
+  /**
+   * Upon receiving [set, volume] from app-input component, will determine if values are valid or "NaN",
+   * then, if successful, will trigger methods used to update volume in user interface and form
+   * @param setVolArray
+   */
+  receiveSetVolume(setVolArray: any): void {
+    let setIndex = setVolArray[0];
+    let setVolume = setVolArray[1];
     if (setVolume === 'NaN') {
       return;
     }
     this.removeExistingSetsVolume(setIndex);
-
     // pushes original and revised set volumes to currentSetVolumes var to calc totalVolumeForExercise
-    this.currentSetVolumes.push(receiveArray);
+    this.currentSetVolumes.push(setVolArray);
     this.updateCurrentSetVolumesArrayAfterChange();
     this.updateExerciseTotalVolume();
     this.activateTotalVolumeDisplay();
+    return;
   }
 
-  /*
-  Removes set if already existing in currentSetVolumes for total volume calc and then calls       updateCurrentSetVolumesArrayAfterChange() to ensure currentSetVolumes index incrementally increase
+  /**
+   * Used to update total volume calculation. Removes set if already existing in currentSetVolumes
+   * for total volume calculatuon
+   * @param setNumber
    */
-  removeExistingSetsVolume(setNumber: string) {
+  removeExistingSetsVolume(setNumber: string): void {
     this.currentSetVolumes.forEach((setIndexVolumeArray) => {
       let setNumberAsNumber: number = Number(setNumber);
       let setIndexVolumeArrayAsNumber: number = Number(setIndexVolumeArray[0]);
-
       if (setIndexVolumeArrayAsNumber === setNumberAsNumber) {
         let elementIndex = Number(
           this.currentSetVolumes.indexOf(setIndexVolumeArray)
         );
-
         this.currentSetVolumes.splice(elementIndex, 1);
       }
+      return;
     });
   }
 
-  /*
-  Once first set of volume is calculated, total volume will display on screen - else total volume would display "NaN"
-  */
-  activateTotalVolumeDisplay() {
-    this.setAdded_activateTotalVolDisplay = true;
+  /**
+   * If required input are entered by user(reps and weight(?), total volume for exercise
+   * will begin to display in client view
+   * @example if rep*weight(?) entered => view boolean = true and will display in UI
+   */
+  activateTotalVolumeDisplay(): boolean {
+    return (this.setAdded_activateTotalVolDisplay = true);
   }
 
-  /*
-  Creates replacement set number to currentSetVolumes which calcs total volume of exercise.
-  If not updated, the index/set being passed on deleting set/row may have an incorrect index/set to
-  match up with the appropriate index/set in the volume calc, which would potentially show
-  an incorrect total volume
-  */
-  updateCurrentSetVolumesArrayAfterChange() {
+  /**
+   * Used in calculation of total volume. Creates replacement and pushes set number to currentSetVolumes
+   * which is used as a storage to calculate total volume of all sets in exercise. If not updated, the
+   * index set being passed on deleting set/row may have an incorrect index/set to match with the
+   * appropriate index/set i, which would potentially show an incorrect total volume
+   */
+  updateCurrentSetVolumesArrayAfterChange(): void {
     let newSetVolumesAfterDelete: string[][] = [];
     let setNumber: number = 1;
     this.currentSetVolumes.forEach((element) => {
@@ -125,22 +132,29 @@ export class InputArrayComponent implements OnInit {
       setNumber += 1;
     });
     this.currentSetVolumes = newSetVolumesAfterDelete;
+    return;
   }
 
-  updateExerciseTotalVolume() {
-    // If no sets available for volume calc, total volume will be zeroed
+  /**
+   * Assists in calculating total volume. If no sets available for volume calculation, total volume will be zeroed else
+   * loops through currentSetVolumes, and sums volumes for totalVolume use in display and form
+   * @returns number
+   */
+  updateExerciseTotalVolume(): number {
+    //
     if (this.currentSetVolumes.length === 0) {
-      this.totalVolumeForExercise = 0;
+      return (this.totalVolumeForExercise = 0);
     } else {
-      // loops through currentSetVolumes, and sums volumes for use in display
+      //
       let runningTotalVolume: number = 0;
       this.currentSetVolumes.forEach((element) => {
         let volAsNumber: number = Number(element[1]);
         runningTotalVolume += volAsNumber;
-        this.totalVolumeForExercise = runningTotalVolume;
+        return (this.totalVolumeForExercise = runningTotalVolume);
       });
     }
-    this.exerciseForm.value.exerciseVolume = this.totalVolumeForExercise;
+    return (this.exerciseForm.value.exerciseVolume =
+      this.totalVolumeForExercise);
   }
 
   onSubmit() {
@@ -153,5 +167,9 @@ export class InputArrayComponent implements OnInit {
     // alert(
     //   'Are you really done? This will also remove the exercise for editing'
     // );
+  }
+
+  testSet() {
+    // let setValues = this.setArray.value[1].volume;
   }
 }

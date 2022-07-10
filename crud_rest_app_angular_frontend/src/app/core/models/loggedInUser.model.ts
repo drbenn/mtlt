@@ -3,9 +3,9 @@ export interface LoggedInUser {
   joinDate: Date;
   customExercises?: CustomExercise[];
   customWorkouts?: CustomWorkout;
-  exerciseHistory?: [{}];
-  exerciseLastTime?: [{}];
-  exerciseAllTimeBest?: [{}];
+  exerciseHistory?: {}[];
+  exerciseLastTime?: {}[];
+  exerciseAllTimeBest?: {}[];
 }
 
 export interface CustomExercise {

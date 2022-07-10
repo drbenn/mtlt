@@ -95,7 +95,7 @@
   <button type="submit" (click)="closeExercise()">Done!</button>
 
   <!-- Uncommenting below line for active view will cause giant error in console. Wont cause any breaking errors, just annoying -->
-  <!-- <p>form group values: {{ exerciseForm.value | json }}</p> -->
+  <p>form group values: {{ exerciseForm.value | json }}</p>
   <div
     *ngIf="
       exerciseForm.controls['exerciseType'].touched &&

@@ -12,7 +12,7 @@ export class InputComponent implements OnInit {
   @Output() exerciseTotalVolume = new EventEmitter<string[]>();
 
   @Input() inputFormGroup = this.fb.group({});
-
+  @Input() exerType: string;
   @Input() set i(value: number) {
     this.index = value;
     this.inputFormGroup.get('setNumber')?.setValue(value);
@@ -20,7 +20,6 @@ export class InputComponent implements OnInit {
 
   index: number;
   // exerciseTypeSelected: string = 'something';
-  @Input() exerType: string;
 
   repsInSet: number;
   weightInSet: number;
@@ -68,6 +67,10 @@ export class InputComponent implements OnInit {
    */
   volumeCalc(): void {
     let setVolume: number;
+    console.log(this.exerType);
+    this.exerType === 'bodyweight'
+      ? (this.bodyWeight = true)
+      : (this.bodyWeight = false);
 
     this.bodyWeight
       ? (setVolume = this.repsInSet * 1)

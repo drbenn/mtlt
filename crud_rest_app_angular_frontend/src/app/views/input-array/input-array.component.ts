@@ -1,48 +1,157 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { elementAt } from 'rxjs';
+import { DefaultExercises } from 'src/app/core/services/defaultExercises.service';
 import { FormFactoryService } from 'src/app/core/services/exerciseInput.service';
 
 @Component({
   selector: 'app-input-array',
   templateUrl: './input-array.component.html',
   styleUrls: ['./input-array.component.scss'],
+  providers: [DefaultExercises],
 })
 export class InputArrayComponent implements OnInit {
   exerciseForm: FormGroup = new FormGroup({});
+
+  exerciseTypesDropDown: string[] = [
+    'Barbell',
+    'BodyWeight',
+    'Dumbbell',
+    'Kettlebell',
+    'Machine',
+  ];
+  barbellDropDown: string[] =
+    this.defaultExercises.standardBarbell.exerciseName;
+  bodyweightVariationsDropDown: string[] = [
+    'Bridge',
+    'Handstand Pushup',
+    'Leg Raise',
+    'Pullup',
+    'Pushup',
+    'Squat',
+  ];
+  bwName = this.defaultExercises.standardBodyWeight.exerciseName;
+  bodyweightBridgeDropDown: string[] = this.bwName[0].exerciseVariation;
+  bodyweightHandStandPushupDropDown: string[] =
+    this.bwName[1].exerciseVariation;
+  bodyweightLegRaiseDropDown: string[] = this.bwName[2].exerciseVariation;
+  bodyweightPullupDropDown: string[] = this.bwName[3].exerciseVariation;
+  bodyweightPushupDropDown: string[] = this.bwName[4].exerciseVariation;
+  bodyweightSquatDropDown: string[] = this.bwName[5].exerciseVariation;
+  dumbbellDropDown: string[] =
+    this.defaultExercises.standardDumbbell.exerciseName;
+  kettlebellDropDown: string[] =
+    this.defaultExercises.standardKettlebell.exerciseName;
+  machineDropDown: string[] =
+    this.defaultExercises.standardMachine.exerciseName;
+
   setAdded_activateTotalVolDisplay: boolean = false;
   currentSetVolumes: string[][] = [];
   totalVolumeForExercise: number;
 
+  exerciseTypeSelected: string[];
+  exerciseTypeToChild: string;
+  bodyweightVariationSelected: string[];
+  addButtonActive: boolean = false;
+
   constructor(
     private fb: FormBuilder,
-    private formFactoryService: FormFactoryService
+    private formFactoryService: FormFactoryService,
+    private defaultExercises: DefaultExercises
   ) {}
 
   ngOnInit(): void {
     this.exerciseForm = this.fb.group({
       exerciseDate: new Date(),
-      exerciseType: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.minLength(10),
-        ],
-      ],
-      exercise: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.minLength(10),
-        ],
-      ],
+      exerciseType: ['', [Validators.required]],
+      exercise: ['', [Validators.required]],
+      bodyweightVariation: [''],
       setArray: new FormArray([]),
       exerciseVolume: [''],
     });
   }
 
+  /**
+   * When exercisetype dropdown selected, the exerciseTypeSelected variable will be
+   * adjusted to reflect the correct list of exercises. Also, bodyWeightVariation cleared
+   * for instances of switching from bodyweight to a different type.
+   * @param e
+   *
+   * @Example e = 'barbell' => this.exerciseTypeSelected = this.barbellDropDown
+   * and barbell exercises are displayed in UI
+   */
+  populateExerciseSelect(e: any) {
+    let selectedExerciseType: string = String(e.target.value);
+    let lowerCaseSelected = selectedExerciseType.toLowerCase();
+    console.log(`this: ${lowerCaseSelected}`);
+
+    switch (lowerCaseSelected) {
+      case 'barbell':
+        this.exerciseTypeToChild = 'barbell';
+        this.exerciseTypeSelected = this.barbellDropDown;
+        this.exerciseForm.value.bodyweightVariation = '';
+        break;
+      case 'bodyweight':
+        this.exerciseTypeToChild = 'bodyweight';
+        this.exerciseTypeSelected = this.bodyweightVariationsDropDown;
+        this.exerciseForm.value.bodyweightVariation = '';
+        break;
+      case 'dumbbell':
+        this.exerciseTypeToChild = 'dumbbell';
+        this.exerciseTypeSelected = this.dumbbellDropDown;
+        this.exerciseForm.value.bodyweightVariation = '';
+        break;
+      case 'kettlebell':
+        this.exerciseTypeToChild = 'kettlebell';
+        this.exerciseTypeSelected = this.kettlebellDropDown;
+        this.exerciseForm.value.bodyweightVariation = '';
+        break;
+      case 'machine':
+        this.exerciseTypeToChild = 'machine';
+        this.exerciseTypeSelected = this.machineDropDown;
+        this.exerciseForm.value.bodyweightVariation = '';
+        break;
+      default:
+        console.log(`There is an error in the selection`);
+        break;
+    }
+  }
+
+  /**
+   * When exercisetype dropdown selected as bodyweight, the bodyweightVariationSelected variable
+   * will be adjusted to reflect the correct list of bodyweight exercise variations
+   * @param e
+   *
+   * @Example e = 'bridge' => this.bodyweightVariationSelected = this.bodyweightBridgeDropDown
+   * and bridge exercise variations are displayed in UI
+   */
+  populateBodyWeightVariationSelect(e: any) {
+    let selectedBodyWeigthExercise: string = String(e.target.value);
+    let lowerCaseSelectedBw = selectedBodyWeigthExercise.toLowerCase();
+    switch (lowerCaseSelectedBw) {
+      case 'bridge':
+        this.bodyweightVariationSelected = this.bodyweightBridgeDropDown;
+        break;
+      case 'handstand pushup':
+        this.bodyweightVariationSelected =
+          this.bodyweightHandStandPushupDropDown;
+        break;
+      case 'leg raise':
+        this.bodyweightVariationSelected = this.bodyweightLegRaiseDropDown;
+        break;
+      case 'pullup':
+        this.bodyweightVariationSelected = this.bodyweightPullupDropDown;
+        break;
+      case 'pushup':
+        this.bodyweightVariationSelected = this.bodyweightPushupDropDown;
+        break;
+      case 'squat':
+        this.bodyweightVariationSelected = this.bodyweightSquatDropDown;
+        break;
+      default:
+        console.log(`There is an error in the selection`);
+        break;
+    }
+  }
   get setArray() {
     return <FormArray>this.exerciseForm.get('setArray');
   }

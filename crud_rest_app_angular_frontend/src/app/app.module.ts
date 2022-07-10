@@ -9,6 +9,14 @@ import { DisplayModule } from './display/display.module';
 import { InputComponent } from './views/input/input.component';
 import { InputArrayComponent } from './views/input-array/input-array.component';
 import { ExercisePanelComponent } from './views/exercise-panel/exercise-panel.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Angular Material Imports
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -23,6 +31,12 @@ import { ExercisePanelComponent } from './views/exercise-panel/exercise-panel.co
     ReactiveFormsModule,
     DisplayModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

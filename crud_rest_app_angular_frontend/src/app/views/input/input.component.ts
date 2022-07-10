@@ -19,6 +19,8 @@ export class InputComponent implements OnInit {
   }
 
   index: number;
+  // exerciseTypeSelected: string = 'something';
+  @Input() exerType: string;
 
   repsInSet: number;
   weightInSet: number;
@@ -46,6 +48,8 @@ export class InputComponent implements OnInit {
   ngOnInit() {
     // On init of new rep row, setNumber will auto-populate value based on index
     this.inputFormGroup.get('setNumber')?.setValue(this.index);
+    console.log('this work?');
+    console.log(this.exerType);
   }
 
   /**
@@ -63,7 +67,6 @@ export class InputComponent implements OnInit {
    * @returns
    */
   volumeCalc(): void {
-    // t
     let setVolume: number;
 
     this.bodyWeight

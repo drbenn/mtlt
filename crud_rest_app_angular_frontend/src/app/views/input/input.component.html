@@ -5,18 +5,20 @@
   <div>Set Volume</div>
 </div> -->
 
-<label>Set Number</label>
+<!-- <label>Set Number</label>
+{{ exerType }}
 &nbsp;&nbsp;
 <input
   placeholder="Set Number"
   [formControl]="$any(inputFormGroup.controls['setNumber'])"
   type="number"
   required
-/>
+/> -->
 
-<label>Weight</label>
+<label *ngIf="exerType !== 'bodyweight'">Weight</label>
 &nbsp;&nbsp;
 <input
+  *ngIf="exerType !== 'bodyweight'"
   placeholder="Weight"
   [formControl]="$any(inputFormGroup.controls['weight'])"
   type="number"

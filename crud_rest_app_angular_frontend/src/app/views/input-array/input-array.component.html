@@ -1,5 +1,5 @@
 <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
-  <label for="">Exercise Type</label>
+  <!-- <label for="">Exercise Type</label>
   <input
     type="text"
     placeholder="Execise Type"
@@ -7,19 +7,72 @@
     required
     maxlength="10"
   />
+  &nbsp;&nbsp; -->
+
+  <label for="">Exercise Type</label>
+  <select
+    formControlName="exerciseType"
+    required
+    (change)="populateExerciseSelect($event)"
+  >
+    <option *ngFor="let type of exerciseTypesDropDown" [value]="type">
+      {{ type }}
+    </option>
+  </select>
   &nbsp;&nbsp;
 
-  <label for="">Exercise</label>
+  <label for="" *ngIf="this.exerciseForm.value.exerciseType">Exercise </label>
+  <select
+    *ngIf="this.exerciseForm.value.exerciseType"
+    formControlName="exercise"
+    required
+    (change)="populateBodyWeightVariationSelect($event)"
+  >
+    <option *ngFor="let exercise of exerciseTypeSelected" [value]="exercise">
+      {{ exercise }}
+    </option>
+  </select>
+  &nbsp;&nbsp;
+
+  <label
+    for=""
+    *ngIf="
+      this.exerciseForm.value.exercise &&
+      this.exerciseForm.value.exerciseType === 'BodyWeight'
+    "
+    >Variation
+  </label>
+  <select
+    *ngIf="
+      this.exerciseForm.value.exercise &&
+      this.exerciseForm.value.exerciseType === 'BodyWeight'
+    "
+    formControlName="bodyweightVariation"
+    required
+  >
+    <option
+      *ngFor="let variation of bodyweightVariationSelected"
+      [value]="variation"
+    >
+      {{ variation }}
+    </option>
+  </select>
+  &nbsp;&nbsp;
+
+  <!-- <label for="">Exercise</label>
   <input
+    *ngIf="this.exerciseForm.value.exerciseType"
     type="text"
     placeholder="Exercise"
     formControlName="exercise"
     required
     maxLength="10"
-  />
+  /> -->
 
   &nbsp;&nbsp;Add Set
-  <button type="button" (click)="addSet()">Add</button>
+  <button type="button" (click)="addSet()" [disabled]="addButtonActive">
+    Add
+  </button>
 
   <br />
 
@@ -27,6 +80,7 @@
     <span>Set {{ i + 1 }}</span>
     <app-input
       [i]="i + 1"
+      [exerType]="exerciseTypeToChild"
       [inputFormGroup]="$any(s)"
       (exerciseTotalVolume)="receiveSetVolume($event)"
     ></app-input>
@@ -37,13 +91,7 @@
     Total Volume = {{ totalVolumeForExercise }}
   </div>
   <button type="submit">Save Progress</button>
-  <button
-    type="submit"
-    (click)="closeExercise()"
-    [disabled]="!exerciseForm.valid"
-  >
-    Done!
-  </button>
+  <button type="submit" (click)="closeExercise()">Done!</button>
 
   <!-- Uncommenting below line for active view will cause giant error in console. Wont cause any breaking errors, just annoying -->
   <!-- <p>form group values: {{ exerciseForm.value | json }}</p> -->

@@ -51,7 +51,7 @@ export class InputArrayComponent implements OnInit {
   exerciseTypeSelected: string[];
   exerciseTypeToChild: string;
   bodyweightVariationSelected: string[];
-  addButtonActive: boolean = false;
+  addSetButtonDisabled: boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -82,38 +82,45 @@ export class InputArrayComponent implements OnInit {
   populateExerciseSelect(e: any) {
     let selectedExerciseType: string = String(e.target.value);
     let lowerCaseSelected = selectedExerciseType.toLowerCase();
-    console.log(`this: ${lowerCaseSelected}`);
-
     switch (lowerCaseSelected) {
       case 'barbell':
         this.exerciseTypeToChild = 'barbell';
         this.exerciseTypeSelected = this.barbellDropDown;
         this.exerciseForm.value.bodyweightVariation = '';
+        this.addSetButtonDisabled = true;
         break;
       case 'bodyweight':
         this.exerciseTypeToChild = 'bodyweight';
         this.exerciseTypeSelected = this.bodyweightVariationsDropDown;
         this.exerciseForm.value.bodyweightVariation = '';
+        this.addSetButtonDisabled = true;
         break;
       case 'dumbbell':
         this.exerciseTypeToChild = 'dumbbell';
         this.exerciseTypeSelected = this.dumbbellDropDown;
         this.exerciseForm.value.bodyweightVariation = '';
+        this.addSetButtonDisabled = true;
         break;
       case 'kettlebell':
         this.exerciseTypeToChild = 'kettlebell';
         this.exerciseTypeSelected = this.kettlebellDropDown;
         this.exerciseForm.value.bodyweightVariation = '';
+        this.addSetButtonDisabled = true;
         break;
       case 'machine':
         this.exerciseTypeToChild = 'machine';
         this.exerciseTypeSelected = this.machineDropDown;
         this.exerciseForm.value.bodyweightVariation = '';
+        this.addSetButtonDisabled = true;
         break;
       default:
         console.log(`There is an error in the selection`);
         break;
     }
+  }
+
+  activateAddSet(): void {
+    this.addSetButtonDisabled = false;
   }
 
   /**
@@ -148,7 +155,7 @@ export class InputArrayComponent implements OnInit {
         this.bodyweightVariationSelected = this.bodyweightSquatDropDown;
         break;
       default:
-        console.log(`There is an error in the selection`);
+        this.addSetButtonDisabled = false;
         break;
     }
   }

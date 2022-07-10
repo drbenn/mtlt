@@ -49,6 +49,7 @@
     "
     formControlName="bodyweightVariation"
     required
+    (change)="activateAddSet()"
   >
     <option
       *ngFor="let variation of bodyweightVariationSelected"
@@ -70,7 +71,7 @@
   /> -->
 
   &nbsp;&nbsp;Add Set
-  <button type="button" (click)="addSet()" [disabled]="addButtonActive">
+  <button type="button" (click)="addSet()" [disabled]="addSetButtonDisabled">
     Add
   </button>
 

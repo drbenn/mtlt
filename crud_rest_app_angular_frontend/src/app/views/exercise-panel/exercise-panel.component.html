@@ -1,8 +1,10 @@
-<p>exercise-panel works!</p>
+<div class="border">
+  <p>exercise-panel works!</p>
 
-<div *ngFor="let e of exerciseInput; index as i">
-  <p>{{ i }}</p>
-  <button (click)="removeExercise(i)">Delete Exercise</button>
-  <app-input-array></app-input-array>
+  <div *ngFor="let e of exerciseInput; index as i">
+    <p>{{ i }}</p>
+    <button (click)="removeExercise(i)">Delete Exercise</button>
+    <app-input-array></app-input-array>
+  </div>
+  <button (click)="addExerciseInput()">Add Exercise / Circuit Training</button>
 </div>
-<button (click)="addExerciseInput()">Add Exercise / Circuit Training</button>

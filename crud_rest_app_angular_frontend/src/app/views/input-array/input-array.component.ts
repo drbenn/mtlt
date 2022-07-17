@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataHistoryService } from 'src/app/core/services/dataHistory.service';
 import { DefaultExercises } from 'src/app/core/services/defaultExercises.service';
 import { FormFactoryService } from 'src/app/core/services/exerciseInput.service';
 
@@ -10,7 +11,15 @@ import { FormFactoryService } from 'src/app/core/services/exerciseInput.service'
   providers: [DefaultExercises],
 })
 export class InputArrayComponent implements OnInit {
+  @Output() exerciseArrayForIteration = new EventEmitter<string[]>();
+  @Input() exerciseIndexForCurrentWorkout: number;
   exerciseForm: FormGroup = new FormGroup({});
+  thisExerciseArray: string[] = [
+    '_exerciseIndex',
+    '_exerciseType',
+    '_exercise',
+    '_bodyweightVariation',
+  ];
 
   exerciseTypesDropDown: string[] = [
     'Barbell',
@@ -56,7 +65,8 @@ export class InputArrayComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private formFactoryService: FormFactoryService,
-    private defaultExercises: DefaultExercises
+    private defaultExercises: DefaultExercises,
+    private dataHistoryService: DataHistoryService
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +78,12 @@ export class InputArrayComponent implements OnInit {
       setArray: new FormArray([]),
       exerciseVolume: [''],
     });
+
+    let exerciseIndexAsString: string = String(
+      this.exerciseIndexForCurrentWorkout
+    );
+    this.thisExerciseArray[0] = exerciseIndexAsString;
+    // console.log(this.exerciseIndexForCurrentWorkout);
   }
 
   /**
@@ -82,6 +98,9 @@ export class InputArrayComponent implements OnInit {
   populateExerciseSelect(e: any) {
     let selectedExerciseType: string = String(e.target.value);
     let lowerCaseSelected = selectedExerciseType.toLowerCase();
+    this.thisExerciseArray[1] = lowerCaseSelected;
+    // console.log(this.thisExerciseArray);
+
     switch (lowerCaseSelected) {
       case 'barbell':
         this.exerciseTypeToChild = 'barbell';
@@ -119,8 +138,18 @@ export class InputArrayComponent implements OnInit {
     }
   }
 
-  activateAddSet(): void {
+  activateAddSet(e: any): void {
     this.addSetButtonDisabled = false;
+    console.log('the bodyweight variation has been changed');
+    this.thisExerciseArray[3] = e.target.value.toLowerCase();
+    console.log(this.thisExerciseArray);
+    // emit thisExerciseArray because bodyweight exercise type,
+    // exercise and bodyweight variation selected
+    console.log(
+      `emit because bw and variation selected: ${this.thisExerciseArray}`
+    );
+
+    this.exerciseArrayForIteration.emit(this.thisExerciseArray);
   }
 
   /**
@@ -134,6 +163,16 @@ export class InputArrayComponent implements OnInit {
   populateBodyWeightVariationSelect(e: any) {
     let selectedBodyWeigthExercise: string = String(e.target.value);
     let lowerCaseSelectedBw = selectedBodyWeigthExercise.toLowerCase();
+    this.thisExerciseArray[2] = lowerCaseSelectedBw;
+    // console.log(this.thisExerciseArray);
+    // emit thisExerciseArray because exercise selected, and exercise type not bodyweight which requires a variation also selected
+    if (this.thisExerciseArray[1] !== 'bodyweight') {
+      // console.log(
+      //   `emit ${this.thisExerciseArray} because bodyweight not selected`
+      // );
+      this.exerciseArrayForIteration.emit(this.thisExerciseArray);
+    }
+
     switch (lowerCaseSelectedBw) {
       case 'bridge':
         this.bodyweightVariationSelected = this.bodyweightBridgeDropDown;
@@ -286,6 +325,15 @@ export class InputArrayComponent implements OnInit {
   }
 
   testSet() {
-    // let setValues = this.setArray.value[1].volume;
+    let exIndexInCurrentWorkout: number = this.exerciseIndexForCurrentWorkout;
+    let exType: string = this.exerciseForm.value.exerciseType;
+    let ex: string = this.exerciseForm.value.exercise;
+    let exVar: string = this.exerciseForm.value.bodyweightVariation;
+    let exerciseId: string = `${exIndexInCurrentWorkout}/${exType}/${ex}/${exVar}`;
+    // console.log(exerciseId);
+    this.dataHistoryService.getFoo();
+    this.dataHistoryService.updateCurrentExerciseListingForOtherComponents(
+      exerciseId
+    );
   }
 }

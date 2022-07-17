@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LoggedInUser } from 'src/app/core/models/loggedInUser.model';
 
 @Component({
@@ -6,7 +6,11 @@ import { LoggedInUser } from 'src/app/core/models/loggedInUser.model';
   templateUrl: './last-time.component.html',
   styleUrls: ['./last-time.component.scss'],
 })
+
+// component generated on selection of exercise/exercise variation
+//  ALSO MUST BE DESTROYED  Rerun if changed
 export class LastTimeComponent implements OnInit {
+  @Input() exerciseList: string[];
   testUser: LoggedInUser = {
     username: 'User1',
     joinDate: new Date(),
@@ -141,7 +145,7 @@ export class LastTimeComponent implements OnInit {
         exerciseVolume: '30',
       },
       {
-        exerciseDate: '2022-07-10T21:40:51.815Z',
+        exerciseDate: '2021-07-10T21:40:51.815Z',
         exerciseType: 'BodyWeight',
         exercise: 'Pullup',
         bodyweightVariation: '5. Full',
@@ -153,7 +157,7 @@ export class LastTimeComponent implements OnInit {
         exerciseVolume: '33',
       },
       {
-        exerciseDate: '2022-07-10T21:40:51.815Z',
+        exerciseDate: '2020-07-10T21:40:51.815Z',
         exerciseType: 'BodyWeight',
         exercise: 'Pullup',
         bodyweightVariation: '5. Full',
@@ -165,16 +169,16 @@ export class LastTimeComponent implements OnInit {
         exerciseVolume: '42',
       },
       {
-        exerciseDate: '2022-07-10T21:40:51.815Z',
+        exerciseDate: '2019-07-10T21:40:51.815Z',
         exerciseType: 'BodyWeight',
         exercise: 'Pullup',
         bodyweightVariation: '5. Full',
         setArray: [
-          { setNumber: 1, weight: '', reps: 12, volume: '' },
+          { setNumber: 1, weight: '', reps: 22, volume: '' },
           { setNumber: 2, weight: '', reps: 10, volume: '' },
           { setNumber: 3, weight: '', reps: 8, volume: '' },
         ],
-        exerciseVolume: '',
+        exerciseVolume: '40',
       },
       {
         exerciseDate: '2022-07-10T21:40:51.815Z',
@@ -182,14 +186,16 @@ export class LastTimeComponent implements OnInit {
         exercise: 'Pullup',
         bodyweightVariation: '5. Full',
         setArray: [
-          { setNumber: 1, weight: '', reps: 12, volume: '' },
+          { setNumber: 1, weight: '', reps: 120, volume: '' },
           { setNumber: 2, weight: '', reps: 10, volume: '' },
           { setNumber: 3, weight: '', reps: 8, volume: '' },
         ],
-        exerciseVolume: '',
+        exerciseVolume: '138',
       },
     ],
   };
+
+  getArrayOfExercisesEntered() {}
 
   constructor() {}
 

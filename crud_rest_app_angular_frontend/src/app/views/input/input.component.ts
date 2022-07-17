@@ -47,8 +47,8 @@ export class InputComponent implements OnInit {
   ngOnInit() {
     // On init of new rep row, setNumber will auto-populate value based on index
     this.inputFormGroup.get('setNumber')?.setValue(this.index);
-    console.log('this work?');
-    console.log(this.exerType);
+    // console.log('this work?');
+    // console.log(this.exerType);
   }
 
   /**
@@ -93,6 +93,8 @@ export class InputComponent implements OnInit {
    */
   outputVolumeToParentForDisplay(vol: string): void {
     let setIndex: string = String(this.index);
+    console.log(`setIndex: ${setIndex}`);
+
     let emitArray = [setIndex, vol];
     this.exerciseTotalVolume.emit(emitArray);
   }

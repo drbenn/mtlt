@@ -2,9 +2,15 @@
   <p>exercise-panel works!</p>
 
   <div *ngFor="let e of exerciseInput; index as i">
+    {{ indexSend(i) }}
     <p>{{ i }}</p>
-    <button (click)="removeExercise(i)">Delete Exercise</button>
-    <app-input-array></app-input-array>
+    <button (click)="removeExercise(i)" *ngIf="i + 1 === exerciseInputIndex">
+      Delete Exercise
+    </button>
+    <app-input-array
+      [exerciseIndexForCurrentWorkout]="exerciseInputIndex"
+      (exerciseArrayForIteration)="receiveIterationExercise($event)"
+    ></app-input-array>
   </div>
   <button (click)="addExerciseInput()">Add Exercise / Circuit Training</button>
 </div>

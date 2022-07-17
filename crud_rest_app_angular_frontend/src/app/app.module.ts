@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LastTimeComponent } from './views/last-time/last-time.component';
+import { DataHistoryService } from './core/services/dataHistory.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { LastTimeComponent } from './views/last-time/last-time.component';
     MatIconModule,
     MatButtonModule,
   ],
-  providers: [],
+  providers: [DataHistoryService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

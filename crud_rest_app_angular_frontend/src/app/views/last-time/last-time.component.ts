@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { LoggedInUser } from 'src/app/core/models/loggedInUser.model';
 
 @Component({
@@ -197,7 +199,16 @@ export class LastTimeComponent implements OnInit {
 
   getArrayOfExercisesEntered() {}
 
-  constructor() {}
+  constructor(private store: Store) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let activeExercisesUI$: Observable<string[][]> = this.store.select(
+      (state) => state.appState.activeExercises
+    );
+    activeExercisesUI$.subscribe((_activeExercises: string[][]) => {
+      console.log('last time component actually listening');
+
+      console.log(_activeExercises);
+    });
+  }
 }

@@ -19,6 +19,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LastTimeComponent } from './views/last-time/last-time.component';
 import { DataHistoryService } from './core/services/dataHistory.service';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { AppState } from './core/state/appState.state';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,7 @@ import { DataHistoryService } from './core/services/dataHistory.service';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    NgxsModule.forRoot([AppState]),
   ],
   providers: [DataHistoryService],
   bootstrap: [AppComponent],

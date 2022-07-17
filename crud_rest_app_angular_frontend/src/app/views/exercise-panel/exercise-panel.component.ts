@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { UpdateActiveExercises } from 'src/app/core/state/appState.actions';
 
 @Component({
   selector: 'app-exercise-panel',
@@ -12,7 +14,7 @@ export class ExercisePanelComponent implements OnInit {
   exerciseIndexToChild: string;
   exerciseArrayForState: string[][] = [];
   lengthOfArrayForState: number = this.exerciseArrayForState.length;
-  constructor() {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {}
 
@@ -23,6 +25,10 @@ export class ExercisePanelComponent implements OnInit {
     this.exerciseInputIndex += 1;
   }
 
+  updateStateActiveExercises(exercises: string[][]) {
+    this.store.dispatch(new UpdateActiveExercises(exercises));
+  }
+
   removeExercise(i: number) {
     console.log(i);
     this.exerciseInput.splice(i, 1);
@@ -30,6 +36,7 @@ export class ExercisePanelComponent implements OnInit {
     // Below updates state array
     this.exerciseArrayForState.pop();
     console.log(`state-after-remove: ${this.exerciseArrayForState}`);
+    this.updateStateActiveExercises(this.exerciseArrayForState);
   }
   indexSend(i: number) {
     // console.log(i);
@@ -47,6 +54,7 @@ export class ExercisePanelComponent implements OnInit {
       this.exerciseArrayForState.push(exerIterationArray);
     }
     console.log(`state after add/replace: ${this.exerciseArrayForState}`);
+    this.updateStateActiveExercises(this.exerciseArrayForState);
   }
 
   generateExerciseListArray() {}

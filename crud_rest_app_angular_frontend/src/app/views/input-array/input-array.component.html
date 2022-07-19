@@ -15,7 +15,10 @@
     required
     (change)="populateExerciseSelect($event)"
   >
-    <option *ngFor="let type of exerciseTypesDropDown" [value]="type">
+    <option
+      *ngFor="let type of exerciseTypesDropDown"
+      [value]="type | lowercase"
+    >
       {{ type }}
     </option>
   </select>
@@ -28,7 +31,10 @@
     required
     (change)="populateBodyWeightVariationSelect($event)"
   >
-    <option *ngFor="let exercise of exerciseTypeSelected" [value]="exercise">
+    <option
+      *ngFor="let exercise of exerciseTypeSelected"
+      [value]="exercise | lowercase"
+    >
       {{ exercise }}
     </option>
   </select>
@@ -38,14 +44,14 @@
     for=""
     *ngIf="
       this.exerciseForm.value.exercise &&
-      this.exerciseForm.value.exerciseType === 'BodyWeight'
+      this.exerciseForm.value.exerciseType === 'bodyweight'
     "
     >Variation
   </label>
   <select
     *ngIf="
       this.exerciseForm.value.exercise &&
-      this.exerciseForm.value.exerciseType === 'BodyWeight'
+      this.exerciseForm.value.exerciseType === 'bodyweight'
     "
     formControlName="bodyweightVariation"
     required
@@ -53,7 +59,7 @@
   >
     <option
       *ngFor="let variation of bodyweightVariationSelected"
-      [value]="variation"
+      [value]="variation | lowercase"
     >
       {{ variation }}
     </option>

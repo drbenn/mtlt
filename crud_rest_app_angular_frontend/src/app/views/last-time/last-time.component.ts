@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { LoggedInUser } from 'src/app/core/models/loggedInUser.model';
+import { DataHistoryService } from 'src/app/core/services/dataHistory.service';
 
 @Component({
   selector: 'app-last-time',
@@ -199,16 +200,24 @@ export class LastTimeComponent implements OnInit {
 
   getArrayOfExercisesEntered() {}
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private dataHistoryService: DataHistoryService
+  ) {}
 
   ngOnInit(): void {
     let activeExercisesUI$: Observable<string[][]> = this.store.select(
       (state) => state.appState.activeExercises
     );
     activeExercisesUI$.subscribe((_activeExercises: string[][]) => {
-      console.log('last time component actually listening');
-
-      console.log(_activeExercises);
+      // console.log('LAST TIME LISTENING!');
+      // console.log(_activeExercises);
+      // console.log(this.dataHistoryService.testData);
+      this.lastTimeDataRequest(_activeExercises);
     });
+  }
+
+  lastTimeDataRequest(activeExercises: string[][]) {
+    this.dataHistoryService.getLastTimeDisplayData(activeExercises);
   }
 }

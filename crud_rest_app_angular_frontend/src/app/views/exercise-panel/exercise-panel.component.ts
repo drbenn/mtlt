@@ -35,7 +35,7 @@ export class ExercisePanelComponent implements OnInit {
     this.exerciseInputIndex -= 1;
     // Below updates state array
     this.exerciseArrayForState.pop();
-    console.log(`state-after-remove: ${this.exerciseArrayForState}`);
+    // console.log(`state-after-remove: ${this.exerciseArrayForState}`);
     this.updateStateActiveExercises(this.exerciseArrayForState);
   }
   indexSend(i: number) {
@@ -53,7 +53,7 @@ export class ExercisePanelComponent implements OnInit {
     } else {
       this.exerciseArrayForState.push(exerIterationArray);
     }
-    console.log(`state after add/replace: ${this.exerciseArrayForState}`);
+    // console.log(`state after add/replace: ${this.exerciseArrayForState}`);
     this.updateStateActiveExercises(this.exerciseArrayForState);
   }
 

@@ -141,14 +141,14 @@ export class InputArrayComponent implements OnInit {
 
   activateAddSet(e: any): void {
     this.addSetButtonDisabled = false;
-    console.log('the bodyweight variation has been changed');
+    // console.log('the bodyweight variation has been changed');
     this.thisExerciseArray[3] = e.target.value.toLowerCase();
-    console.log(this.thisExerciseArray);
+    // console.log(this.thisExerciseArray);
     // emit thisExerciseArray because bodyweight exercise type,
     // exercise and bodyweight variation selected
-    console.log(
-      `emit because bw and variation selected: ${this.thisExerciseArray}`
-    );
+    // console.log(
+    //   `emit because bw and variation selected: ${this.thisExerciseArray}`
+    // );
 
     this.exerciseArrayForIteration.emit(this.thisExerciseArray);
   }
@@ -162,8 +162,8 @@ export class InputArrayComponent implements OnInit {
    * and bridge exercise variations are displayed in UI
    */
   populateBodyWeightVariationSelect(e: any) {
-    let selectedBodyWeigthExercise: string = String(e.target.value);
-    let lowerCaseSelectedBw = selectedBodyWeigthExercise.toLowerCase();
+    let selectedBodyWeightExercise: string = String(e.target.value);
+    let lowerCaseSelectedBw = selectedBodyWeightExercise.toLowerCase();
     this.thisExerciseArray[2] = lowerCaseSelectedBw;
     // console.log(this.thisExerciseArray);
     // emit thisExerciseArray because exercise selected, and exercise type not bodyweight which requires a variation also selected

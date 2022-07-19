@@ -99,7 +99,7 @@ export class InputComponent implements OnInit {
    */
   outputVolumeToParentForDisplay(vol: string): void {
     let setIndex: string = String(this.index);
-    console.log(`setIndex: ${setIndex}`);
+    // console.log(`setIndex: ${setIndex}`);
 
     let emitArray = [setIndex, vol];
     this.exerciseTotalVolume.emit(emitArray);

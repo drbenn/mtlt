@@ -30,16 +30,17 @@ export class AppState {
     payload: { activeExercisesUI: string[][] }
     // action: UpdateActiveExercises
   ) {
+    let newData: string[][];
     // const { activeExercises } = action;
-    console.log('action in state truggered');
-    console.log('payload');
-    console.log(payload.activeExercisesUI);
-
+    // console.log('action in state triggered');
+    // console.log('payload');
+    // console.log(payload.activeExercisesUI);
+    newData = [...payload.activeExercisesUI];
     // console.log(activeExercises);
 
     // const state = ctx.getState();
 
-    ctx.setState({ activeExercises: payload.activeExercisesUI });
+    ctx.setState({ activeExercises: newData });
   }
 }
 

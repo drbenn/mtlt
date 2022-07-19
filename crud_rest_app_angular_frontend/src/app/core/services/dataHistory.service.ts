@@ -7,9 +7,9 @@ export class DataHistoryService {
   testData = [
     {
       exerciseDate: '2022-05-04T21:35:16.048Z',
-      exerciseType: 'BodyWeight',
-      exercise: 'Pullup',
-      bodyweightVariation: '5. Full',
+      exerciseType: 'bodyweight',
+      exercise: 'pullup',
+      bodyweightVariation: '5. full',
       setArray: [
         { setNumber: 1, weight: '', reps: 8, volume: 8 },
         { setNumber: 2, weight: '', reps: 6, volume: 6 },
@@ -20,8 +20,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-04T21:37:21.138Z',
-      exerciseType: 'Barbell',
-      exercise: 'Squat(Back)',
+      exerciseType: 'barbell',
+      exercise: 'squatb(back)',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 45, reps: 12, volume: 540 },
@@ -32,8 +32,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-04T21:38:13.630Z',
-      exerciseType: 'Barbell',
-      exercise: 'Deadlift(Trap-Bar)',
+      exerciseType: 'barbell',
+      exercise: 'deadlift(trap-bar)',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 45, reps: 12, volume: 540 },
@@ -46,8 +46,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-04T21:39:25.617Z',
-      exerciseType: 'Dumbbell',
-      exercise: 'Bench Press',
+      exerciseType: 'dumbbell',
+      exercise: 'bench press',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 30, reps: 12, volume: 720 },
@@ -60,8 +60,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-04T21:51:55.549Z',
-      exerciseType: 'Dumbbell',
-      exercise: 'Shoulder Press',
+      exerciseType: 'dumbbell',
+      exercise: 'shoulder press',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 25, reps: 12, volume: 600 },
@@ -72,8 +72,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-04T22:39:43.019Z',
-      exerciseType: 'Dumbbell',
-      exercise: 'Curl(Supine)',
+      exerciseType: 'dumbbell',
+      exercise: 'curl(supine)',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 20, reps: 12, volume: 480 },
@@ -84,8 +84,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-04T22:40:03.208Z',
-      exerciseType: 'Machine',
-      exercise: 'Tricep Extension',
+      exerciseType: 'machine',
+      exercise: 'tricep extension',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 42.5, reps: 12, volume: 510 },
@@ -97,9 +97,9 @@ export class DataHistoryService {
 
     {
       exerciseDate: '2022-05-07T21:35:16.048Z',
-      exerciseType: 'BodyWeight',
-      exercise: 'Pullup',
-      bodyweightVariation: '5. Full',
+      exerciseType: 'bodyweight',
+      exercise: 'pullup',
+      bodyweightVariation: '5. full',
       setArray: [
         { setNumber: 1, weight: '', reps: 10, volume: 10 },
         { setNumber: 2, weight: '', reps: 6, volume: 6 },
@@ -110,8 +110,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-07T21:37:21.138Z',
-      exerciseType: 'Barbell',
-      exercise: 'Squat(Back)',
+      exerciseType: 'barbell',
+      exercise: 'squat(back)',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 45, reps: 12, volume: 540 },
@@ -122,8 +122,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-07T21:38:13.630Z',
-      exerciseType: 'Barbell',
-      exercise: 'Deadlift(Trap-Bar)',
+      exerciseType: 'barbell',
+      exercise: 'deadlift(trap-bar)',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 45, reps: 12, volume: 540 },
@@ -136,8 +136,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-07T21:39:25.617Z',
-      exerciseType: 'Dumbbell',
-      exercise: 'Bench Press',
+      exerciseType: 'dumbbell',
+      exercise: 'bench press',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 30, reps: 12, volume: 720 },
@@ -150,8 +150,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-07T21:51:55.549Z',
-      exerciseType: 'Dumbbell',
-      exercise: 'Shoulder Press',
+      exerciseType: 'dumbbell',
+      exercise: 'shoulder press',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 27.5, reps: 12, volume: 660 },
@@ -162,8 +162,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-07T22:39:43.019Z',
-      exerciseType: 'Dumbbell',
-      exercise: 'Curl(Supine)',
+      exerciseType: 'dumbbell',
+      exercise: 'curl(supine)',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 20, reps: 12, volume: 480 },
@@ -174,8 +174,8 @@ export class DataHistoryService {
     },
     {
       exerciseDate: '2022-05-07T22:40:03.208Z',
-      exerciseType: 'Machine',
-      exercise: 'Tricep Extension',
+      exerciseType: 'machine',
+      exercise: 'tricep extension',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 44, reps: 12, volume: 528 },
@@ -192,5 +192,11 @@ export class DataHistoryService {
 
   updateCurrentExerciseListingForOtherComponents(exerciseId: string) {
     console.log(exerciseId);
+  }
+
+  getLastTimeDisplayData(activeExercises: string[][]) {
+    // console.log(activeExercises);
+    // activeExercises.forEach((obj) => this.testData.filter(object=> object.));
+    return console.log('recvd in service');
   }
 }

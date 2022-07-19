@@ -10,14 +10,13 @@ import { FormFactoryService } from 'src/app/core/services/exerciseInput.service'
 })
 export class InputComponent implements OnInit {
   @Output() exerciseTotalVolume = new EventEmitter<string[]>();
-
   @Input() inputFormGroup = this.fb.group({});
   @Input() exerType: string;
   @Input() set i(value: number) {
     this.index = value;
     this.inputFormGroup.get('setNumber')?.setValue(value);
   }
-
+  singleDumbbell: boolean = false;
   index: number;
   // exerciseTypeSelected: string = 'something';
 
@@ -60,6 +59,10 @@ export class InputComponent implements OnInit {
     return;
   }
 
+  singledumbbellStatus() {
+    this.singleDumbbell = !this.singleDumbbell;
+  }
+
   /**
    * If bodyweight exercise selected volume will be counted as reps, instead of
    * reps*weight. Then volume passed to be emitted outside of component
@@ -67,14 +70,17 @@ export class InputComponent implements OnInit {
    */
   volumeCalc(): void {
     let setVolume: number;
-    console.log(this.exerType);
     this.exerType === 'bodyweight'
       ? (this.bodyWeight = true)
       : (this.bodyWeight = false);
 
-    this.bodyWeight
-      ? (setVolume = this.repsInSet * 1)
-      : (setVolume = this.repsInSet * this.weightInSet);
+    if (this.bodyWeight) {
+      setVolume = this.repsInSet * 1;
+    } else if (this.exerType === 'dumbbell' && this.singleDumbbell === false) {
+      setVolume = this.repsInSet * (this.weightInSet * 2);
+    } else {
+      setVolume = this.repsInSet * this.weightInSet;
+    }
 
     if (setVolume) {
       this.updateSetValue(setVolume);

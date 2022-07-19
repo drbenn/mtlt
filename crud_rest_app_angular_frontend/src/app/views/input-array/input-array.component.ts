@@ -11,6 +11,7 @@ import { FormFactoryService } from 'src/app/core/services/exerciseInput.service'
   providers: [DefaultExercises],
 })
 export class InputArrayComponent implements OnInit {
+  lastToDelete: number = -1;
   @Output() exerciseArrayForIteration = new EventEmitter<string[]>();
   @Input() exerciseIndexForCurrentWorkout: number;
   exerciseForm: FormGroup = new FormGroup({});
@@ -204,6 +205,7 @@ export class InputArrayComponent implements OnInit {
 
   // Adds new set in display for input and also adds new setArray form for syncronous data collection on input
   addSet(): void {
+    this.lastToDelete += 1;
     let newSet = this.formFactoryService.getSetForm();
     return this.setArray.push(newSet);
   }
@@ -215,6 +217,10 @@ export class InputArrayComponent implements OnInit {
    * @param i
    */
   removeSet(i: number): void {
+    this.lastToDelete -= 1;
+    console.log(`i to remove: ${i}`);
+    console.log(this.lastToDelete);
+
     this.setArray.removeAt(i);
     let setIndex: string = String(i + 1);
     this.removeExistingSetsVolume(setIndex);

@@ -76,6 +76,12 @@
   </button>
 
   <br />
+  <p *ngIf="exerciseForm.controls['exerciseType'].value === 'Dumbbell'">
+    Selecting dumbbells will automatically calculate volume as if doing 1 rep
+    with dumbbells in each hand. If only using 1 dumbbell, click "Only 1"
+    checkbox to correctly reflect volume of single dumbbell
+  </p>
+  <br />
 
   <div *ngFor="let s of setArray.controls; index as i">
     <span>Set {{ i + 1 }}</span>
@@ -85,7 +91,7 @@
       [inputFormGroup]="$any(s)"
       (exerciseTotalVolume)="receiveSetVolume($event)"
     ></app-input>
-    <button (click)="removeSet(i)">Delete</button>
+    <button (click)="removeSet(i)" *ngIf="i == lastToDelete">Delete</button>
     <p>{{ i }}</p>
   </div>
   <div *ngIf="setAdded_activateTotalVolDisplay">
@@ -95,7 +101,7 @@
   <button type="submit" (click)="closeExercise()">Done!</button>
 
   <!-- Uncommenting below line for active view will cause giant error in console. Wont cause any breaking errors, just annoying -->
-  <!-- <p>form group values: {{ exerciseForm.value | json }}</p> -->
+  <p>form group values: {{ exerciseForm.value | json }}</p>
   <div
     *ngIf="
       exerciseForm.controls['exerciseType'].touched &&

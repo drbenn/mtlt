@@ -1,0 +1,57 @@
+.nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: clamp(100px, calc(100px + 10vw), 200px);
+}
+
+.app-title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  padding-top: clamp(1rem, calc(1.5rem + 1vw), 4rem);
+  text-align: center;
+}
+
+.app-subtitle {
+  font-size: 0.9rem;
+  font-weight: 400;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.login-register-status-container {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+a:link,
+a:visited {
+  // background-color: #acaad2;
+  color: rgb(45, 199, 213);
+  // padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+a:hover,
+a:active {
+  color: rgb(15, 99, 71);
+}
+
+.in-app-navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: clamp(200px, calc(200px + 12vw), 800px);
+}
+
+.nav-border-width {
+  width: 85%;
+  margin-bottom: 2rem;
+}

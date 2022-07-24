@@ -23,6 +23,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AppState } from './core/state/appState.state';
 import { BestTimeComponent } from './views/best-time/best-time.component';
+import { NavComponent } from './views/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { BestTimeComponent } from './views/best-time/best-time.component';
     ExercisePanelComponent,
     LastTimeComponent,
     BestTimeComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,

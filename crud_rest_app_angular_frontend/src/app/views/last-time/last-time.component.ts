@@ -13,7 +13,7 @@ import { DataHistoryService } from 'src/app/core/services/dataHistory.service';
 // component generated on selection of exercise/exercise variation
 //  ALSO MUST BE DESTROYED  Rerun if changed
 export class LastTimeComponent implements OnInit {
-  @Input() exerciseList: string[];
+  lastTimeArrayForDisplay: any[] = [];
   testUser: LoggedInUser = {
     username: 'User1',
     joinDate: new Date(),
@@ -141,11 +141,11 @@ export class LastTimeComponent implements OnInit {
         exercise: 'Pullup',
         bodyweightVariation: '5. Full',
         setArray: [
-          { setNumber: 1, weight: '', reps: 12, volume: '' },
-          { setNumber: 2, weight: '', reps: 10, volume: '' },
-          { setNumber: 3, weight: '', reps: 8, volume: '' },
+          { setNumber: 1, weight: '', reps: 12, volume: 12 },
+          { setNumber: 2, weight: '', reps: 10, volume: 10 },
+          { setNumber: 3, weight: '', reps: 8, volume: 8 },
         ],
-        exerciseVolume: '30',
+        exerciseVolume: 30,
       },
       {
         exerciseDate: '2021-07-10T21:40:51.815Z',
@@ -153,52 +153,71 @@ export class LastTimeComponent implements OnInit {
         exercise: 'Pullup',
         bodyweightVariation: '5. Full',
         setArray: [
-          { setNumber: 1, weight: '', reps: 15, volume: '' },
-          { setNumber: 2, weight: '', reps: 10, volume: '' },
-          { setNumber: 3, weight: '', reps: 8, volume: '' },
+          { setNumber: 1, weight: '', reps: 15, volume: 15 },
+          { setNumber: 2, weight: '', reps: 10, volume: 10 },
+          { setNumber: 3, weight: '', reps: 8, volume: 8 },
         ],
-        exerciseVolume: '33',
-      },
-      {
-        exerciseDate: '2020-07-10T21:40:51.815Z',
-        exerciseType: 'BodyWeight',
-        exercise: 'Pullup',
-        bodyweightVariation: '5. Full',
-        setArray: [
-          { setNumber: 1, weight: '', reps: 12, volume: '' },
-          { setNumber: 2, weight: '', reps: 12, volume: '' },
-          { setNumber: 3, weight: '', reps: 18, volume: '' },
-        ],
-        exerciseVolume: '42',
-      },
-      {
-        exerciseDate: '2019-07-10T21:40:51.815Z',
-        exerciseType: 'BodyWeight',
-        exercise: 'Pullup',
-        bodyweightVariation: '5. Full',
-        setArray: [
-          { setNumber: 1, weight: '', reps: 22, volume: '' },
-          { setNumber: 2, weight: '', reps: 10, volume: '' },
-          { setNumber: 3, weight: '', reps: 8, volume: '' },
-        ],
-        exerciseVolume: '40',
-      },
-      {
-        exerciseDate: '2022-07-10T21:40:51.815Z',
-        exerciseType: 'BodyWeight',
-        exercise: 'Pullup',
-        bodyweightVariation: '5. Full',
-        setArray: [
-          { setNumber: 1, weight: '', reps: 120, volume: '' },
-          { setNumber: 2, weight: '', reps: 10, volume: '' },
-          { setNumber: 3, weight: '', reps: 8, volume: '' },
-        ],
-        exerciseVolume: '138',
+        exerciseVolume: 33,
       },
     ],
   };
 
-  getArrayOfExercisesEntered() {}
+  testObjectArray: any[] = [
+    {
+      exerciseDate: '2022-05-07T21:37:21.138Z',
+      exerciseType: 'barbell',
+      exercise: 'squat(back)',
+      bodyweightVariation: '',
+      setArray: [
+        {
+          setNumber: 1,
+          weight: 45,
+          reps: 12,
+          volume: 540,
+        },
+        {
+          setNumber: 2,
+          weight: 105,
+          reps: 10,
+          volume: 1050,
+        },
+        {
+          setNumber: 3,
+          weight: 125,
+          reps: 8,
+          volume: 1000,
+        },
+      ],
+      exerciseVolume: 2590,
+    },
+    {
+      exerciseDate: '2022-05-07T22:40:03.208Z',
+      exerciseType: 'machine',
+      exercise: 'tricep extension',
+      bodyweightVariation: '',
+      setArray: [
+        {
+          setNumber: 1,
+          weight: 44,
+          reps: 12,
+          volume: 528,
+        },
+        {
+          setNumber: 2,
+          weight: 52.5,
+          reps: 10,
+          volume: 525,
+        },
+        {
+          setNumber: 3,
+          weight: 540,
+          reps: 10,
+          volume: 540,
+        },
+      ],
+      exerciseVolume: 1560,
+    },
+  ];
 
   constructor(
     private store: Store,
@@ -209,15 +228,48 @@ export class LastTimeComponent implements OnInit {
     let activeExercisesUI$: Observable<string[][]> = this.store.select(
       (state) => state.appState.activeExercises
     );
+    let lastTimeArray$: Observable<Object[][]> = this.store.select(
+      (state) => state.appState.lastTime
+    );
     activeExercisesUI$.subscribe((_activeExercises: string[][]) => {
-      // console.log('LAST TIME LISTENING!');
-      // console.log(_activeExercises);
-      // console.log(this.dataHistoryService.testData);
       this.lastTimeDataRequest(_activeExercises);
+    });
+    lastTimeArray$.subscribe((_lastTimeArray: object[]) => {
+      if (typeof _lastTimeArray !== 'undefined') {
+        // this.lastTimeArrayForDisplay = [];
+        console.log(_lastTimeArray);
+        if (_lastTimeArray.length > 0) {
+          this.lastTimeArrayForDisplay = _lastTimeArray;
+        }
+      }
+      console.log(this.lastTimeArrayForDisplay);
     });
   }
 
+  // ngOnInit(): void {
+  //   let lastTimeArrayForD: any[] = [];
+  //   let activeExercisesUI$: Observable<string[][]> = this.store.select(
+  //     (state) => state.appState.activeExercises
+  //   );
+  //   let lastTimeArray$: Observable<Object[][]> = this.store.select(
+  //     (state) => state.appState.lastTime
+  //   );
+  //   activeExercisesUI$.subscribe((_activeExercises: string[][]) => {
+  //     this.lastTimeDataRequest(_activeExercises);
+  //   });
+  //   lastTimeArray$.subscribe((_lastTimeArray: object[]) => {
+  //     if (typeof _lastTimeArray !== 'undefined') {
+  //       this.lastTimeArrayForDisplay = [];
+  //       console.log(_lastTimeArray);
+
+  //       lastTimeArrayForD.push(..._lastTimeArray);
+  //       this.lastTimeArrayForDisplay = lastTimeArrayForD;
+  //     }
+  //     console.log(this.lastTimeArrayForDisplay);
+  //   });
+  // }
+
   lastTimeDataRequest(activeExercises: string[][]) {
-    this.dataHistoryService.getLastTimeDisplayData(activeExercises);
+    return this.dataHistoryService.getLastTimeDisplayData(activeExercises);
   }
 }

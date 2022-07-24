@@ -8,11 +8,16 @@ import {
   StateContext,
 } from '@ngxs/store';
 import { CurrentExercisesService } from '../services/currentExercises.service';
-import { UpdateActiveExercises } from './appState.actions';
+import {
+  UpdateActiveExercises,
+  UpdateLastAndBestTime,
+} from './appState.actions';
 
 export interface AppStateModel {
   exerciseHistory?: [];
   activeExercises?: string[][];
+  lastTime?: [];
+  bestTime?: [];
 }
 
 @State<AppStateModel>({
@@ -20,6 +25,8 @@ export interface AppStateModel {
   defaults: {
     exerciseHistory: [],
     activeExercises: [],
+    lastTime: [],
+    bestTime: [],
   },
 })
 @Injectable()
@@ -41,6 +48,25 @@ export class AppState {
     // const state = ctx.getState();
 
     ctx.setState({ activeExercises: newData });
+  }
+
+  @Action(UpdateLastAndBestTime)
+  updateLastAndBestTime(
+    ctx: StateContext<AppStateModel>,
+    payload: { lastAndBestTimeArray: any[] }
+  ) {
+    // console.log('last and best triggered in state');
+    // console.log('last time');
+    let lastTimeArray: [];
+    let bestTimeArray: [];
+    if (payload.lastAndBestTimeArray) {
+      lastTimeArray = payload.lastAndBestTimeArray[0];
+      // console.log(lastTimeArray);
+
+      bestTimeArray = payload.lastAndBestTimeArray[0];
+      ctx.setState({ lastTime: lastTimeArray });
+      ctx.setState({ bestTime: bestTimeArray });
+    }
   }
 }
 

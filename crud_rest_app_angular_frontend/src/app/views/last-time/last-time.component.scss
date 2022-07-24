@@ -1,7 +1,46 @@
+// .last-time-row {
+//   display: flex;
+//   flex-direction: row;
+//   width: 100%;
+//   justify-content: space-evenly;
+//   align-items: center;
+// }
+
 .last-time-row {
+  min-width: 200px;
+}
+.wrapper {
+  min-width: 400px;
+  // border: solid blue 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.exercise-categories {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-evenly;
+}
+.type-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  // border: red 2px solid;
+}
+
+.set-row-titles {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+.set-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
 }

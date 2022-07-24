@@ -330,16 +330,12 @@ export class InputArrayComponent implements OnInit {
     // );
   }
 
-  testSet() {
-    let exIndexInCurrentWorkout: number = this.exerciseIndexForCurrentWorkout;
-    let exType: string = this.exerciseForm.value.exerciseType;
-    let ex: string = this.exerciseForm.value.exercise;
-    let exVar: string = this.exerciseForm.value.bodyweightVariation;
-    let exerciseId: string = `${exIndexInCurrentWorkout}/${exType}/${ex}/${exVar}`;
-    // console.log(exerciseId);
-    this.dataHistoryService.getFoo();
-    this.dataHistoryService.updateCurrentExerciseListingForOtherComponents(
-      exerciseId
-    );
-  }
+  // testSet() {
+  //   let exIndexInCurrentWorkout: number = this.exerciseIndexForCurrentWorkout;
+  //   let exType: string = this.exerciseForm.value.exerciseType;
+  //   let ex: string = this.exerciseForm.value.exercise;
+  //   let exVar: string = this.exerciseForm.value.bodyweightVariation;
+  //   let exerciseId: string = `${exIndexInCurrentWorkout}/${exType}/${ex}/${exVar}`;
+  // console.log(exerciseId);
+  // }
 }

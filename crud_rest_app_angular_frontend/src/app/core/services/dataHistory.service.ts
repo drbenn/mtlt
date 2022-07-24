@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { ExerciseHistory } from '../models/loggedInUser.model';
+import { UpdateLastAndBestTime } from '../state/appState.actions';
 
 @Injectable()
 export class DataHistoryService {
   currentExerciseListForComparison: string[] = [];
-
-  testData = [
+  constructor(private store: Store) {}
+  testData: ExerciseHistory[] = [
     {
       exerciseDate: '2022-05-04T21:35:16.048Z',
       exerciseType: 'bodyweight',
@@ -21,7 +24,7 @@ export class DataHistoryService {
     {
       exerciseDate: '2022-05-04T21:37:21.138Z',
       exerciseType: 'barbell',
-      exercise: 'squatb(back)',
+      exercise: 'squat(back)',
       bodyweightVariation: '',
       setArray: [
         { setNumber: 1, weight: 45, reps: 12, volume: 540 },
@@ -186,17 +189,46 @@ export class DataHistoryService {
     },
   ];
 
-  getFoo(): void {
-    return console.log('fopo');
-  }
-
-  updateCurrentExerciseListingForOtherComponents(exerciseId: string) {
-    console.log(exerciseId);
-  }
-
   getLastTimeDisplayData(activeExercises: string[][]) {
-    // console.log(activeExercises);
-    // activeExercises.forEach((obj) => this.testData.filter(object=> object.));
-    return console.log('recvd in service');
+    let returnedHistoryLastTime: any[] = [];
+    let returnedHistoryBestTime: any[] = [];
+    let lastAndBestTimeArray: any[] = [[], []];
+
+    activeExercises?.forEach((activeExerciseArray) => {
+      let exerciseMethod: string = activeExerciseArray[1];
+      let exercise: string = activeExerciseArray[2];
+      let bodyweightVariation: string = activeExerciseArray[3];
+      let filter;
+
+      if (exerciseMethod !== 'bodyweight') {
+        filter = this.testData?.filter(
+          (obj) =>
+            obj.exerciseType == exerciseMethod && obj.exercise == exercise
+        );
+      }
+
+      if (exerciseMethod === 'bodyweight') {
+        filter = this.testData?.filter(
+          (obj) =>
+            obj.exerciseType == exerciseMethod &&
+            obj.exercise == exercise &&
+            obj.bodyweightVariation == bodyweightVariation
+        );
+      }
+      let lastTime = filter?.reduce((a, b) =>
+        a.exerciseDate > b.exerciseDate ? a : b
+      );
+
+      let bestTime = filter?.reduce((a, b) =>
+        a.exerciseVolume > b.exerciseVolume ? a : b
+      );
+
+      returnedHistoryLastTime.push(lastTime);
+      returnedHistoryBestTime.push(bestTime);
+    });
+    lastAndBestTimeArray[0] = returnedHistoryLastTime;
+    lastAndBestTimeArray[1] = returnedHistoryBestTime;
+
+    this.store.dispatch(new UpdateLastAndBestTime(lastAndBestTimeArray));
   }
 }

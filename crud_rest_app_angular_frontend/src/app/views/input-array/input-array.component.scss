@@ -1,0 +1,55 @@
+.set-flex-wrapper {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  padding-left: 10%;
+  // align-items: center;
+  // text-align: center;
+}
+
+.select-title {
+  font-weight: 500;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.set-title {
+  font-size: 1.4rem;
+  min-width: 88px;
+}
+
+.select-input {
+  max-width: 140px;
+  padding: 0.4rem 0.7rem;
+  margin: 0 1rem 1rem 1rem;
+  font-size: 0.9rem;
+  border: solid 2px #b0bec5;
+}
+
+.select-input:focus {
+  border: solid 3px #545c5f;
+}
+
+.exercise-select-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.current-total-volume {
+  float: right;
+  padding-right: 3.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+// .select-stack {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// }

@@ -38,14 +38,6 @@ export class ExercisePanelComponent implements OnInit {
     // console.log(`state-after-remove: ${this.exerciseArrayForState}`);
     this.updateStateActiveExercises(this.exerciseArrayForState);
   }
-  indexSend(i: number) {
-    // console.log(i);
-    // console.log(typeof i);
-    // let indexAsString = 'did they receive index';
-    // console.log('index send fired');
-    // this.exerciseIndexToChild = indexAsString;
-    // this.exerciseIndex.emit(this.exerciseIndexToChild);
-  }
 
   receiveIterationExercise(exerIterationArray: any): void {
     this.lengthOfArrayForState = this.exerciseArrayForState.length;
@@ -56,6 +48,4 @@ export class ExercisePanelComponent implements OnInit {
     // console.log(`state after add/replace: ${this.exerciseArrayForState}`);
     this.updateStateActiveExercises(this.exerciseArrayForState);
   }
-
-  generateExerciseListArray() {}
 }

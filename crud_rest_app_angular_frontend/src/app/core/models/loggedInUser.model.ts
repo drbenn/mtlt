@@ -3,7 +3,7 @@ export interface LoggedInUser {
   joinDate: Date;
   customExercises?: CustomExercise[];
   customWorkouts?: CustomWorkout;
-  exerciseHistory?: {}[];
+  exerciseHistory?: ExerciseHistory[];
   exerciseLastTime?: {}[];
   exerciseAllTimeBest?: {}[];
 }
@@ -21,4 +21,20 @@ export interface CustomWorkout {
 export interface BodyWeightProgression {
   exerciseVariation: string;
   exercises: string[];
+}
+
+export interface ExerciseHistory {
+  exerciseDate: Date | string;
+  exerciseType: string;
+  exercise: string;
+  bodyweightVariation: string;
+  setArray: SetArray[];
+  exerciseVolume: number;
+}
+
+export interface SetArray {
+  setNumber: number;
+  weight?: number | string;
+  reps: number;
+  volume: number;
 }

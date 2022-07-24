@@ -1,8 +1,43 @@
-<div class="border">
-  <p>last-time works!</p>
-  <div class="last-time-row">
-    <div>Weight:</div>
-    <div>Reps:</div>
+<div class="wrapper">
+  <div class="last-time-row" *ngFor="let item of lastTimeArrayForDisplay">
+    <div class="exercise-categories">
+      <div class="type-column">
+        <!-- <div>ExerciseType</div> -->
+        <div class="historical-title">{{ item.exerciseType | titlecase }}</div>
+      </div>
+      <div class="type-column">
+        <!-- <div>Exercise</div> -->
+        <div class="historical-title">{{ item.exercise | titlecase }}</div>
+      </div>
+      <div class="type-column" *ngIf="item.exerciseType === 'bodyweight'">
+        <!-- <div>Variation</div> -->
+        <div class="historical-title">
+          {{ item.bodyweightVariation | titlecase }}
+        </div>
+      </div>
+    </div>
+    <div class="set-row-titles">
+      <div class="set-row historical-type-title">Set</div>
+      <div
+        class="set-row historical-type-title"
+        *ngIf="item.exerciseType !== 'bodyweight'"
+      >
+        Weight
+      </div>
+      <div class="set-row historical-type-title">Reps</div>
+    </div>
+    <div class="set-row" *ngFor="let set of item.setArray">
+      <div class="set-cell">{{ set.setNumber }}</div>
+      <div class="set-cell" *ngIf="item.exerciseType !== 'bodyweight'">
+        {{ set.weight }}
+      </div>
+      <div class="set-cell">{{ set.reps }}</div>
+    </div>
+    <div class="total-set-historical-volume">
+      Total Volume: {{ item.exerciseVolume }}
+    </div>
+    <div class="bottom-border"></div>
   </div>
-  <div>Total Volume:</div>
+
+  <!-- <button (click)="addToTestArray()">add</button> -->
 </div>

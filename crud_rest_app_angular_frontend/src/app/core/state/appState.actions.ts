@@ -7,3 +7,8 @@ export class UpdateActiveExercises {
   static readonly type = '[ExerciseList] Update Active Exercises';
   constructor(public activeExercisesUI: string[][]) {}
 }
+
+export class UpdateLastAndBestTime {
+  static readonly type = '[ExerciseHistory] Update Last and Best Exercises';
+  constructor(public lastAndBestTimeArray: any[]) {}
+}

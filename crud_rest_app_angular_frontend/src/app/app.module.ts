@@ -22,7 +22,7 @@ import { DataHistoryService } from './core/services/dataHistory.service';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AppState } from './core/state/appState.state';
-import { environment } from 'src/environments/environment';
+import { BestTimeComponent } from './views/best-time/best-time.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { environment } from 'src/environments/environment';
     InputArrayComponent,
     ExercisePanelComponent,
     LastTimeComponent,
+    BestTimeComponent,
   ],
   imports: [
     BrowserModule,

@@ -63,7 +63,7 @@ export class AppState {
       lastTimeArray = payload.lastAndBestTimeArray[0];
       // console.log(lastTimeArray);
 
-      bestTimeArray = payload.lastAndBestTimeArray[0];
+      bestTimeArray = payload.lastAndBestTimeArray[1];
       ctx.setState({ lastTime: lastTimeArray });
       ctx.setState({ bestTime: bestTimeArray });
     }

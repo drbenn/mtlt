@@ -192,7 +192,7 @@ export class DataHistoryService {
   getLastTimeDisplayData(activeExercises: string[][]) {
     let returnedHistoryLastTime: any[] = [];
     let returnedHistoryBestTime: any[] = [];
-    let lastAndBestTimeArray: any[] = [[], []];
+    let lastAndBestTimeArray: any[] = [];
 
     activeExercises?.forEach((activeExerciseArray) => {
       let exerciseMethod: string = activeExerciseArray[1];

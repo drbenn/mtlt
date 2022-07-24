@@ -5,15 +5,12 @@ import { LoggedInUser } from 'src/app/core/models/loggedInUser.model';
 import { DataHistoryService } from 'src/app/core/services/dataHistory.service';
 
 @Component({
-  selector: 'app-last-time',
-  templateUrl: './last-time.component.html',
-  styleUrls: ['./last-time.component.scss'],
+  selector: 'app-best-time',
+  templateUrl: './best-time.component.html',
+  styleUrls: ['./best-time.component.scss'],
 })
-
-// component generated on selection of exercise/exercise variation
-//  ALSO MUST BE DESTROYED  Rerun if changed
-export class LastTimeComponent implements OnInit {
-  lastTimeArrayForDisplay: any[] = [];
+export class BestTimeComponent implements OnInit {
+  bestTimeArrayForDisplay: any[] = [];
   testUser: LoggedInUser = {
     username: 'User1',
     joinDate: new Date(),
@@ -220,31 +217,31 @@ export class LastTimeComponent implements OnInit {
   ];
 
   constructor(
-    private store: Store,
-    private dataHistoryService: DataHistoryService
-  ) {}
+    private store: Store
+  ) // private dataHistoryService: DataHistoryService
+  {}
 
   ngOnInit(): void {
-    let activeExercisesUI$: Observable<string[][]> = this.store.select(
-      (state) => state.appState.activeExercises
+    // let activeExercisesUI$: Observable<string[][]> = this.store.select(
+    //   (state) => state.appState.activeExercises
+    // );
+    let bestTimeArray$: Observable<Object[][]> = this.store.select(
+      (state) => state.appState.bestTime
     );
-    let lastTimeArray$: Observable<Object[][]> = this.store.select(
-      (state) => state.appState.lastTime
-    );
-    activeExercisesUI$.subscribe((_activeExercises: string[][]) => {
-      this.lastTimeDataRequest(_activeExercises);
-    });
-    lastTimeArray$.subscribe((_lastTimeArray: object[]) => {
-      if (typeof _lastTimeArray !== 'undefined') {
-        if (_lastTimeArray.length > 0) {
-          this.lastTimeArrayForDisplay = _lastTimeArray;
+    // activeExercisesUI$.subscribe((_activeExercises: string[][]) => {
+    //   this.lastTimeDataRequest(_activeExercises);
+    // });
+    bestTimeArray$.subscribe((_bestTimeArray: object[]) => {
+      if (typeof _bestTimeArray !== 'undefined') {
+        if (_bestTimeArray.length > 0) {
+          this.bestTimeArrayForDisplay = _bestTimeArray;
         }
       }
       // console.log(this.lastTimeArrayForDisplay);
     });
   }
 
-  lastTimeDataRequest(activeExercises: string[][]) {
-    return this.dataHistoryService.getLastTimeDisplayData(activeExercises);
-  }
+  // lastTimeDataRequest(activeExercises: string[][]) {
+  //   return this.dataHistoryService.getLastTimeDisplayData(activeExercises);
+  // }
 }

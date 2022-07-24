@@ -16,12 +16,27 @@ body {
 }
 
 // LAST/BEST TIME SHARED STYLES
-.historical-title {
-  font-size: 1.1rem;
+.historic-title {
+  font-size: 1rem;
   font-weight: 500;
 }
 
-.historical-type-title {
+.historic-type-title {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.historic-section-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.historic-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 0.9rem;
   font-weight: 400;
 }
@@ -38,7 +53,7 @@ body {
   text-align: center;
 }
 
-.total-set-historical-volume {
+.total-set-historic-volume {
   float: right;
   padding-right: 1rem;
   font-size: 1rem;

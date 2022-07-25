@@ -8,16 +8,18 @@
     maxlength="10"
   />
   &nbsp;&nbsp; -->
-  <div class="exercise-select-row">
+  <div class="exercise-select-row title-area-height">
     <div class="select-stack">
       <div class="select-title">Exercise Type</div>
       <select
+        style="font-size: 10px"
         class="select-input"
         formControlName="exerciseType"
         required
         (change)="populateExerciseSelect($event)"
       >
         <option
+          style="font-size: 0.9rem"
           *ngFor="let type of exerciseTypesDropDown"
           [value]="type | lowercase"
         >
@@ -31,6 +33,7 @@
         Exercise
       </div>
       <select
+        style="font-size: 10px"
         class="select-input"
         *ngIf="this.exerciseForm.value.exerciseType"
         formControlName="exercise"
@@ -38,6 +41,7 @@
         (change)="populateBodyWeightVariationSelect($event)"
       >
         <option
+          style="font-size: 0.9rem"
           *ngFor="let exercise of exerciseTypeSelected"
           [value]="exercise | lowercase"
         >
@@ -58,6 +62,7 @@
         Variation
       </div>
       <select
+        style="font-size: 10px"
         class="select-input"
         *ngIf="
           this.exerciseForm.value.exercise &&
@@ -68,6 +73,7 @@
         (change)="activateAddSet($event)"
       >
         <option
+          style="font-size: 0.9rem"
           *ngFor="let variation of bodyweightVariationSelected"
           [value]="variation | lowercase"
         >
@@ -75,6 +81,7 @@
         </option>
       </select>
     </div>
+
     <!-- &nbsp;&nbsp; -->
 
     <!-- <label for="">Exercise</label>
@@ -91,6 +98,15 @@
     <button type="button" (click)="addSet()" [disabled]="addSetButtonDisabled">
       Add Set
     </button>
+  </div>
+  <div>
+    <span>{{ this.exerciseForm.value.exerciseType | titlecase }}</span>
+    <span *ngIf="this.exerciseForm.value.exercise">
+      - {{ this.exerciseForm.value.exercise | titlecase }}</span
+    >
+    <span *ngIf="this.exerciseForm.value.bodyweightVariation">
+      - {{ this.exerciseForm.value.bodyweightVariation | titlecase }}</span
+    >
   </div>
   <!-- <br /> -->
   <p *ngIf="exerciseForm.controls['exerciseType'].value === 'Dumbbell'">
@@ -121,9 +137,10 @@
   <div class="current-total-volume" *ngIf="setAdded_activateTotalVolDisplay">
     Total Volume = {{ totalVolumeForExercise }}
   </div>
-  <button type="submit">Save Progress</button>
-  <button type="submit" (click)="closeExercise()">Done!</button>
-
+  <div class="bottom-buttons">
+    <button type="submit">Save Progress</button>
+    <button type="submit" (click)="closeExercise()">Done!</button>
+  </div>
   <div
     class="warning-text"
     *ngIf="

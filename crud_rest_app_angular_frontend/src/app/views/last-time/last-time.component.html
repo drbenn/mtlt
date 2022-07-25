@@ -1,29 +1,31 @@
-<div class="wrapper">
-  <div class="old-time-row" *ngFor="let item of lastTimeArrayForDisplay">
-    <div class="historic-section-title">Last Time</div>
-    <div class="exercise-categories">
-      <div class="type-column">
-        <div class="historic-title">{{ item.exerciseType | titlecase }}</div>
-      </div>
-      <div class="type-column">
-        <div class="historic-title">{{ item.exercise | titlecase }}</div>
-      </div>
-      <div class="type-column" *ngIf="item.exerciseType === 'bodyweight'">
-        <div class="historic-title">
-          {{ item.bodyweightVariation | titlecase }}
+<div class="wrapper border-right">
+  <div
+    class="old-time-row"
+    *ngFor="let item of lastTimeArrayForDisplay; index as i"
+  >
+    <div class="title-area-height">
+      <div class="historic-section-title" *ngIf="i === 0">Last Time</div>
+      <div class="exercise-categories">
+        <div class="type-column">
+          <div class="historic-title">
+            {{ item.exerciseType | titlecase }} - {{ item.exercise | titlecase
+            }}<span *ngIf="item.exerciseType === 'bodyweight'">
+              - {{ item.bodyweightVariation | titlecase }}</span
+            >
+          </div>
         </div>
       </div>
-    </div>
-    <div class="historic-date">{{ item.exerciseDate | date }}</div>
-    <div class="set-row-titles">
-      <div class="set-row historic-type-title">Set</div>
-      <div
-        class="set-row historic-type-title"
-        *ngIf="item.exerciseType !== 'bodyweight'"
-      >
-        Weight
+      <div class="historic-date">{{ item.exerciseDate | date }}</div>
+      <div class="set-row-titles">
+        <div class="set-row historic-type-title">Set</div>
+        <div
+          class="set-row historic-type-title"
+          *ngIf="item.exerciseType !== 'bodyweight'"
+        >
+          Weight
+        </div>
+        <div class="set-row historic-type-title">Reps</div>
       </div>
-      <div class="set-row historic-type-title">Reps</div>
     </div>
     <div class="set-row" *ngFor="let set of item.setArray">
       <div class="set-cell">{{ set.setNumber }}</div>

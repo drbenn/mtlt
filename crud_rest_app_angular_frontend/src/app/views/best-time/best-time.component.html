@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper border-right">
   <div class="old-time-row" *ngFor="let item of bestTimeArrayForDisplay">
     <div class="historic-section-title">Best Time</div>
     <div class="exercise-categories">
@@ -35,6 +35,6 @@
     <div class="total-set-historic-volume">
       Total Volume: {{ item.exerciseVolume }}
     </div>
-    <div class="bottom-border"></div>
   </div>
+  <div class="bottom-border" *ngIf="bestTimeArrayForDisplay.length > 0"></div>
 </div>

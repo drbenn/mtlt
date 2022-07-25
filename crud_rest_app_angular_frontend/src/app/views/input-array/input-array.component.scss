@@ -15,13 +15,21 @@
   align-items: flex-end;
 }
 
+select {
+  -o-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .set-title {
   font-size: 1.4rem;
   min-width: 88px;
 }
 
 .select-input {
-  max-width: 140px;
+  max-width: 75px;
   padding: 0.4rem 0.7rem;
   margin: 0 1rem 1rem 1rem;
   font-size: 0.9rem;
@@ -45,6 +53,10 @@
   padding-right: 3.5rem;
   font-size: 1rem;
   font-weight: 500;
+}
+
+.bottom-buttons {
+  padding-left: 2rem;
 }
 
 // .select-stack {

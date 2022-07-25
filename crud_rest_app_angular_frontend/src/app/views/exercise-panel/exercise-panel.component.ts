@@ -1,4 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Store } from '@ngxs/store';
 import { UpdateActiveExercises } from 'src/app/core/state/appState.actions';
 
@@ -7,7 +15,7 @@ import { UpdateActiveExercises } from 'src/app/core/state/appState.actions';
   templateUrl: './exercise-panel.component.html',
   styleUrls: ['./exercise-panel.component.scss'],
 })
-export class ExercisePanelComponent implements OnInit {
+export class ExercisePanelComponent implements OnInit, AfterViewChecked {
   @Output() exerciseIndex = new EventEmitter<string>();
   exerciseInput: number[] = [];
   exerciseInputIndex: number = 0;
@@ -17,6 +25,16 @@ export class ExercisePanelComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {}
+
+  ngAfterViewChecked() {
+    let width = this.heightListener.nativeElement.offsetWidth;
+    let height = this.heightListener.nativeElement.offsetHeight;
+
+    console.log('Width:' + width);
+    console.log('Height: ' + height);
+  }
+  @ViewChild('heightListener')
+  heightListener: ElementRef;
 
   addExerciseInput() {
     this.exerciseInput.push(this.exerciseInputIndex);
@@ -47,5 +65,11 @@ export class ExercisePanelComponent implements OnInit {
     }
     // console.log(`state after add/replace: ${this.exerciseArrayForState}`);
     this.updateStateActiveExercises(this.exerciseArrayForState);
+  }
+
+  public onResizeHandler(event: any): void {
+    event.target.innerWidth;
+    event.target.innerHeight;
+    console.log(event.target.innerHeight);
   }
 }

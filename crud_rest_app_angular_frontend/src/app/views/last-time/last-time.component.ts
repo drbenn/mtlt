@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { LoggedInUser } from 'src/app/core/models/loggedInUser.model';
 import { DataHistoryService } from 'src/app/core/services/dataHistory.service';
+import { UpdateZindexForMobile } from 'src/app/core/state/appState.actions';
 
 @Component({
   selector: 'app-last-time',
@@ -11,8 +12,9 @@ import { DataHistoryService } from 'src/app/core/services/dataHistory.service';
 })
 
 // component generated on selection of exercise/exercise variation
-//  ALSO MUST BE DESTROYED  Rerun if changed
 export class LastTimeComponent implements OnInit {
+  zIndexArrayForMobileLast: number;
+  public innerWidth: any;
   lastTimeArrayForDisplay: any[] = [];
   testUser: LoggedInUser = {
     username: 'User1',
@@ -225,6 +227,16 @@ export class LastTimeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    let zIndexMobilePane$: Observable<number[]> = this.store.select(
+      (state) => state.appState.zIndexMobilePane
+    );
+
+    zIndexMobilePane$.subscribe((_zIndexMobilePane: number[]) => {
+      console.log(_zIndexMobilePane);
+      this.zIndexArrayForMobileLast = _zIndexMobilePane[1];
+      console.log(`last z: ${this.zIndexArrayForMobileLast}`);
+    });
+    this.innerWidth = window.innerWidth;
     let activeExercisesUI$: Observable<string[][]> = this.store.select(
       (state) => state.appState.activeExercises
     );
@@ -235,16 +247,35 @@ export class LastTimeComponent implements OnInit {
       this.lastTimeDataRequest(_activeExercises);
     });
     lastTimeArray$.subscribe((_lastTimeArray: object[]) => {
+      console.log(_lastTimeArray);
+
       if (typeof _lastTimeArray !== 'undefined') {
         if (_lastTimeArray.length > 0) {
           this.lastTimeArrayForDisplay = _lastTimeArray;
         }
       }
-      // console.log(this.lastTimeArrayForDisplay);
     });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.innerWidth = window.innerWidth;
+    console.log(this.innerWidth);
+  }
+  ngAfterViewChecked() {}
+
   lastTimeDataRequest(activeExercises: string[][]) {
     return this.dataHistoryService.getLastTimeDisplayData(activeExercises);
+  }
+
+  zIndexToBestTime() {
+    // [zIndexCurrent, zIndexLast, zIndexBest]
+    let bestTimeZIndex: number[] = [1, 1, 3];
+    this.store.dispatch(new UpdateZindexForMobile(bestTimeZIndex));
+  }
+  zIndexToCurrentTime() {
+    // [zIndexCurrent, zIndexLast, zIndexBest]
+    let currentTimeZIndex: number[] = [3, 1, 1];
+    this.store.dispatch(new UpdateZindexForMobile(currentTimeZIndex));
   }
 }

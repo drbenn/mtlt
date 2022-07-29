@@ -84,7 +84,6 @@ export class InputArrayComponent implements OnInit {
       this.exerciseIndexForCurrentWorkout
     );
     this.thisExerciseArray[0] = exerciseIndexAsString;
-    // console.log(this.exerciseIndexForCurrentWorkout);
   }
 
   /**
@@ -207,6 +206,14 @@ export class InputArrayComponent implements OnInit {
   addSet(): void {
     this.lastToDelete += 1;
     let newSet = this.formFactoryService.getSetForm();
+    let exerciseIndexNumberForHeightOrder =
+      this.exerciseIndexForCurrentWorkout - 1;
+    let numberOfSetsInExercise = this.lastToDelete + 1;
+
+    console.log(
+      `exercise: ${exerciseIndexNumberForHeightOrder}, #ofSets: ${numberOfSetsInExercise}`
+    );
+
     return this.setArray.push(newSet);
   }
 
@@ -320,7 +327,7 @@ export class InputArrayComponent implements OnInit {
 
   onSubmit() {
     console.warn('form submitted');
-    console.log(this.exerciseForm.value);
+    // console.log(this.exerciseForm.value);
   }
 
   closeExercise() {

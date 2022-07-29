@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { IInputSet } from 'src/app/core/models/set.model';
 import { FormBuilder } from '@angular/forms';
 import { FormFactoryService } from 'src/app/core/services/exerciseInput.service';
 
@@ -18,26 +17,11 @@ export class InputComponent implements OnInit {
   }
   singleDumbbell: boolean = false;
   index: number;
-  // exerciseTypeSelected: string = 'something';
 
   repsInSet: number;
   weightInSet: number;
-  // volumeOfSet: number;
 
   bodyWeight: boolean = false;
-
-  // workingSets = [1];
-  // workingVolDisplay: number = 0;
-  // inputRep: number = 0;
-  // inputWeight: number = 0;
-  // inputSetVolume = 10;
-  // activeSetArray: IInputSet[] = [];
-
-  // testSet: IInputSet = {
-  //   set: 1,
-  //   reps: 10,
-  //   weight: 50,
-  // };
 
   constructor(
     private fb: FormBuilder,
@@ -46,8 +30,6 @@ export class InputComponent implements OnInit {
   ngOnInit() {
     // On init of new rep row, setNumber will auto-populate value based on index
     this.inputFormGroup.get('setNumber')?.setValue(this.index);
-    // console.log('this work?');
-    // console.log(this.exerType);
   }
 
   /**

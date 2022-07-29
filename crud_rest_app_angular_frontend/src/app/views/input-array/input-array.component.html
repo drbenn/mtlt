@@ -1,120 +1,99 @@
 <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
-  <!-- <label for="">Exercise Type</label>
-  <input
-    type="text"
-    placeholder="Execise Type"
-    formControlName="exerciseType"
-    required
-    maxlength="10"
-  />
-  &nbsp;&nbsp; -->
-  <div class="exercise-select-row title-area-height">
-    <div class="select-stack">
-      <div class="select-title">Exercise Type</div>
-      <select
-        style="font-size: 10px"
-        class="select-input"
-        formControlName="exerciseType"
-        required
-        (change)="populateExerciseSelect($event)"
-      >
-        <option
-          style="font-size: 0.9rem"
-          *ngFor="let type of exerciseTypesDropDown"
-          [value]="type | lowercase"
+  <div class="title-area-height">
+    <div class="exercise-select-row">
+      <div class="select-stack">
+        <div class="select-title">Type</div>
+        <select
+          style="font-size: 10px"
+          class="select-input"
+          formControlName="exerciseType"
+          required
+          (change)="populateExerciseSelect($event)"
         >
-          {{ type }}
-        </option>
-      </select>
-    </div>
-    <!-- &nbsp;&nbsp; -->
-    <div class="select-stack">
-      <div class="select-title" *ngIf="this.exerciseForm.value.exerciseType">
-        Exercise
+          <option
+            style="font-size: 0.9rem"
+            *ngFor="let type of exerciseTypesDropDown"
+            [value]="type | lowercase"
+          >
+            {{ type }}
+          </option>
+        </select>
       </div>
-      <select
-        style="font-size: 10px"
-        class="select-input"
-        *ngIf="this.exerciseForm.value.exerciseType"
-        formControlName="exercise"
-        required
-        (change)="populateBodyWeightVariationSelect($event)"
-      >
-        <option
-          style="font-size: 0.9rem"
-          *ngFor="let exercise of exerciseTypeSelected"
-          [value]="exercise | lowercase"
+      <div class="select-stack">
+        <div class="select-title" *ngIf="this.exerciseForm.value.exerciseType">
+          Exercise
+        </div>
+        <select
+          style="font-size: 10px"
+          class="select-input"
+          *ngIf="this.exerciseForm.value.exerciseType"
+          formControlName="exercise"
+          required
+          (change)="populateBodyWeightVariationSelect($event)"
         >
-          {{ exercise }}
-        </option>
-      </select>
-    </div>
-    <!-- &nbsp;&nbsp; -->
-    <div class="select-stack">
-      <div
-        class="select-title"
-        for=""
-        *ngIf="
-          this.exerciseForm.value.exercise &&
-          this.exerciseForm.value.exerciseType === 'bodyweight'
-        "
-      >
-        Variation
+          <option
+            style="font-size: 0.9rem"
+            *ngFor="let exercise of exerciseTypeSelected"
+            [value]="exercise | lowercase"
+          >
+            {{ exercise }}
+          </option>
+        </select>
       </div>
-      <select
-        style="font-size: 10px"
-        class="select-input"
-        *ngIf="
-          this.exerciseForm.value.exercise &&
-          this.exerciseForm.value.exerciseType === 'bodyweight'
-        "
-        formControlName="bodyweightVariation"
-        required
-        (change)="activateAddSet($event)"
-      >
-        <option
-          style="font-size: 0.9rem"
-          *ngFor="let variation of bodyweightVariationSelected"
-          [value]="variation | lowercase"
+      <div class="select-stack">
+        <div
+          class="select-title"
+          for=""
+          *ngIf="
+            this.exerciseForm.value.exercise &&
+            this.exerciseForm.value.exerciseType === 'bodyweight'
+          "
         >
-          {{ variation }}
-        </option>
-      </select>
+          Variation
+        </div>
+        <select
+          style="font-size: 10px"
+          class="select-input"
+          *ngIf="
+            this.exerciseForm.value.exercise &&
+            this.exerciseForm.value.exerciseType === 'bodyweight'
+          "
+          formControlName="bodyweightVariation"
+          required
+          (change)="activateAddSet($event)"
+        >
+          <option
+            style="font-size: 0.9rem"
+            *ngFor="let variation of bodyweightVariationSelected"
+            [value]="variation | lowercase"
+          >
+            {{ variation }}
+          </option>
+        </select>
+      </div>
+      <button
+        type="button add-set-button-responsive"
+        (click)="addSet()"
+        [disabled]="addSetButtonDisabled"
+      >
+        Add Set
+      </button>
     </div>
-
-    <!-- &nbsp;&nbsp; -->
-
-    <!-- <label for="">Exercise</label>
-  <input
-    *ngIf="this.exerciseForm.value.exerciseType"
-    type="text"
-    placeholder="Exercise"
-    formControlName="exercise"
-    required
-    maxLength="10"
-  /> -->
-
-    <!-- &nbsp;&nbsp;Add Set -->
-    <button type="button" (click)="addSet()" [disabled]="addSetButtonDisabled">
-      Add Set
-    </button>
+    <div class="selected-exercise-readout-container">
+      <span>{{ this.exerciseForm.value.exerciseType | titlecase }}</span>
+      <span *ngIf="this.exerciseForm.value.exercise">
+        - {{ this.exerciseForm.value.exercise | titlecase }}</span
+      >
+      <span *ngIf="this.exerciseForm.value.bodyweightVariation">
+        - {{ this.exerciseForm.value.bodyweightVariation | titlecase }}</span
+      >
+    </div>
   </div>
-  <div>
-    <span>{{ this.exerciseForm.value.exerciseType | titlecase }}</span>
-    <span *ngIf="this.exerciseForm.value.exercise">
-      - {{ this.exerciseForm.value.exercise | titlecase }}</span
-    >
-    <span *ngIf="this.exerciseForm.value.bodyweightVariation">
-      - {{ this.exerciseForm.value.bodyweightVariation | titlecase }}</span
-    >
-  </div>
-  <!-- <br /> -->
   <p *ngIf="exerciseForm.controls['exerciseType'].value === 'Dumbbell'">
     Selecting dumbbells will automatically calculate volume as if doing 1 rep
     with dumbbells in each hand. If only using 1 dumbbell, click "Only 1"
     checkbox to correctly reflect volume of single dumbbell
   </p>
-  <!-- <br /> -->
   <div class="set-flex-wrapper">
     <div *ngFor="let s of setArray.controls; index as i">
       <span class="set-title">Set {{ i + 1 }}</span>
@@ -129,9 +108,8 @@
         (click)="removeSet(i)"
         *ngIf="i == lastToDelete"
       >
-        Delete Set
+        X
       </button>
-      <!-- <p>{{ i }}</p> -->
     </div>
   </div>
   <div class="current-total-volume" *ngIf="setAdded_activateTotalVolDisplay">
@@ -155,22 +133,6 @@
 
   <!-- Uncommenting below line for active view will cause giant error in console. Wont cause any breaking errors, just annoying -->
   <!-- <p>form group values: {{ exerciseForm.value | json }}</p> -->
-  <!-- <div
-    *ngIf="
-      exerciseForm.controls['exerciseType'].touched &&
-      exerciseForm.controls['exerciseType'].invalid
-    "
-  >
-    Extype too long!
-  </div>
-  <div
-    *ngIf="
-      exerciseForm.controls['exercise'].touched &&
-      exerciseForm.controls['exercise'].invalid
-    "
-  >
-    Exercise name too long!
-  </div> -->
 
   <!-- <button (click)="testSet()">TEST</button> -->
 </form>

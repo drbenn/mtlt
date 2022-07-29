@@ -1,0 +1,12 @@
+@media (max-width: 1200px) {
+  .z1 {
+    position: absolute;
+    z-index: 1;
+    display: none;
+  }
+
+  .z3 {
+    position: absolute;
+    z-index: 3;
+  }
+}

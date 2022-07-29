@@ -24,6 +24,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AppState } from './core/state/appState.state';
 import { BestTimeComponent } from './views/best-time/best-time.component';
 import { NavComponent } from './views/nav/nav.component';
+import { MainComponent } from './views/main/main.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NavComponent } from './views/nav/nav.component';
     LastTimeComponent,
     BestTimeComponent,
     NavComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,

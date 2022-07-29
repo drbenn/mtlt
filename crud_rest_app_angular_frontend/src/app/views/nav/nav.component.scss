@@ -55,3 +55,10 @@ a:active {
   width: 85%;
   margin-bottom: 1rem;
 }
+
+@media (max-width: 450px) {
+  a:link,
+  a:visited {
+    font-size: clamp(0.7rem, calc(0.7rem + 3vw), 0.8rem);
+  }
+}

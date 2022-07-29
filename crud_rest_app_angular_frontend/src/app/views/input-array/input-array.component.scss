@@ -1,10 +1,8 @@
 .set-flex-wrapper {
   display: flex;
   flex-direction: column;
-  // justify-content: center;
-  padding-left: 10%;
-  // align-items: center;
-  // text-align: center;
+  padding-left: clamp(0%, calc(10% + 5vw), 12%);
+  flex-wrap: nowrap;
 }
 
 .select-title {
@@ -29,9 +27,12 @@ select {
 }
 
 .select-input {
-  max-width: 75px;
+  width: clamp(50px, calc(50px + 2.5rem), 200px);
   padding: 0.4rem 0.7rem;
-  margin: 0 1rem 1rem 1rem;
+  margin-top: 0;
+  margin-right: clamp(0.1rem, calc(0.1rem + 1vw), 1rem);
+  margin-bottom: 1rem;
+  margin-left: clamp(0.1rem, calc(0.1rem + 1vw), 1rem);
   font-size: 0.9rem;
   border: solid 2px #b0bec5;
 }
@@ -45,7 +46,17 @@ select {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
+
+.selected-exercise-readout-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--accent);
 }
 
 .current-total-volume {
@@ -59,9 +70,6 @@ select {
   padding-left: 2rem;
 }
 
-// .select-stack {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-// }
+.delete-button {
+  width: 40px;
+}

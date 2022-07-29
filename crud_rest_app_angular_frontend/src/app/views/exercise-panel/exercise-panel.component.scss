@@ -3,5 +3,6 @@
 }
 
 .add-exercise-button {
-  margin-left: 2.2rem;
+  margin-top: 0.3rem;
+  margin-left: clamp(1rem, calc(1rem + 0.3vw), 2.2rem);
 }

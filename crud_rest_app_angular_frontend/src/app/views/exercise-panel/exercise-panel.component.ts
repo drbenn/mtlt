@@ -1,44 +1,56 @@
 import {
-  AfterViewChecked,
   Component,
-  ElementRef,
   EventEmitter,
+  HostListener,
   OnInit,
   Output,
-  ViewChild,
 } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { UpdateActiveExercises } from 'src/app/core/state/appState.actions';
+import { Observable } from 'rxjs';
+import {
+  UpdateActiveExercises,
+  UpdateZindexForMobile,
+} from 'src/app/core/state/appState.actions';
 
 @Component({
   selector: 'app-exercise-panel',
   templateUrl: './exercise-panel.component.html',
   styleUrls: ['./exercise-panel.component.scss'],
 })
-export class ExercisePanelComponent implements OnInit, AfterViewChecked {
+export class ExercisePanelComponent implements OnInit {
   @Output() exerciseIndex = new EventEmitter<string>();
+  zIndexArrayForMobileCurrent: number;
   exerciseInput: number[] = [];
   exerciseInputIndex: number = 0;
   exerciseIndexToChild: string;
   exerciseArrayForState: string[][] = [];
   lengthOfArrayForState: number = this.exerciseArrayForState.length;
+  exercisePanelCurrentHeight: number;
+  exercisePanelIteration: number;
+  public innerWidth: any;
   constructor(private store: Store) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let zIndexMobilePane$: Observable<number[]> = this.store.select(
+      (state) => state.appState.zIndexMobilePane
+    );
 
-  ngAfterViewChecked() {
-    let width = this.heightListener.nativeElement.offsetWidth;
-    let height = this.heightListener.nativeElement.offsetHeight;
-
-    console.log('Width:' + width);
-    console.log('Height: ' + height);
+    zIndexMobilePane$.subscribe((_zIndexMobilePane: number[]) => {
+      console.log(_zIndexMobilePane);
+      this.zIndexArrayForMobileCurrent = _zIndexMobilePane[0];
+      console.log(`current z: ${this.zIndexArrayForMobileCurrent}`);
+    });
+    this.innerWidth = window.innerWidth;
   }
-  @ViewChild('heightListener')
-  heightListener: ElementRef;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.innerWidth = window.innerWidth;
+    console.log(this.innerWidth);
+  }
 
   addExerciseInput() {
     this.exerciseInput.push(this.exerciseInputIndex);
-    // console.log(this.exerciseInputIndex);
 
     this.exerciseInputIndex += 1;
   }
@@ -67,9 +79,20 @@ export class ExercisePanelComponent implements OnInit, AfterViewChecked {
     this.updateStateActiveExercises(this.exerciseArrayForState);
   }
 
-  public onResizeHandler(event: any): void {
-    event.target.innerWidth;
-    event.target.innerHeight;
-    console.log(event.target.innerHeight);
+  receiveZIndexForCurrentTime(zIndexArray: any): void {
+    console.log(zIndexArray);
+  }
+
+  zIndexToBestTime() {
+    console.log('best test');
+    // [zIndexCurrent, zIndexLast, zIndexBest]
+    let bestTimeZIndex: number[] = [1, 1, 3];
+    this.store.dispatch(new UpdateZindexForMobile(bestTimeZIndex));
+  }
+  zIndexToLastTime() {
+    console.log('last test');
+    // [zIndexCurrent, zIndexLast, zIndexBest]
+    let lastTimeZIndex: number[] = [1, 3, 1];
+    this.store.dispatch(new UpdateZindexForMobile(lastTimeZIndex));
   }
 }

@@ -1,22 +1,3 @@
-<!-- <div class="input-row">
-  <div>Set</div>
-  <div>Reps</div>
-  <div>Weight</div>
-  <div>Set Volume</div>
-</div> -->
-
-<!-- <label>Set Number</label>
-{{ exerType }}
-&nbsp;&nbsp;
-<input
-  placeholder="Set Number"
-  [formControl]="$any(inputFormGroup.controls['setNumber'])"
-  type="number"
-  required
-/> -->
-
-<!-- <label *ngIf="exerType !== 'bodyweight'">Weight</label>
-&nbsp;&nbsp; -->
 <input
   class="set-input"
   *ngIf="exerType !== 'bodyweight'"
@@ -29,15 +10,12 @@
   (focusout)="volumeCalc()"
 />
 <label *ngIf="exerType === 'dumbbell'">1 DB?</label>
-<!-- &nbsp;&nbsp; -->
 <input
   *ngIf="exerType === 'dumbbell'"
   type="checkbox"
   [(ngModel)]="singleDumbbell"
   (click)="singledumbbellStatus()"
 />
-<!-- &nbsp;&nbsp;
-<label>Reps</label> -->
 <input
   class="set-input"
   placeholder="Reps"

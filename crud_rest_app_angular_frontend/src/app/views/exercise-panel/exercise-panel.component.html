@@ -1,8 +1,4 @@
-<div
-  class="workout-panel-sizing"
-  *ngFor="let e of exerciseInput; index as i"
-  #heightListener
->
+<div class="workout-panel-sizing" *ngFor="let e of exerciseInput; index as i">
   <app-input-array
     [exerciseIndexForCurrentWorkout]="exerciseInputIndex"
     (exerciseArrayForIteration)="receiveIterationExercise($event)"
@@ -21,3 +17,10 @@
 >
   Add Exercise
 </button>
+<div
+  class="exercise-switches"
+  *ngIf="exerciseInputIndex > 0 && innerWidth < 1200"
+>
+  <div class="switch-left" (click)="zIndexToBestTime()">Best Time</div>
+  <div class="switch-right" (click)="zIndexToLastTime()">Last Time</div>
+</div>

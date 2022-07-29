@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { LoggedInUser } from 'src/app/core/models/loggedInUser.model';
 import { DataHistoryService } from 'src/app/core/services/dataHistory.service';
+import { UpdateZindexForMobile } from 'src/app/core/state/appState.actions';
 
 @Component({
   selector: 'app-best-time',
   templateUrl: './best-time.component.html',
   styleUrls: ['./best-time.component.scss'],
 })
+
+// component generated on selection of exercise/exercise variation
 export class BestTimeComponent implements OnInit {
+  zIndexArrayForMobileBest: number;
   bestTimeArrayForDisplay: any[] = [];
+  public innerWidth: any;
   testUser: LoggedInUser = {
     username: 'User1',
     joinDate: new Date(),
@@ -216,32 +221,52 @@ export class BestTimeComponent implements OnInit {
     },
   ];
 
-  constructor(
-    private store: Store
-  ) // private dataHistoryService: DataHistoryService
-  {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    // let activeExercisesUI$: Observable<string[][]> = this.store.select(
-    //   (state) => state.appState.activeExercises
-    // );
+    let zIndexMobilePane$: Observable<number[]> = this.store.select(
+      (state) => state.appState.zIndexMobilePane
+    );
+
+    zIndexMobilePane$.subscribe((_zIndexMobilePane: number[]) => {
+      console.log(_zIndexMobilePane);
+      this.zIndexArrayForMobileBest = _zIndexMobilePane[2];
+      console.log(`best z: ${this.zIndexArrayForMobileBest}`);
+    });
+
+    this.innerWidth = window.innerWidth;
+
     let bestTimeArray$: Observable<Object[][]> = this.store.select(
       (state) => state.appState.bestTime
     );
-    // activeExercisesUI$.subscribe((_activeExercises: string[][]) => {
-    //   this.lastTimeDataRequest(_activeExercises);
-    // });
+
     bestTimeArray$.subscribe((_bestTimeArray: object[]) => {
       if (typeof _bestTimeArray !== 'undefined') {
         if (_bestTimeArray.length > 0) {
           this.bestTimeArrayForDisplay = _bestTimeArray;
         }
       }
-      // console.log(this.lastTimeArrayForDisplay);
     });
   }
 
-  // lastTimeDataRequest(activeExercises: string[][]) {
-  //   return this.dataHistoryService.getLastTimeDisplayData(activeExercises);
-  // }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.innerWidth = window.innerWidth;
+    console.log(this.innerWidth);
+  }
+
+  receiveZIndexForBestTime(zIndexArray: any): void {
+    console.log(zIndexArray);
+  }
+
+  zIndexToLastTime() {
+    // [zIndexCurrent, zIndexLast, zIndexBest]
+    let lastTimeZIndex: number[] = [1, 3, 1];
+    this.store.dispatch(new UpdateZindexForMobile(lastTimeZIndex));
+  }
+  zIndexToCurrentTime() {
+    // [zIndexCurrent, zIndexLast, zIndexBest]
+    let currentTimeZIndex: number[] = [3, 1, 1];
+    this.store.dispatch(new UpdateZindexForMobile(currentTimeZIndex));
+  }
 }

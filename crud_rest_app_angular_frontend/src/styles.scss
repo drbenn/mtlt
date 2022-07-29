@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --accent: #232f74;
+  // --button-accent: #80cbc4;
+  // --button-accent: #f99e9e;
+  // --button-accent: #f8fbb1;
+  --button-accent: #9ceee3;
+}
+
 html,
 body {
   height: 100%;
@@ -8,11 +16,54 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.main-flex-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .workout-panel-sizing {
-  width: clamp(300px, calc(500px), 800px);
+  width: clamp(calc(250px + 5vw), calc(350px + 6vw), 1000px);
+  // width: 280px;
 }
 .border {
   border: 1px solid rgb(39, 153, 211);
+}
+
+.exercise-switches {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: calc(80px + 0.3vw);
+  height: clamp(40px, calc(40px + 3vw), 45px);
+  font-size: clamp(calc(12px), calc(10px + 0.2vw), 14px);
+
+  font-weight: 600;
+  position: absolute;
+  top: clamp(100px, 100px + 10vw, 200px);
+  transform: translate(2px, -0.5rem);
+}
+
+.switch-left {
+  border: 1px solid #2b2b2b;
+  border-right: 2px solid #2b2b2b;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: var(--button-accent);
+}
+
+.switch-right {
+  border: 1px solid #2b2b2b;
+  border-left: 2px solid #2b2b2b;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: var(--button-accent);
 }
 
 // LAST/BEST TIME SHARED STYLES
@@ -65,6 +116,7 @@ body {
 .total-set-historic-volume {
   text-align: right;
   padding-right: 1rem;
+  padding-bottom: 18px;
   font-size: 1rem;
   font-weight: 500;
 }
@@ -82,7 +134,7 @@ body {
 }
 
 .add-exercise-button {
-  background-color: #80cbc4 !important;
+  background-color: var(--button-accent) !important;
 }
 
 button {
@@ -95,8 +147,8 @@ button {
   cursor: pointer;
   // font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont,
   //   sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+  // font-size: 16px;
+  // font-weight: 400;
   outline: none;
   outline: 0;
   // padding: 10px 25px;
@@ -137,8 +189,56 @@ button:hover {
   border-right: 1px solid #d2d2d2;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 1200px) {
+  .mobile-exercise-view {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+  .border-right {
+    border-right: none;
+  }
+  .z1 {
+    position: absolute;
+    z-index: 1;
+    display: none;
+  }
+
+  .z3 {
+    position: absolute;
+    z-index: 3;
+  }
+
+  .exercise-switches {
+    // top: clamp(100px, 100px + 10vw, 200px);
+    // transform: translate(2px, -0.5rem);
+
+    width: 260px;
+    font-weight: 600;
+    top: 0;
+    transform: translate(-15px, -1.2rem);
+  }
+
+  .switch-left,
+  .switch-right {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    height: 22px;
+  }
+}
+
+@media (max-width: 850px) {
   button {
-    // padding: 10px 30px;
+    padding-top: 0.3rem;
+    padding-right: clamp(calc(0.1rem + 1vw), 0.3rem, 0.3rem);
+    padding-bottom: 0.3rem;
+    padding-left: clamp(calc(0.1rem + 1vw), 0.3rem, 0.3rem);
+
+    margin-top: 0.2rem;
+    margin-right: clamp(calc(0.1rem + 1vw), 0.2rem, 0.2rem);
+    margin-bottom: 0.2rem;
+    margin-left: clamp(calc(0.1rem + 1vw), 0.2rem, 0.2rem);
+    font-weight: 600;
+    font-size: 16px;
   }
 }

@@ -1,6 +1,7 @@
 .input-row {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: space-evenly;
   align-items: center;
   border: blue 1px solid;
@@ -27,4 +28,20 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
+}
+
+@media (max-width: 850px) {
+  .set-input {
+    padding-top: 0.5rem;
+    padding-right: clamp(5px, calc(0.3rem + 3vw), 0.5rem);
+    padding-bottom: 0.5rem;
+    padding-left: clamp(5px, calc(0.3rem + 3vw), 0.5rem);
+
+    margin-top: 1rem;
+    margin-right: clamp(4px, calc(4px + 3vw), 1rem);
+    margin-bottom: 1rem;
+    margin-left: clamp(4px, calc(4px + 3vw), 1rem);
+    font-weight: 400;
+    font-size: 16px;
+  }
 }

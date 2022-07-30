@@ -1,7 +1,14 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { LoggedInUser } from 'src/app/core/models/loggedInUser.model';
+import { CurrentExercisesService } from 'src/app/core/services/currentExercises.service';
 import { DataHistoryService } from 'src/app/core/services/dataHistory.service';
 import { UpdateZindexForMobile } from 'src/app/core/state/appState.actions';
 
@@ -16,6 +23,7 @@ export class LastTimeComponent implements OnInit {
   zIndexArrayForMobileLast: number;
   public innerWidth: any;
   lastTimeArrayForDisplay: any[] = [];
+  @Output() lastTimeCountForSwitchDisplay = new EventEmitter<number>();
   testUser: LoggedInUser = {
     username: 'User1',
     joinDate: new Date(),
@@ -223,7 +231,8 @@ export class LastTimeComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private dataHistoryService: DataHistoryService
+    private dataHistoryService: DataHistoryService,
+    private currentExerciseService: CurrentExercisesService
   ) {}
 
   ngOnInit(): void {
@@ -232,9 +241,11 @@ export class LastTimeComponent implements OnInit {
     );
 
     zIndexMobilePane$.subscribe((_zIndexMobilePane: number[]) => {
-      console.log(_zIndexMobilePane);
-      this.zIndexArrayForMobileLast = _zIndexMobilePane[1];
-      console.log(`last z: ${this.zIndexArrayForMobileLast}`);
+      if (_zIndexMobilePane) {
+        // console.log(_zIndexMobilePane);
+        this.zIndexArrayForMobileLast = _zIndexMobilePane[1];
+        // console.log(`last z: ${this.zIndexArrayForMobileLast}`);
+      }
     });
     this.innerWidth = window.innerWidth;
     let activeExercisesUI$: Observable<string[][]> = this.store.select(
@@ -247,11 +258,16 @@ export class LastTimeComponent implements OnInit {
       this.lastTimeDataRequest(_activeExercises);
     });
     lastTimeArray$.subscribe((_lastTimeArray: object[]) => {
-      console.log(_lastTimeArray);
+      // console.log(_lastTimeArray);
 
       if (typeof _lastTimeArray !== 'undefined') {
         if (_lastTimeArray.length > 0) {
           this.lastTimeArrayForDisplay = _lastTimeArray;
+          let lengthOfLastTimeIteration: number =
+            this.lastTimeArrayForDisplay.length;
+          this.currentExerciseService.changeLastTimeIteration(
+            lengthOfLastTimeIteration
+          );
         }
       }
     });
@@ -260,7 +276,6 @@ export class LastTimeComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = window.innerWidth;
-    console.log(this.innerWidth);
   }
   ngAfterViewChecked() {}
 

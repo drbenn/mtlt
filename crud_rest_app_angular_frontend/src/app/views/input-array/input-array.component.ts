@@ -206,13 +206,6 @@ export class InputArrayComponent implements OnInit {
   addSet(): void {
     this.lastToDelete += 1;
     let newSet = this.formFactoryService.getSetForm();
-    let exerciseIndexNumberForHeightOrder =
-      this.exerciseIndexForCurrentWorkout - 1;
-    let numberOfSetsInExercise = this.lastToDelete + 1;
-
-    console.log(
-      `exercise: ${exerciseIndexNumberForHeightOrder}, #ofSets: ${numberOfSetsInExercise}`
-    );
 
     return this.setArray.push(newSet);
   }
@@ -224,10 +217,6 @@ export class InputArrayComponent implements OnInit {
    * @param i
    */
   removeSet(i: number): void {
-    this.lastToDelete -= 1;
-    console.log(`i to remove: ${i}`);
-    console.log(this.lastToDelete);
-
     this.setArray.removeAt(i);
     let setIndex: string = String(i + 1);
     this.removeExistingSetsVolume(setIndex);

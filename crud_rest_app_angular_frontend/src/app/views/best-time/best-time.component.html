@@ -1,4 +1,4 @@
-<div class="wrapper border-right">
+<div class="wrapper border-right" *ngIf="bestTimeArrayForDisplay.length > 0">
   <div
     class="old-time-row"
     *ngFor="let item of bestTimeArrayForDisplay; index as i"

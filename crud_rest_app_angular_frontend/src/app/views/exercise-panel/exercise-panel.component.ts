@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { CurrentExercisesService } from 'src/app/core/services/currentExercises.service';
 import {
   UpdateActiveExercises,
   UpdateZindexForMobile,
@@ -18,27 +19,40 @@ import {
   styleUrls: ['./exercise-panel.component.scss'],
 })
 export class ExercisePanelComponent implements OnInit {
-  @Output() exerciseIndex = new EventEmitter<string>();
+  // @Output() exerciseIndex = new EventEmitter<string>();
   zIndexArrayForMobileCurrent: number;
   exerciseInput: number[] = [];
   exerciseInputIndex: number = 0;
-  exerciseIndexToChild: string;
+  // exerciseIndexToChild: string;
   exerciseArrayForState: string[][] = [];
   lengthOfArrayForState: number = this.exerciseArrayForState.length;
   exercisePanelCurrentHeight: number;
   exercisePanelIteration: number;
   public innerWidth: any;
-  constructor(private store: Store) {}
+  showLastBestSwitches: boolean = true;
+  iterationsDisplay: number;
+  constructor(
+    private store: Store,
+    private currentExerciseService: CurrentExercisesService
+  ) {}
 
   ngOnInit(): void {
+    this.currentExerciseService.currentLastTimeIterations.subscribe(
+      (iterations: number) => {
+        this.iterationsDisplay = iterations;
+        console.log(`lasttimeIterationsInExPanel: ${this.iterationsDisplay}`);
+      }
+    );
     let zIndexMobilePane$: Observable<number[]> = this.store.select(
       (state) => state.appState.zIndexMobilePane
     );
 
     zIndexMobilePane$.subscribe((_zIndexMobilePane: number[]) => {
-      console.log(_zIndexMobilePane);
-      this.zIndexArrayForMobileCurrent = _zIndexMobilePane[0];
-      console.log(`current z: ${this.zIndexArrayForMobileCurrent}`);
+      if (_zIndexMobilePane) {
+        console.log(_zIndexMobilePane);
+        this.zIndexArrayForMobileCurrent = _zIndexMobilePane[0];
+        console.log(`current z: ${this.zIndexArrayForMobileCurrent}`);
+      }
     });
     this.innerWidth = window.innerWidth;
   }
@@ -46,7 +60,6 @@ export class ExercisePanelComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = window.innerWidth;
-    console.log(this.innerWidth);
   }
 
   addExerciseInput() {

@@ -24,12 +24,26 @@
   position: absolute;
   top: 15px;
   right: 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.log-margin {
+  margin: 0rem 0.5rem;
+}
+
+.login-display-name {
+  font-size: 0.7rem;
+  text-align: center;
 }
 
 a:link,
 a:visited {
   // background-color: #acaad2;
-  color: rgb(45, 199, 213);
+  color: var(--nav-link-color);
   // padding: 14px 25px;
   text-align: center;
   text-decoration: none;
@@ -40,7 +54,7 @@ a:visited {
 
 a:hover,
 a:active {
-  color: rgb(15, 99, 71);
+  color: var(--nav-link-color-hover);
 }
 
 .in-app-navigation {
@@ -54,6 +68,22 @@ a:active {
 .nav-border-width {
   width: 85%;
   margin-bottom: 1rem;
+}
+
+.logged-in-svg {
+  height: 20px;
+  width: 20px;
+}
+
+@media (max-width: 1000px) {
+  .login-register-status-container {
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+  }
 }
 
 @media (max-width: 450px) {

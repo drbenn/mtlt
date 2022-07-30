@@ -19,7 +19,7 @@
 </button>
 <div
   class="exercise-switches"
-  *ngIf="exerciseInputIndex > 0 && innerWidth < 1200"
+  *ngIf="exerciseInputIndex > 0 && innerWidth < 1200 && iterationsDisplay > 0"
 >
   <div class="switch-left" (click)="zIndexToBestTime()">Best Time</div>
   <div class="switch-right" (click)="zIndexToLastTime()">Last Time</div>

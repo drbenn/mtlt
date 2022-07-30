@@ -3,10 +3,12 @@ import { Action, State, StateContext } from '@ngxs/store';
 import {
   UpdateActiveExercises,
   UpdateLastAndBestTime,
+  UpdateLoginStatus,
   UpdateZindexForMobile,
 } from './appState.actions';
 
 export interface AppStateModel {
+  isUserLoggedIn?: boolean;
   exerciseHistory?: [];
   activeExercises?: string[][];
   lastTime?: [];
@@ -19,6 +21,7 @@ export interface AppStateModel {
 @State<AppStateModel>({
   name: 'appState',
   defaults: {
+    isUserLoggedIn: true,
     exerciseHistory: [],
     activeExercises: [],
     lastTime: [],
@@ -61,5 +64,13 @@ export class AppState {
     payload: { zIndexMobile: number[] }
   ) {
     ctx.setState({ zIndexMobilePane: payload.zIndexMobile });
+  }
+
+  @Action(UpdateLoginStatus)
+  updateLoginStatus(
+    ctx: StateContext<AppStateModel>,
+    payload: { isUserLoggedIn: boolean }
+  ) {
+    ctx.setState({ isUserLoggedIn: payload.isUserLoggedIn });
   }
 }

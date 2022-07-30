@@ -229,9 +229,11 @@ export class BestTimeComponent implements OnInit {
     );
 
     zIndexMobilePane$.subscribe((_zIndexMobilePane: number[]) => {
-      console.log(_zIndexMobilePane);
-      this.zIndexArrayForMobileBest = _zIndexMobilePane[2];
-      console.log(`best z: ${this.zIndexArrayForMobileBest}`);
+      if (_zIndexMobilePane) {
+        // console.log(_zIndexMobilePane);
+        this.zIndexArrayForMobileBest = _zIndexMobilePane[2];
+        // console.log(`best z: ${this.zIndexArrayForMobileBest}`);
+      }
     });
 
     this.innerWidth = window.innerWidth;
@@ -252,7 +254,6 @@ export class BestTimeComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = window.innerWidth;
-    console.log(this.innerWidth);
   }
 
   receiveZIndexForBestTime(zIndexArray: any): void {

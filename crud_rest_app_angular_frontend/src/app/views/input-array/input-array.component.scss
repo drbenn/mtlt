@@ -27,7 +27,7 @@ select {
 }
 
 .select-input {
-  width: clamp(50px, calc(50px + 2.5rem), 200px);
+  width: clamp(50px, calc(50px + 5vw), 100px);
   padding: 0.4rem 0.7rem;
   margin-top: 0;
   margin-right: clamp(0.1rem, calc(0.1rem + 1vw), 1rem);
@@ -72,4 +72,13 @@ select {
 
 .delete-button {
   width: 40px;
+}
+
+@media (max-width: 1200px) {
+  .set-flex-wrapper {
+    padding-left: clamp(5px, calc(0px + 3vw), 50px);
+  }
+  .delete-button {
+    width: 35px;
+  }
 }

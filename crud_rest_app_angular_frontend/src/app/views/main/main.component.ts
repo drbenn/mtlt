@@ -24,23 +24,27 @@ export class MainComponent implements OnInit {
     );
 
     zIndexMobilePane$.subscribe((_zIndexMobilePane: number[]) => {
+      // console.log(_zIndexMobilePane);
+
       // [zIndexCurrent, zIndexLast, zIndexBest]
-      if (_zIndexMobilePane[0] === 3) {
-        this.zIndexCurrent = this.z3String;
-        this.zIndexLast = this.z1String;
-        this.zIndexBest = this.z1String;
-      }
+      if (_zIndexMobilePane) {
+        if (_zIndexMobilePane[0] === 3) {
+          this.zIndexCurrent = this.z3String;
+          this.zIndexLast = this.z1String;
+          this.zIndexBest = this.z1String;
+        }
 
-      if (_zIndexMobilePane[1] === 3) {
-        this.zIndexCurrent = this.z1String;
-        this.zIndexLast = this.z3String;
-        this.zIndexBest = this.z1String;
-      }
+        if (_zIndexMobilePane[1] === 3) {
+          this.zIndexCurrent = this.z1String;
+          this.zIndexLast = this.z3String;
+          this.zIndexBest = this.z1String;
+        }
 
-      if (_zIndexMobilePane[2] === 3) {
-        this.zIndexCurrent = this.z1String;
-        this.zIndexLast = this.z1String;
-        this.zIndexBest = this.z3String;
+        if (_zIndexMobilePane[2] === 3) {
+          this.zIndexCurrent = this.z1String;
+          this.zIndexLast = this.z1String;
+          this.zIndexBest = this.z3String;
+        }
       }
     });
   }

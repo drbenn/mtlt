@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { LastTimeComponent } from './views/last-time/last-time.component';
 import { DataHistoryService } from './core/services/dataHistory.service';
 import { NgxsModule } from '@ngxs/store';
@@ -49,6 +50,7 @@ import { MainComponent } from './views/main/main.component';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatTooltipModule,
     NgxsModule.forRoot([AppState]),
   ],
   providers: [DataHistoryService],

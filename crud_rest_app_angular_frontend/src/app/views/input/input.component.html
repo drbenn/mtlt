@@ -9,13 +9,31 @@
   [(ngModel)]="weightInSet"
   (focusout)="volumeCalc()"
 />
-<label *ngIf="exerType === 'dumbbell'">1 DB?</label>
+<!-- <label class="one-db-font" *ngIf="exerType === 'dumbbell'">1 DB?</label>
 <input
   *ngIf="exerType === 'dumbbell'"
   type="checkbox"
   [(ngModel)]="singleDumbbell"
   (click)="singledumbbellStatus()"
-/>
+/> -->
+<span
+  class="one-db-option"
+  (click)="singledumbbellStatus()"
+  *ngIf="exerType === 'dumbbell' && singleDumbbell === true"
+  matTooltipPosition="above"
+  matTooltip="Selecting dumbbell type will automatically calculate volume as if doing 1 rep with dumbbells in each hand. If only using 1 dumbbell, click '2 DB' Button to switch and correctly reflect volume of single dumbbell"
+  aria-label="Button that displays a tooltip when focused or hovered over"
+  >1 DB</span
+>
+<span
+  class="two-db-option"
+  (click)="singledumbbellStatus()"
+  *ngIf="exerType === 'dumbbell' && singleDumbbell === false"
+  matTooltipPosition="above"
+  matTooltip="Selecting dumbbell type will automatically calculate volume as if doing 1 rep with dumbbells in each hand. If only using 1 dumbbell, click '2 DB' Button to switch and correctly reflect volume of single dumbbell"
+  aria-label="Button that displays a tooltip when focused or hovered over"
+  >2 DB</span
+>
 <input
   class="set-input"
   placeholder="Reps"

@@ -82,18 +82,14 @@
     <div class="selected-exercise-readout-container">
       <span>{{ this.exerciseForm.value.exerciseType | titlecase }}</span>
       <span *ngIf="this.exerciseForm.value.exercise">
-        - {{ this.exerciseForm.value.exercise | titlecase }}</span
+        &nbsp;- {{ this.exerciseForm.value.exercise | titlecase }}</span
       >
       <span *ngIf="this.exerciseForm.value.bodyweightVariation">
-        - {{ this.exerciseForm.value.bodyweightVariation | titlecase }}</span
+        &nbsp;-
+        {{ this.exerciseForm.value.bodyweightVariation | titlecase }}</span
       >
     </div>
   </div>
-  <p *ngIf="exerciseForm.controls['exerciseType'].value === 'Dumbbell'">
-    Selecting dumbbells will automatically calculate volume as if doing 1 rep
-    with dumbbells in each hand. If only using 1 dumbbell, click "Only 1"
-    checkbox to correctly reflect volume of single dumbbell
-  </p>
   <div class="set-flex-wrapper">
     <div *ngFor="let s of setArray.controls; index as i">
       <span class="set-title">Set {{ i + 1 }}</span>

@@ -1,15 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { UpdateLoginStatus } from 'src/app/core/state/appState.actions';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
+  isUserLoggedIn: boolean = false;
+  public innerWidth: any;
+  usernameForDisplay: string = 'Username PlaceHolder';
 
-  constructor() { }
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
+    let userLoggedIn$: Observable<boolean> = this.store.select(
+      (state) => state.appState.isUserLoggedIn
+    );
+    userLoggedIn$.subscribe((_userLoggedIn$: boolean) => {
+      this.isUserLoggedIn = _userLoggedIn$;
+    });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.innerWidth = window.innerWidth;
+  }
+
+  userLogIn() {
+    console.log('logIN triggered');
+    this.store.dispatch(new UpdateLoginStatus(true));
+  }
+
+  userLogOut() {
+    console.log('logOUT in triggered');
+    this.store.dispatch(new UpdateLoginStatus(false));
+  }
 }

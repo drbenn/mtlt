@@ -18,3 +18,9 @@ export class UpdateZindexForMobile {
     '[MobileView] Z index to show appropriate pane in narrow mobile view';
   constructor(public zIndexMobile: number[]) {}
 }
+
+export class UpdateLoginStatus {
+  static readonly type =
+    '[UserStatus] Update login status determining view of application';
+  constructor(public isUserLoggedIn: boolean) {}
+}

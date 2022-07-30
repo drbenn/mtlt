@@ -2,7 +2,7 @@
   min-width: 200px;
 }
 .wrapper {
-  min-width: 400px;
+  width: clamp(200px + 5vw, 350px + 6vw, 1000px);
   // border: solid blue 2px;
   display: flex;
   flex-direction: column;
@@ -35,4 +35,10 @@
   flex-direction: row;
   width: 100%;
   justify-content: space-around;
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    width: clamp(265px, 100px + 50vw, 425px);
+  }
 }

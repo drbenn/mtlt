@@ -1,7 +1,10 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { UpdateLoginStatus } from 'src/app/core/state/appState.actions';
+import {
+  UpdateLoginStatus,
+  UpdateUsername,
+} from 'src/app/core/state/appState.actions';
 
 @Component({
   selector: 'app-nav',
@@ -23,6 +26,15 @@ export class NavComponent implements OnInit {
     userLoggedIn$.subscribe((_userLoggedIn$: boolean) => {
       this.isUserLoggedIn = _userLoggedIn$;
     });
+
+    let username$: Observable<string> = this.store.select(
+      (state) => state.appState.username
+    );
+    username$.subscribe((_username$: string) => {
+      if (_username$ !== undefined) {
+        this.usernameForDisplay = _username$;
+      }
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -31,6 +43,7 @@ export class NavComponent implements OnInit {
   }
 
   userLogIn() {
+    this.store.dispatch(new UpdateUsername());
     console.log('logIN triggered');
     this.store.dispatch(new UpdateLoginStatus(true));
   }

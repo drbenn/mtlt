@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
+import { DataHistoryService } from '../services/dataHistory.service';
 import {
   UpdateActiveExercises,
   UpdateLastAndBestTime,
   UpdateLoginStatus,
+  UpdateUsername,
   UpdateZindexForMobile,
 } from './appState.actions';
 
 export interface AppStateModel {
   isUserLoggedIn?: boolean;
+  username?: string;
   exerciseHistory?: [];
   activeExercises?: string[][];
   lastTime?: [];
@@ -22,6 +25,7 @@ export interface AppStateModel {
   name: 'appState',
   defaults: {
     isUserLoggedIn: true,
+    username: '',
     exerciseHistory: [],
     activeExercises: [],
     lastTime: [],
@@ -33,6 +37,8 @@ export interface AppStateModel {
 })
 @Injectable()
 export class AppState {
+  constructor(private dataHistoryService: DataHistoryService) {}
+
   @Action(UpdateActiveExercises)
   updateActiveExercises(
     ctx: StateContext<AppStateModel>,
@@ -72,5 +78,12 @@ export class AppState {
     payload: { isUserLoggedIn: boolean }
   ) {
     ctx.setState({ isUserLoggedIn: payload.isUserLoggedIn });
+  }
+
+  @Action(UpdateUsername)
+  updateUsername(ctx: StateContext<AppStateModel>) {
+    let usernameService: string =
+      this.dataHistoryService.getUserNameForDisplay();
+    ctx.setState({ username: usernameService });
   }
 }

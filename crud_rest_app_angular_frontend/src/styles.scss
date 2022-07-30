@@ -135,9 +135,14 @@ body {
 
 // THIS TIME SHARED STYLES
 .warning-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #b71c1c;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 400;
+  text-align: center;
+  width: 85%;
 }
 
 .delete-button {

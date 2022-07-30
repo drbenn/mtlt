@@ -107,6 +107,16 @@
         X
       </button>
     </div>
+    <div
+      class="warning-text"
+      *ngIf="
+        exerciseForm.controls['setArray'].touched &&
+        exerciseForm.controls['setArray'].invalid
+      "
+    >
+      Hey beefcake! Only values less than 1500 lbs and less than 250 reps are
+      accepted.
+    </div>
   </div>
   <div class="current-total-volume" *ngIf="setAdded_activateTotalVolDisplay">
     Total Volume = {{ totalVolumeForExercise }}
@@ -115,16 +125,7 @@
     <button type="submit">Save Progress</button>
     <button type="submit" (click)="closeExercise()">Done!</button>
   </div>
-  <div
-    class="warning-text"
-    *ngIf="
-      exerciseForm.controls['setArray'].touched &&
-      exerciseForm.controls['setArray'].invalid
-    "
-  >
-    Hey beefcake! Only values less than 1500 lbs and less than 250 reps are
-    accepted.
-  </div>
+
   <div class="bottom-border"></div>
 
   <!-- Uncommenting below line for active view will cause giant error in console. Wont cause any breaking errors, just annoying -->

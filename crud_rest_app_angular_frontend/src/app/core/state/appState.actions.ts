@@ -24,3 +24,7 @@ export class UpdateLoginStatus {
     '[UserStatus] Update login status determining view of application';
   constructor(public isUserLoggedIn: boolean) {}
 }
+
+export class UpdateUsername {
+  static readonly type = '[UserData] Update username on login for display';
+}

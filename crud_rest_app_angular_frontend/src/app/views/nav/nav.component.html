@@ -4,9 +4,11 @@
     <div class="app-subtitle">More Than Last Time</div>
   </div>
   <div class="login-register-status-container" *ngIf="!isUserLoggedIn">
-    <div class="log-margin"><a href="#" (click)="userLogIn()">Login</a></div>
+    <div class="log-margin">
+      <a routerLink="/login" (click)="userLogIn()">Login</a>
+    </div>
     <div *ngIf="innerWidth > 1000">|</div>
-    <div class="log-margin"><a href="">Register</a></div>
+    <div class="log-margin"><a routerLink="/register">Register</a></div>
   </div>
   <div class="login-register-status-container" *ngIf="isUserLoggedIn">
     <div class="login-display-name">{{ usernameForDisplay }}</div>
@@ -63,12 +65,15 @@
       </svg>
     </div>
     <div *ngIf="innerWidth > 1000">|</div>
-    <div class="log-margin"><a href="#" (click)="userLogOut()">Logout</a></div>
+    <div class="log-margin">
+      <a routerLink="/landing" (click)="userLogOut()">Logout</a>
+    </div>
   </div>
 
   <div class="in-app-navigation">
-    <a href="">Workout</a>
-    <a href="">Dashboard</a>
+    <a routerLink="/workout">Workout</a>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/landing">Landing</a>
   </div>
   <div class="bottom-border nav-border-width"></div>
 </div>

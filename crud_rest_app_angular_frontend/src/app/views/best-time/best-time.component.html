@@ -35,7 +35,7 @@
       <div class="set-cell">{{ set.reps }}</div>
     </div>
     <div class="total-set-historic-volume">
-      Total Volume: {{ item.exerciseVolume }}
+      Total Volume: {{ item.exerciseVolume | number: "1.0":"en-US" }}
     </div>
     <div class="bottom-border"></div>
   </div>

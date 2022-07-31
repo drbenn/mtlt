@@ -40,7 +40,6 @@ export class ExercisePanelComponent implements OnInit {
     this.currentExerciseService.currentLastTimeIterations.subscribe(
       (iterations: number) => {
         this.iterationsDisplay = iterations;
-        console.log(`lasttimeIterationsInExPanel: ${this.iterationsDisplay}`);
       }
     );
     let zIndexMobilePane$: Observable<number[]> = this.store.select(

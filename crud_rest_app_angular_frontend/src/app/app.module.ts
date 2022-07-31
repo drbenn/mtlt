@@ -26,6 +26,10 @@ import { AppState } from './core/state/appState.state';
 import { BestTimeComponent } from './views/best-time/best-time.component';
 import { NavComponent } from './views/nav/nav.component';
 import { MainComponent } from './views/main/main.component';
+import { LoginComponent } from './views/login/login.component';
+import { RegisterComponent } from './views/register/register.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { LandingComponent } from './views/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,10 @@ import { MainComponent } from './views/main/main.component';
     BestTimeComponent,
     NavComponent,
     MainComponent,
+    LoginComponent,
+    RegisterComponent,
+    DashboardComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,

@@ -219,6 +219,8 @@ export class InputArrayComponent implements OnInit {
   removeSet(i: number): void {
     this.setArray.removeAt(i);
     let setIndex: string = String(i + 1);
+    console.log(setIndex);
+    this.lastToDelete -= 1;
     this.removeExistingSetsVolume(setIndex);
     this.updateCurrentSetVolumesArrayAfterChange();
     this.updateExerciseTotalVolume();

@@ -1,1 +1,15 @@
-<p>login works!</p>
+<div class="auth-wrapper">
+  <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+    <div class="auth-field">
+      <div>User Name&nbsp;&nbsp;</div>
+      <input formControlName="username" required />
+    </div>
+    <div class="auth-field">
+      <div>Password&nbsp;&nbsp;</div>
+      <input formControlName="password" required />
+    </div>
+    <div class="">
+      <button type="submit" (click)="submitLogin()">Login</button>
+    </div>
+  </form>
+</div>

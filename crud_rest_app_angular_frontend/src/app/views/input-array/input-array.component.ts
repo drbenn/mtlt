@@ -316,7 +316,7 @@ export class InputArrayComponent implements OnInit {
       this.totalVolumeForExercise);
   }
 
-  onSubmit() {
+  onExerciseSubmit() {
     console.warn('form submitted');
     // console.log(this.exerciseForm.value);
   }

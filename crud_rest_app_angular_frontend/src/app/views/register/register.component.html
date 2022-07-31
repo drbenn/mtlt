@@ -1,1 +1,19 @@
-<p>register works!</p>
+<div class="auth-wrapper">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+    <div class="auth-field">
+      <div>User Name&nbsp;&nbsp;</div>
+      <input formControlName="username" required />
+    </div>
+    <div class="auth-field">
+      <div>Email&nbsp;&nbsp;</div>
+      <input formControlName="email" required />
+    </div>
+    <div class="auth-field">
+      <div>Password&nbsp;&nbsp;</div>
+      <input formControlName="password" required />
+    </div>
+    <div class="">
+      <button type="submit" (click)="submitRegister()">Register</button>
+    </div>
+  </form>
+</div>

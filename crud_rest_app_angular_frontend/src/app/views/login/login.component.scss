@@ -1,0 +1,16 @@
+input {
+  width: 180px;
+  padding: 0.5rem 0.7rem;
+  font-size: 1.2rem;
+}
+
+button {
+  margin-left: 13rem;
+  padding: 0.6rem;
+}
+
+@media (max-width: 850px) {
+  button {
+    margin-left: 6.5rem;
+  }
+}

@@ -21,9 +21,14 @@
 html,
 body {
   height: 100%;
+  // display: flex;
+  // justify-content: flex-start;
+  // align-items: center;
+  // flex-direction: column;
 }
 body {
-  margin: 0;
+  // margin: 0;
+  margin: auto;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -201,6 +206,25 @@ button:hover {
   border-right: 1px solid #d2d2d2;
 }
 
+// Shared Authorization Styles
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 2rem 8rem 2rem 2rem;
+}
+
 @media (max-width: 1200px) {
   .mobile-exercise-view {
     position: absolute;
@@ -255,5 +279,10 @@ button:hover {
     margin-left: clamp(2px, calc(2px + 0.1vw), 0.2rem);
     font-weight: 600;
     font-size: 16px;
+  }
+
+  .auth-field {
+    flex-direction: column;
+    margin: 2rem 2rem 2rem 2rem;
   }
 }

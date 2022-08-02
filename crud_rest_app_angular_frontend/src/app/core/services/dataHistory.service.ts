@@ -1806,4 +1806,107 @@ export class DataHistoryService {
 
     this.store.dispatch(new UpdateLastAndBestTime(lastAndBestTimeArray));
   }
+
+  /**
+   *
+   * Functions for Dashboard Graphs
+   *
+   *
+   */
+
+  /**
+   *
+   * TOTAL VOLUME DASHBOARD GRAPH
+   */
+  getDashboardTotalVolumeData(): any {
+    let totalVolumeDataForChart: any[] = [];
+    let exerciseDatesSet = new Set();
+    let exerciseDatesArray: any[];
+    let exerciseTotalVolumesArray: any[] = [];
+    // Transforms user exercise history to a set of dates in format 'YYYY/MM/DD' for comparison
+    let userExerciseHistory: ExerciseHistory[] | undefined =
+      this.userData.exerciseHistory;
+    userExerciseHistory?.forEach((obj) =>
+      exerciseDatesSet.add(
+        new Date(obj.exerciseDate)
+          .toLocaleString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          })
+          .toString()
+      )
+    );
+    exerciseDatesArray = Array.from(exerciseDatesSet).sort();
+    // Iterates through set(now array) of dates to filter relative volumes as numbers to add, then push to an array to act as corresponding volume data to the dates array
+    exerciseDatesArray.forEach((date) => {
+      let volumeAddVar: number = 0;
+      let newFil = this.userData.exerciseHistory?.filter(
+        (obj) =>
+          date ==
+          new Date(obj.exerciseDate).toLocaleString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          })
+      );
+      if (newFil) {
+        newFil.forEach((obj) => (volumeAddVar += Number(obj.exerciseVolume)));
+      }
+      exerciseTotalVolumesArray.push(volumeAddVar);
+    });
+    // Pushes arrays for dates and corresponding total volumes to totalVolumeDataForChart array to be used in dashboard chart
+    totalVolumeDataForChart[0] = exerciseDatesArray;
+    totalVolumeDataForChart[1] = exerciseTotalVolumesArray;
+    return totalVolumeDataForChart;
+  }
+
+  /**
+   *
+   * VOLUME BY EXERCISE DASHBOARD GRAPH
+   */
+  getDashboardVolumeByExercise(exercise: string): any {
+    let totalVolumeDataForChart: any[] = [];
+    let exerciseDatesSet = new Set();
+    let exerciseDatesArray: any[];
+    let exerciseTotalVolumesArray: any[] = [];
+    // Transforms user exercise history to a set of dates in format 'YYYY/MM/DD' for comparison
+    let userExerciseHistory: ExerciseHistory[] | undefined =
+      this.userData.exerciseHistory;
+    userExerciseHistory?.forEach((obj) => {
+      if (obj.exercise === 'bench press') {
+        exerciseDatesSet.add(
+          new Date(obj.exerciseDate)
+            .toLocaleString('en-US', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            })
+            .toString()
+        );
+      }
+    });
+    exerciseDatesArray = Array.from(exerciseDatesSet).sort();
+    // Iterates through set(now array) of dates to filter relative volumes as numbers to add, then push to an array to act as corresponding volume data to the dates array
+    exerciseDatesArray.forEach((date) => {
+      let volumeAddVar: number = 0;
+      let newFil = this.userData.exerciseHistory?.filter(
+        (obj) =>
+          date ==
+            new Date(obj.exerciseDate).toLocaleString('en-US', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            }) && obj.exercise === 'bench press'
+      );
+      if (newFil) {
+        newFil.forEach((obj) => (volumeAddVar += Number(obj.exerciseVolume)));
+      }
+      exerciseTotalVolumesArray.push(volumeAddVar);
+    });
+    // Pushes arrays for dates and corresponding total volumes to totalVolumeDataForChart array to be used in dashboard chart
+    totalVolumeDataForChart[0] = exerciseDatesArray;
+    totalVolumeDataForChart[1] = exerciseTotalVolumesArray;
+    return totalVolumeDataForChart;
+  }
 }

@@ -30,6 +30,9 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { LandingComponent } from './views/landing/landing.component';
+import { TotalVolumeComponent } from './views/dashboard/total-volume/total-volume.component';
+import { VolumeByExerciseComponent } from './views/dashboard/volume-by-exercise/volume-by-exercise.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,8 @@ import { LandingComponent } from './views/landing/landing.component';
     RegisterComponent,
     DashboardComponent,
     LandingComponent,
+    TotalVolumeComponent,
+    VolumeByExerciseComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,8 +63,10 @@ import { LandingComponent } from './views/landing/landing.component';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    HighchartsChartModule,
     MatTooltipModule,
     NgxsModule.forRoot([AppState]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
   providers: [DataHistoryService],
   bootstrap: [AppComponent],

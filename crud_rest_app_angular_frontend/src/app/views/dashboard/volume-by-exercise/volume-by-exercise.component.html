@@ -1,0 +1,25 @@
+<div class="dashboard-chart">
+  <highcharts-chart
+    [Highcharts]="Highcharts"
+    [options]="chartOptions"
+    style="width: 300px; height: 340px; display: block"
+  ></highcharts-chart>
+  <div class="select-stack-dashboard">
+    <div class="select-title-dashboard">Completed Exercises:</div>
+    <div>
+      <select
+        style="font-size: 10px"
+        class="select-input"
+        (change)="exerciseSelect($event.target)"
+      >
+        <option
+          style="font-size: 0.9rem"
+          *ngFor="let exercise of exerciseListing"
+          [value]="exercise | lowercase"
+        >
+          {{ exercise }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

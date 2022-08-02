@@ -25,7 +25,7 @@
   align-items: center;
   height: 350px;
   width: 300px;
-  border: 1px solid red;
+
   margin: 0 3rem 3rem 3rem;
 }
 
@@ -36,8 +36,13 @@
   padding-bottom: 0.5rem;
 }
 
-.dashboard-component {
-  //
+// .dashboard-component {
+
+// }
+
+.demo-inline-calendar-card {
+  width: 105%;
+  transform: translate(-8%, 0);
 }
 
 @media (max-width: 850px) {

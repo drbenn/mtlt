@@ -86,6 +86,13 @@ export class InputArrayComponent implements OnInit {
     this.thisExerciseArray[0] = exerciseIndexAsString;
   }
 
+  onSaveExercise() {
+    if (confirm('Are you finished the exercise and want to save?')) {
+      console.log('Implement delete functionality here');
+      console.log(this.exerciseForm.value);
+    }
+  }
+
   /**
    * When exercisetype dropdown selected, the exerciseTypeSelected variable will be
    * adjusted to reflect the correct list of exercises. Also, bodyWeightVariation cleared
@@ -318,15 +325,16 @@ export class InputArrayComponent implements OnInit {
 
   onExerciseSubmit() {
     console.warn('form submitted');
-    // console.log(this.exerciseForm.value);
+    console.log(this.exerciseForm.value);
   }
 
-  closeExercise() {
-    // console.log('exercise closing');
-    // alert(
-    //   'Are you really done? This will also remove the exercise for editing'
-    // );
-  }
+  // closeExercise() {
+  //   console.log(this.exerciseForm.value);
+  //   console.log('exercise closing');
+  //   alert(
+  //     'Are you really done? This will also remove the exercise for editing'
+  //   );
+  // }
 
   // testSet() {
   //   let exIndexInCurrentWorkout: number = this.exerciseIndexForCurrentWorkout;

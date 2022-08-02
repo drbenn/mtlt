@@ -9,6 +9,17 @@ button {
   padding: 0.6rem;
 }
 
+.test-dialog-text {
+  font-size: 1rem;
+  color: var(--nav-link-color);
+  text-align: center;
+  margin-top: 2rem;
+}
+.test-dialog-text:hover {
+  font-size: 1rem;
+  color: var(--nav-link-color-hover);
+}
+
 @media (max-width: 850px) {
   button {
     margin-left: 6.5rem;

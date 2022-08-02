@@ -71,14 +71,18 @@ export class ExercisePanelComponent implements OnInit {
     this.store.dispatch(new UpdateActiveExercises(exercises));
   }
 
-  removeExercise(i: number) {
-    console.log(i);
-    this.exerciseInput.splice(i, 1);
-    this.exerciseInputIndex -= 1;
-    // Below updates state array
-    this.exerciseArrayForState.pop();
-    // console.log(`state-after-remove: ${this.exerciseArrayForState}`);
-    this.updateStateActiveExercises(this.exerciseArrayForState);
+  onRemoveExercise(i: number) {
+    if (
+      confirm('Are you sure you want to delete the exercise without saving?')
+    ) {
+      console.log(i);
+      this.exerciseInput.splice(i, 1);
+      this.exerciseInputIndex -= 1;
+      // Below updates state array
+      this.exerciseArrayForState.pop();
+      // console.log(`state-after-remove: ${this.exerciseArrayForState}`);
+      this.updateStateActiveExercises(this.exerciseArrayForState);
+    }
   }
 
   receiveIterationExercise(exerIterationArray: any): void {

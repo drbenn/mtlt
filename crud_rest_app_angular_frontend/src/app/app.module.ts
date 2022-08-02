@@ -33,6 +33,8 @@ import { LandingComponent } from './views/landing/landing.component';
 import { TotalVolumeComponent } from './views/dashboard/total-volume/total-volume.component';
 import { VolumeByExerciseComponent } from './views/dashboard/volume-by-exercise/volume-by-exercise.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogTestLoginInfoComponent } from './views/dialog-test-login-info/dialog-test-login-info.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     LandingComponent,
     TotalVolumeComponent,
     VolumeByExerciseComponent,
+    DialogTestLoginInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatButtonModule,
     HighchartsChartModule,
     MatTooltipModule,
+    MatDialogModule,
     NgxsModule.forRoot([AppState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
   ],

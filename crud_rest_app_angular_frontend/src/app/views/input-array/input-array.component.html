@@ -72,7 +72,7 @@
         </select>
       </div>
       <button
-        type="button add-set-button-responsive app-button"
+        class="button add-set-button-responsive app-button"
         (click)="addSet()"
         [disabled]="addSetButtonDisabled"
       >
@@ -122,8 +122,12 @@
     Total Volume: {{ totalVolumeForExercise | number: "1.0":"en-US" }}
   </div>
   <div class="bottom-buttons">
-    <button type="submit">Save Progress</button>
-    <button type="submit" (click)="closeExercise()">Done!</button>
+    <!-- <button type="submit" class="app-button" (click)="closeExercise()">
+      Save Progress
+    </button> -->
+    <button type="submit" class="app-button" (click)="onSaveExercise()">
+      Save Progress
+    </button>
   </div>
 
   <div class="bottom-border"></div>

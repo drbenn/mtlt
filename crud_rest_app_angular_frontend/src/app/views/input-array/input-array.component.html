@@ -72,7 +72,7 @@
         </select>
       </div>
       <button
-        type="button add-set-button-responsive"
+        type="button add-set-button-responsive app-button"
         (click)="addSet()"
         [disabled]="addSetButtonDisabled"
       >
@@ -100,7 +100,7 @@
         (exerciseTotalVolume)="receiveSetVolume($event)"
       ></app-input>
       <button
-        class="delete-button"
+        class="delete-button app-button"
         (click)="removeSet(i)"
         *ngIf="i === lastToDelete"
       >

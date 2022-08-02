@@ -4,7 +4,7 @@
     (exerciseArrayForIteration)="receiveIterationExercise($event)"
   ></app-input-array>
   <button
-    class="delete-button float-right"
+    class="delete-button float-right app-button"
     (click)="removeExercise(i)"
     *ngIf="i + 1 === exerciseInputIndex"
   >
@@ -12,7 +12,7 @@
   </button>
 </div>
 <button
-  class="add-exercise-button add-exercise-button"
+  class="add-exercise-button add-exercise-button app-button"
   (click)="addExerciseInput()"
 >
   Add Exercise

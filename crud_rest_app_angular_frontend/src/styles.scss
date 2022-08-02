@@ -160,7 +160,7 @@ body {
   background-color: var(--button-accent) !important;
 }
 
-button {
+.app-button {
   white-space: pre;
   background-color: var(--standard-button-color);
   border: 1px solid rgb(35, 35, 35);
@@ -182,7 +182,7 @@ button {
   font-size: 1.1rem;
 }
 
-button:hover {
+.app-button:hover {
   box-shadow: rgba(0, 0, 0, 0.15) 0 3px 9px 0;
   transform: translateY(-2px);
 }
@@ -267,7 +267,7 @@ button:hover {
 }
 
 @media (max-width: 850px) {
-  button {
+  .app-button {
     padding-top: 0.3rem;
     padding-right: clamp(2px, calc(2px + 0.1vw), 0.3rem);
     padding-bottom: 0.3rem;

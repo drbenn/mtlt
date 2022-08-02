@@ -1,6 +1,6 @@
 export interface LoggedInUser {
-  username: string;
-  joinDate: Date;
+  username?: string;
+  joinDate?: Date;
   customExercises?: CustomExercise[];
   customWorkouts?: CustomWorkout;
   exerciseHistory?: ExerciseHistory[];

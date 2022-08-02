@@ -3,6 +3,11 @@
 //   constructor(public exerciseHistory: any) {}
 // }
 
+export class GetUserHistoryOnLogin {
+  static readonly type = '[UserLogin] Get and Set User Information on Login';
+  constructor(public username: string) {}
+}
+
 export class UpdateActiveExercises {
   static readonly type = '[ExerciseList] Update Active Exercises';
   constructor(public activeExercisesUI: string[][]) {}

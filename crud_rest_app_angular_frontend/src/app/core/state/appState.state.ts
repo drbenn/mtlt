@@ -1,7 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Action, State, StateContext } from '@ngxs/store';
+import { Action, State, StateContext, Store } from '@ngxs/store';
+import { LoggedInUser } from '../models/loggedInUser.model';
 import { DataHistoryService } from '../services/dataHistory.service';
 import {
+  GetUserHistoryOnLogin,
   UpdateActiveExercises,
   UpdateLastAndBestTime,
   UpdateLoginStatus,
@@ -12,7 +15,8 @@ import {
 export interface AppStateModel {
   isUserLoggedIn?: boolean;
   username?: string;
-  exerciseHistory?: [];
+  userData?: LoggedInUser;
+  exerciseHistory?: any[];
   activeExercises?: string[][];
   lastTime?: [];
   bestTime?: [];
@@ -37,7 +41,11 @@ export interface AppStateModel {
 })
 @Injectable()
 export class AppState {
-  constructor(private dataHistoryService: DataHistoryService) {}
+  constructor(
+    private dataHistoryService: DataHistoryService,
+    private http: HttpClient,
+    private store: Store
+  ) {}
 
   @Action(UpdateActiveExercises)
   updateActiveExercises(
@@ -82,8 +90,39 @@ export class AppState {
 
   @Action(UpdateUsername)
   updateUsername(ctx: StateContext<AppStateModel>) {
-    let usernameService: string =
+    let usernameService: string | undefined =
       this.dataHistoryService.getUserNameForDisplay();
     ctx.setState({ username: usernameService });
+  }
+
+  @Action(GetUserHistoryOnLogin)
+  getUserHistoryOnLogin(
+    ctx: StateContext<AppStateModel>,
+    payload: { username: string }
+  ) {
+    console.log('get in state');
+
+    // HTTP GET REQUEST NEEDED
+    this.http
+      .get('http://localhost:4200/assets//userdb.json')
+      .subscribe((data) => {
+        let usersJsonHistory = Object.values(data);
+        usersJsonHistory.forEach((userHistory) => {
+          console.log(userHistory);
+
+          if (
+            userHistory.username.toLowerCase() ===
+            payload.username.toLowerCase()
+          ) {
+            console.log('cha-CHING');
+
+            // console.log(userHistory.exerciseHistory);
+            console.log(userHistory.username);
+            ctx.patchState({ isUserLoggedIn: true });
+            ctx.patchState({ username: userHistory.username });
+            // ctx.patchState({ exerciseHistory: userHistory.exerciseHistory });
+          }
+        });
+      });
   }
 }

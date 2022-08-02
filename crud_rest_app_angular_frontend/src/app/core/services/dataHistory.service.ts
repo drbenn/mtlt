@@ -1761,7 +1761,7 @@ export class DataHistoryService {
     ],
   };
 
-  getUserNameForDisplay(): string {
+  getUserNameForDisplay(): string | undefined {
     return this.userData.username;
   }
   getLastTimeDisplayData(activeExercises: string[][]) {

@@ -48,9 +48,9 @@ export class ExercisePanelComponent implements OnInit {
 
     zIndexMobilePane$.subscribe((_zIndexMobilePane: number[]) => {
       if (_zIndexMobilePane) {
-        console.log(_zIndexMobilePane);
+        // console.log(_zIndexMobilePane);
         this.zIndexArrayForMobileCurrent = _zIndexMobilePane[0];
-        console.log(`current z: ${this.zIndexArrayForMobileCurrent}`);
+        // console.log(`current z: ${this.zIndexArrayForMobileCurrent}`);
       }
     });
     this.innerWidth = window.innerWidth;
@@ -75,7 +75,7 @@ export class ExercisePanelComponent implements OnInit {
     if (
       confirm('Are you sure you want to delete the exercise without saving?')
     ) {
-      console.log(i);
+      // console.log(i);
       this.exerciseInput.splice(i, 1);
       this.exerciseInputIndex -= 1;
       // Below updates state array

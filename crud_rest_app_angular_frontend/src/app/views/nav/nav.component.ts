@@ -32,10 +32,11 @@ export class NavComponent implements OnInit {
       (state) => state.appState.username
     );
     username$.subscribe((_username$: string) => {
-      if (_username$ !== undefined) {
-        console.log(_username$);
-        this.usernameForDisplay = _username$;
-      }
+      // if (_username$ !== undefined) {
+      //   console.log(_username$);
+      //   this.usernameForDisplay = _username$;
+      // }
+      console.log(_username$);
     });
   }
 
@@ -46,12 +47,14 @@ export class NavComponent implements OnInit {
 
   userLogIn() {
     // this.store.dispatch(new UpdateUsername());
-    console.log('logIN triggered');
-    this.store.dispatch(new UpdateLoginStatus(true));
+    // console.log('logIN triggered');
+    // this.store.dispatch(new UpdateLoginStatus(true));
   }
 
   userLogOut() {
-    console.log('logOUT in triggered');
+    // console.log('logOUT in triggered');
+    this.usernameForDisplay = '';
+    this.isUserLoggedIn = false;
     this.store.dispatch(new UpdateLoginStatus(false));
   }
 }

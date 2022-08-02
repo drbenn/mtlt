@@ -22,13 +22,12 @@ export interface AppStateModel {
   bestTime?: [];
   // [zIndexCurrent, zIndexLast, zIndexBest]
   zIndexMobilePane?: number[];
-  iterationMaxHeights?: [][];
 }
 
 @State<AppStateModel>({
   name: 'appState',
   defaults: {
-    isUserLoggedIn: true,
+    isUserLoggedIn: false,
     username: '',
     exerciseHistory: [],
     activeExercises: [],
@@ -36,7 +35,6 @@ export interface AppStateModel {
     bestTime: [],
     // [zIndexCurrent, zIndexLast, zIndexBest]
     zIndexMobilePane: [3, 1, 1],
-    iterationMaxHeights: [],
   },
 })
 @Injectable()
@@ -54,7 +52,7 @@ export class AppState {
   ) {
     let newData: string[][];
     newData = [...payload.activeExercisesUI];
-    ctx.setState({ activeExercises: newData });
+    ctx.patchState({ activeExercises: newData });
   }
 
   @Action(UpdateLastAndBestTime)
@@ -67,8 +65,8 @@ export class AppState {
     if (payload.lastAndBestTimeArray) {
       lastTimeArray = payload.lastAndBestTimeArray[0];
       bestTimeArray = payload.lastAndBestTimeArray[1];
-      ctx.setState({ lastTime: lastTimeArray });
-      ctx.setState({ bestTime: bestTimeArray });
+      ctx.patchState({ lastTime: lastTimeArray });
+      ctx.patchState({ bestTime: bestTimeArray });
     }
   }
 
@@ -77,7 +75,7 @@ export class AppState {
     ctx: StateContext<AppStateModel>,
     payload: { zIndexMobile: number[] }
   ) {
-    ctx.setState({ zIndexMobilePane: payload.zIndexMobile });
+    ctx.patchState({ zIndexMobilePane: payload.zIndexMobile });
   }
 
   @Action(UpdateLoginStatus)
@@ -85,7 +83,7 @@ export class AppState {
     ctx: StateContext<AppStateModel>,
     payload: { isUserLoggedIn: boolean }
   ) {
-    ctx.setState({ isUserLoggedIn: payload.isUserLoggedIn });
+    ctx.patchState({ isUserLoggedIn: payload.isUserLoggedIn });
     if (payload.isUserLoggedIn === false) {
       ctx.patchState({ username: '' });
       ctx.patchState({ isUserLoggedIn: false });
@@ -96,7 +94,7 @@ export class AppState {
   updateUsername(ctx: StateContext<AppStateModel>) {
     let usernameService: string | undefined =
       this.dataHistoryService.getUserNameForDisplay();
-    ctx.setState({ username: usernameService });
+    ctx.patchState({ username: usernameService });
   }
 
   @Action(GetUserHistoryOnLogin)
@@ -104,7 +102,7 @@ export class AppState {
     ctx: StateContext<AppStateModel>,
     payload: { username: string }
   ) {
-    console.log('get in state');
+    // console.log('get in state');
 
     // HTTP GET REQUEST NEEDED
     this.http
@@ -123,7 +121,8 @@ export class AppState {
             // console.log(userHistory.exerciseHistory);
             console.log(userHistory.username);
             ctx.patchState({ isUserLoggedIn: true });
-            ctx.patchState({ username: userHistory.username });
+            // ctx.patchState({ username: userHistory.username });
+            ctx.patchState({ username: 'Auto' });
             // ctx.patchState({ exerciseHistory: userHistory.exerciseHistory });
           }
         });

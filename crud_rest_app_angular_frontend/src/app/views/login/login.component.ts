@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngxs/store';
-import { GetUserHistoryOnLogin } from 'src/app/core/state/appState.actions';
+import {
+  GetUserHistoryOnLogin,
+  UpdateLoginStatus,
+} from 'src/app/core/state/appState.actions';
 import { DialogTestLoginInfoComponent } from '../dialog-test-login-info/dialog-test-login-info.component';
 
 @Component({
@@ -46,12 +49,15 @@ export class LoginComponent implements OnInit {
   }
 
   submitLogin() {
-    console.warn('submitLogin');
-    console.log(this.loginForm.value);
-    console.log(this.loginForm.value.username);
-    this.store.dispatch(
-      new GetUserHistoryOnLogin(this.loginForm.value.username)
-    );
+    if (confirm('Login?')) {
+      console.warn('submitLogin');
+      console.log(this.loginForm.value);
+      console.log(this.loginForm.value.username);
+      this.store.dispatch(new UpdateLoginStatus(true));
+      this.store.dispatch(
+        new GetUserHistoryOnLogin(this.loginForm.value.username)
+      );
+    }
   }
 
   onTestAppDialog() {

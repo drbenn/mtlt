@@ -35,6 +35,7 @@ import { VolumeByExerciseComponent } from './views/dashboard/volume-by-exercise/
 import { HighchartsChartModule } from 'highcharts-angular';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogTestLoginInfoComponent } from './views/dialog-test-login-info/dialog-test-login-info.component';
+import { AuthorizationService } from './core/services/authorization.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,7 @@ import { DialogTestLoginInfoComponent } from './views/dialog-test-login-info/dia
     NgxsModule.forRoot([AppState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
-  providers: [DataHistoryService],
+  providers: [DataHistoryService, AuthorizationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

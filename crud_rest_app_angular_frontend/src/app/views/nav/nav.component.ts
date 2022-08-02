@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import {
+  GetUserHistoryOnLogin,
   UpdateLoginStatus,
   UpdateUsername,
 } from 'src/app/core/state/appState.actions';
@@ -32,6 +33,7 @@ export class NavComponent implements OnInit {
     );
     username$.subscribe((_username$: string) => {
       if (_username$ !== undefined) {
+        console.log(_username$);
         this.usernameForDisplay = _username$;
       }
     });
@@ -43,7 +45,7 @@ export class NavComponent implements OnInit {
   }
 
   userLogIn() {
-    this.store.dispatch(new UpdateUsername());
+    // this.store.dispatch(new UpdateUsername());
     console.log('logIN triggered');
     this.store.dispatch(new UpdateLoginStatus(true));
   }

@@ -6,9 +6,20 @@ import { UpdateLastAndBestTime } from '../state/appState.actions';
 @Injectable()
 export class DataHistoryService {
   currentExerciseListForComparison: string[] = [];
-  constructor(private store: Store) {}
+  exerciseHistoryFromState: [];
+  constructor(private store: Store) {
+    // CONSTRUCTOR CODE WILL BREAK PULLING LAST/BEST
+    // let exerciseHistory$: Observable<[]> = this.store.select(
+    //   (state) => state.appState.exerciseHistory
+    // );
+    // exerciseHistory$.subscribe((_exerciseHistory$: []) => {
+    //   if (_exerciseHistory$ !== undefined) {
+    //     this.currentExerciseListForComparison = _exerciseHistory$;
+    //   }
+    // });
+  }
   userData: LoggedInUser = {
-    username: 'Kurt Travis',
+    username: 'DrB',
     joinDate: new Date(),
     exerciseHistory: [
       {
@@ -1763,6 +1774,10 @@ export class DataHistoryService {
 
   getUserNameForDisplay(): string | undefined {
     return this.userData.username;
+
+    //   let usern = this.store.select((state) => state.username);
+
+    //   return 'something';
   }
   getLastTimeDisplayData(activeExercises: string[][]) {
     let returnedHistoryLastTime: any[] = [];

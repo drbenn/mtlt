@@ -152,7 +152,7 @@ body {
 
 .delete-button {
   background-color: var(--delete-button-bg) !important;
-  color: white;
+  color: white !important;
   text-shadow: 1px 1px 2px var(--delete-button-bg);
 }
 

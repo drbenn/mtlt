@@ -86,6 +86,10 @@ export class AppState {
     payload: { isUserLoggedIn: boolean }
   ) {
     ctx.setState({ isUserLoggedIn: payload.isUserLoggedIn });
+    if (payload.isUserLoggedIn === false) {
+      ctx.patchState({ username: '' });
+      ctx.patchState({ isUserLoggedIn: false });
+    }
   }
 
   @Action(UpdateUsername)

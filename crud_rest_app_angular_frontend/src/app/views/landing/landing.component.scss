@@ -19,34 +19,58 @@
 
 .landing-block {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-content: center;
   flex-direction: row;
-  width: 100%;
-  padding: 2rem 0rem;
-  font-size: clamp(16px, calc(10px + 0.5vw), 22px);
-  font-weight: 400;
+  width: 95%;
+  min-height: 250px;
+  padding: 2rem 2rem;
+  margin-bottom: 2rem;
+  font-size: clamp(16px, calc(10px + 0.5vw), 16px);
+  font-weight: 100;
+  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
 }
 
 .landing-text {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 550px;
+  color: var(--standard-button-text-color);
+  text-shadow: 1px 1px 2px #0202026d;
   padding: 0 2rem;
 }
+.landing-text-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 550px;
+  color: var(--standard-button-text-color);
+  text-shadow: 1px 1px 2px #0202026d;
+  padding: 0 2rem;
+  transform: translate(calc(-230px + 1vw), 0);
+}
 
-.landing-image-position {
+.landing-image-position-left {
   display: flex;
   justify-content: center;
   align-content: center;
 }
+.landing-image-position-right {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  transform: translate(calc(550px + 3vw), 0);
+}
 .landing-image {
-  height: 200px;
+  height: 100%;
   width: 200px;
+  object-fit: contain;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1200px) {
   .landing-content-container {
     width: 95%;
     padding-top: 0rem;
@@ -54,13 +78,27 @@
   .landing-block {
     flex-direction: column;
     padding: 1rem 0rem;
+    font-size: clamp(13px, calc(10px + 0.5vw), 16px);
   }
-  .landing-image-position {
+  .landing-image-position-left {
     margin-bottom: 1.5rem;
   }
+  .landing-image-position-right {
+    margin-bottom: 1.5rem;
+    transform: translate(0, 0);
+    text-align: center;
+    padding-left: 15rem;
+  }
+  .landing-text {
+    align-items: center;
+    max-width: 80%;
+    margin-left: calc(1rem + 2vw);
+  }
+  .landing-text-right {
+    transform: translate(3.5vw, 0);
+  }
   .landing-image {
-    max-height: 600px;
-    width: 80%;
-    object-fit: cover;
+    max-height: 400px;
+    width: 100%;
   }
 }

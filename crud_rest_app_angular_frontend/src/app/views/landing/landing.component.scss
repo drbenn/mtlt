@@ -30,6 +30,19 @@
   font-weight: 100;
   box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
 }
+.landing-block-right {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  flex-direction: row-reverse;
+  width: 95%;
+  min-height: 250px;
+  padding: 2rem 2rem;
+  margin-bottom: 2rem;
+  font-size: clamp(16px, calc(10px + 0.5vw), 16px);
+  font-weight: 100;
+  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+}
 
 .landing-text {
   display: flex;
@@ -76,6 +89,12 @@
     padding-top: 0rem;
   }
   .landing-block {
+    flex-direction: column;
+    padding: 1rem 0rem;
+    font-size: clamp(13px, calc(10px + 0.5vw), 16px);
+  }
+
+  .landing-block-right {
     flex-direction: column;
     padding: 1rem 0rem;
     font-size: clamp(13px, calc(10px + 0.5vw), 16px);

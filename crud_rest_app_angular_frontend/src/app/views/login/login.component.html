@@ -1,4 +1,8 @@
 <div class="auth-wrapper">
+  <div class="warning-text login-warning-text" *ngIf="loginFailed">
+    Username and password combination incorrect. Please attempt login again or
+    register for a free account.
+  </div>
   <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
     <div class="auth-field">
       <div>User Name&nbsp;&nbsp;</div>
@@ -9,7 +13,7 @@
       <input formControlName="password" required />
     </div>
     <div class="">
-      <button class="app-button" type="submit" (click)="submitLogin()">
+      <button class="app-button" type="submit" (click)="onClickSubmitLogin()">
         Login
       </button>
       <div>

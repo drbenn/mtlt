@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngxs/store';
+import { LoginAuthentication } from 'src/app/core/models/loggedInUser.model';
 import {
   GetUserHistoryOnLogin,
   UpdateLoginStatus,
@@ -14,6 +15,7 @@ import { DialogTestLoginInfoComponent } from '../dialog-test-login-info/dialog-t
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  loginFailed: boolean = false;
   loginForm: FormGroup = new FormGroup({});
 
   constructor(
@@ -48,7 +50,11 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
   }
 
-  submitLogin() {
+  onClickSubmitLogin() {
+    let submittedLogin: LoginAuthentication = {
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password,
+    };
     if (confirm('Login?')) {
       console.warn('submitLogin');
       console.log(this.loginForm.value);

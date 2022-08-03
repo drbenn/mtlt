@@ -3,6 +3,13 @@ export interface LoginAuthentication {
   password: string;
 }
 
+export interface UserRegistration {
+  username: string;
+  email: string;
+  password: string;
+  date: Date;
+}
+
 export interface LoggedInUser {
   username?: string;
   joinDate?: Date;

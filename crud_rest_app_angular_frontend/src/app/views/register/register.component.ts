@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserRegistration } from 'src/app/core/models/loggedInUser.model';
 
 @Component({
   selector: 'app-register',
@@ -36,10 +37,18 @@ export class RegisterComponent implements OnInit {
 
   onRegisterSubmit() {
     console.warn('Register form submitted');
-    // console.log(this.registerForm.value);
+    console.log(this.registerForm.value);
   }
-  submitRegister() {
+  submitClickRegister() {
+    // if username exists alert box indicating cant register with that name
     console.warn('submitLogin');
     console.log(this.registerForm.value);
+    let requestedRegistrationInfo: UserRegistration = {
+      username: this.registerForm.value.username,
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password,
+      date: new Date(),
+    };
+    console.log(requestedRegistrationInfo);
   }
 }

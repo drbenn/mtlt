@@ -1,4 +1,19 @@
 <div class="auth-wrapper">
+  <div
+    class="warning-text register-warning-text"
+    *ngIf="
+      (registerForm.controls['username'].touched &&
+        registerForm.controls['username'].invalid) ||
+      (registerForm.controls['email'].touched &&
+        registerForm.controls['email'].invalid) ||
+      (registerForm.controls['password'].touched &&
+        registerForm.controls['password'].invalid)
+    "
+  >
+    All Fields required. Username and password allow any characters with minimum
+    two characters and maximum 20 characters. Valid email address required (ex.
+    buff@stuff.com)
+  </div>
   <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
     <div class="auth-field">
       <div>User Name&nbsp;&nbsp;</div>
@@ -12,8 +27,9 @@
       <div>Password&nbsp;&nbsp;</div>
       <input formControlName="password" required />
     </div>
+
     <div class="">
-      <button class="app-button" type="submit" (click)="submitRegister()">
+      <button class="app-button" type="submit" (click)="submitClickRegister()">
         Register
       </button>
     </div>

@@ -32,6 +32,12 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+
+input:focus {
+  outline: none !important;
+  border: 2px var(--nav-link-color) solid;
+  box-shadow: 0 0 12px rgba(44, 44, 44, 0.16);
+}
 .main-flex-wrapper {
   display: flex;
   flex-wrap: nowrap;

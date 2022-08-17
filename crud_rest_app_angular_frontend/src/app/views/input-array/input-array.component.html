@@ -1,4 +1,5 @@
-<form [formGroup]="exerciseForm" (ngSubmit)="onExerciseSubmit()">
+<!-- <form [formGroup]="exerciseForm" (ngSubmit)="onExerciseSubmit()"> -->
+  <form [formGroup]="exerciseForm">
   <div class="title-area-height">
     <div class="exercise-select-row">
       <div class="select-stack">
@@ -111,7 +112,8 @@
       class="warning-text"
       *ngIf="
         exerciseForm.controls['setArray'].touched &&
-        exerciseForm.controls['setArray'].invalid
+        exerciseForm.controls['setArray'].invalid &&
+        this.exerciseForm.value.exerciseType !== 'bodyweight'
       "
     >
       Hey beefcake! Only values less than 1500 lbs and less than 250 reps are

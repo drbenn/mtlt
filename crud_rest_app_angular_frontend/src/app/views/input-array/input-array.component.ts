@@ -1,8 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { ExerciseHistory } from 'src/app/core/models/loggedInUser.model';
 import { DataHistoryService } from 'src/app/core/services/dataHistory.service';
 import { DefaultExercises } from 'src/app/core/services/defaultExercises.service';
 import { FormFactoryService } from 'src/app/core/services/exerciseInput.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { AddExerciseToState } from 'src/app/core/state/appState.actions';
 
 @Component({
   selector: 'app-input-array',
@@ -12,6 +17,7 @@ import { FormFactoryService } from 'src/app/core/services/exerciseInput.service'
 })
 export class InputArrayComponent implements OnInit {
   lastToDelete: number = -1;
+  usernameExerciseSubmit:string='';
   @Output() exerciseArrayForIteration = new EventEmitter<string[]>();
   @Input() exerciseIndexForCurrentWorkout: number;
   exerciseForm: FormGroup = new FormGroup({});
@@ -67,10 +73,18 @@ export class InputArrayComponent implements OnInit {
     private fb: FormBuilder,
     private formFactoryService: FormFactoryService,
     private defaultExercises: DefaultExercises,
-    private dataHistoryService: DataHistoryService
+    private dataHistoryService: DataHistoryService,
+    private store:Store,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    let username$: Observable<string> = this.store.select(
+      (state) => state.appState.username
+    );
+    username$.subscribe((_username$: string) => {
+      this.usernameExerciseSubmit = _username$;
+    });
     this.exerciseForm = this.fb.group({
       exerciseDate: new Date(),
       exerciseType: ['', [Validators.required]],
@@ -86,12 +100,21 @@ export class InputArrayComponent implements OnInit {
     this.thisExerciseArray[0] = exerciseIndexAsString;
   }
 
-  onSaveExercise() {
+  async onSaveExercise() {
     if (confirm('Are you finished the exercise and want to save?')) {
       console.log('Implement delete functionality here');
-      console.log(this.exerciseForm.value);
+      let exerciseForm:ExerciseHistory = this.exerciseForm.value;
+      // let exerciseFormDataArray: [string, any[]] = [this.usernameExerciseSubmit, exerciseForm]
+      // await this.userService.saveExercise(exerciseFormDataArray);
+            await this.userService.saveExercise(exerciseForm);
+      // this.store.dispatch(new AddExerciseToState(exerciseForm));
     }
   }
+
+  //   onExerciseSubmit() {
+  //   console.warn('form submitted');
+  //   console.log(this.exerciseForm.value);
+  // }
 
   /**
    * When exercisetype dropdown selected, the exerciseTypeSelected variable will be
@@ -323,10 +346,7 @@ export class InputArrayComponent implements OnInit {
       this.totalVolumeForExercise);
   }
 
-  onExerciseSubmit() {
-    console.warn('form submitted');
-    console.log(this.exerciseForm.value);
-  }
+
 
   // closeExercise() {
   //   console.log(this.exerciseForm.value);

@@ -3,6 +3,16 @@
 //   constructor(public exerciseHistory: any) {}
 // }
 
+export class UpdateUserHistoryOnLogin {
+  static readonly type = '[UserLogin] Set User State on Login';
+  constructor(public loginResponse: any[]) {}
+}
+
+export class AddExerciseToState {
+  static readonly type= '[ExerciseHistory] Update State with completed exercise';
+  constructor(public submittedExercise: any) {}
+}
+
 export class GetUserHistoryOnLogin {
   static readonly type = '[UserLogin] Get and Set User Information on Login';
   constructor(public username: string) {}
@@ -30,6 +40,6 @@ export class UpdateLoginStatus {
   constructor(public isUserLoggedIn: boolean) {}
 }
 
-export class UpdateUsername {
-  static readonly type = '[UserData] Update username on login for display';
-}
+// export class UpdateUsername {
+//   static readonly type = '[UserData] Update username on login for display';
+// }

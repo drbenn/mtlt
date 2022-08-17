@@ -14,7 +14,14 @@
     two characters and maximum 20 characters. Valid email address required (ex.
     buff@stuff.com)
   </div>
-  <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+  <div
+  class="warning-text register-warning-text"
+  *ngIf="submittedRegistrationResponseMessage == 'Registration Failed - username taken'
+  ">
+  Username already taken, please submit new registration with different username.
+</div>
+  <!-- <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()"> -->
+    <form [formGroup]="registerForm">
     <div class="auth-field">
       <div>User Name&nbsp;&nbsp;</div>
       <input formControlName="username" required />
@@ -32,6 +39,8 @@
       <button class="app-button" type="submit" (click)="submitClickRegister()">
         Register
       </button>
+
     </div>
+
   </form>
 </div>

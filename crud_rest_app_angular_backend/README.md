@@ -1,4 +1,5 @@
 In general, main.ts > app.module > app.controller > app.service(which is injected into the app.controller)
+https://www.youtube.com/watch?v=_ZsECW9rkJI
 
 commands used
 

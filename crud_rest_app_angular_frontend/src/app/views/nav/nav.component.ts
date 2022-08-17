@@ -1,10 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { LoggedInUser, UserRegister } from 'src/app/core/models/loggedInUser.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 import {
   GetUserHistoryOnLogin,
   UpdateLoginStatus,
-  UpdateUsername,
+
 } from 'src/app/core/state/appState.actions';
 
 @Component({
@@ -13,11 +15,13 @@ import {
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
+  dbData$: Observable<any> | undefined;
+
   isUserLoggedIn: boolean = false;
   public innerWidth: any;
-  usernameForDisplay: string = 'Username PlaceHolder';
+  usernameForDisplay: string = '';
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
@@ -36,10 +40,17 @@ export class NavComponent implements OnInit {
       //   console.log(_username$);
       //   this.usernameForDisplay = _username$;
       // }
+      this.usernameForDisplay = _username$;
       console.log(_username$);
     });
   }
 
+  dbTest() {
+    this.dbData$ = this.authService.getDisplay();
+    this.dbData$.subscribe((data:any)=> {console.log(data)});
+    console.log('after');
+    console.log(this.dbData$);
+  }
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = window.innerWidth;

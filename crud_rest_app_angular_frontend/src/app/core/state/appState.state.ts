@@ -4,11 +4,12 @@ import { Action, State, StateContext, Store } from '@ngxs/store';
 import { LoggedInUser } from '../models/loggedInUser.model';
 import { DataHistoryService } from '../services/dataHistory.service';
 import {
+  AddExerciseToState,
   GetUserHistoryOnLogin,
   UpdateActiveExercises,
   UpdateLastAndBestTime,
   UpdateLoginStatus,
-  UpdateUsername,
+  UpdateUserHistoryOnLogin,
   UpdateZindexForMobile,
 } from './appState.actions';
 
@@ -16,7 +17,7 @@ export interface AppStateModel {
   isUserLoggedIn?: boolean;
   username?: string;
   userData?: LoggedInUser;
-  exerciseHistory?: any[];
+  exerciseHistory?: any[] |null;
   activeExercises?: string[][];
   lastTime?: [];
   bestTime?: [];
@@ -44,6 +45,16 @@ export class AppState {
     private http: HttpClient,
     private store: Store
   ) {}
+
+  @Action(AddExerciseToState)
+  addExerciseToState(
+    ctx: StateContext<AppStateModel>,
+    payload: { submittedExercise: any }
+  ) {
+    // console.log(payload.submittedExercise);
+    // ctx.patchState({exerciseHistory: payload.submittedExercise})
+
+  }
 
   @Action(UpdateActiveExercises)
   updateActiveExercises(
@@ -84,17 +95,38 @@ export class AppState {
     payload: { isUserLoggedIn: boolean }
   ) {
     ctx.patchState({ isUserLoggedIn: payload.isUserLoggedIn });
+    // Clear state/exerciseh history's on logout
     if (payload.isUserLoggedIn === false) {
       ctx.patchState({ username: '' });
       ctx.patchState({ isUserLoggedIn: false });
+      ctx.patchState({exerciseHistory: []});
+      ctx.patchState({activeExercises:[]});
+      ctx.patchState({lastTime: []});
+      ctx.patchState({bestTime:[]});
     }
   }
 
-  @Action(UpdateUsername)
-  updateUsername(ctx: StateContext<AppStateModel>) {
-    let usernameService: string | undefined =
-      this.dataHistoryService.getUserNameForDisplay();
-    ctx.patchState({ username: usernameService });
+
+
+  // @Action(UpdateUsername)
+  // updateUsername(ctx: StateContext<AppStateModel>) {
+  //   let usernameService: string | undefined =
+  //     this.dataHistoryService.getUserNameForDisplay();
+  //   ctx.patchState({ username: usernameService });
+  // }
+
+
+  @Action(UpdateUserHistoryOnLogin)
+  updateUserHistoryOnLogin(
+    ctx: StateContext<AppStateModel>,
+    payload: { loginResponse: any[] }
+  ) {
+    console.log(payload.loginResponse);
+    let username:string = payload.loginResponse[0];
+    let exerciseHistory: any[] | null = payload.loginResponse[1];
+    ctx.patchState({ username: username });
+    ctx.patchState({exerciseHistory: exerciseHistory})
+    ctx.patchState({ isUserLoggedIn: true });
   }
 
   @Action(GetUserHistoryOnLogin)

@@ -3,7 +3,8 @@
     Username and password combination incorrect. Please attempt login again or
     register for a free account.
   </div>
-  <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+  <!-- <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()"> -->
+  <form [formGroup]="loginForm">
     <div class="auth-field">
       <div>User Name&nbsp;&nbsp;</div>
       <input formControlName="username" required />
@@ -13,7 +14,7 @@
       <input formControlName="password" required />
     </div>
     <div class="">
-      <button class="app-button" type="submit" (click)="onClickSubmitLogin()">
+      <button class="app-button" type="submit" (click)="submitClickLogin()">
         Login
       </button>
       <div>

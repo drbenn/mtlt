@@ -3,19 +3,20 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   LoggedInUser,
-  LoginAuthentication,
+
+  UserLogin,
 } from '../models/loggedInUser.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthorizationService {
-  private users$ = this.http.get<LoginAuthentication[]>(
+  private users$ = this.http.get<UserLogin[]>(
     '/assets/testLoginDataLocal.json'
   );
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<LoginAuthentication[]> {
+  getUsers(): Observable<UserLogin[]> {
     return this.users$;
   }
 

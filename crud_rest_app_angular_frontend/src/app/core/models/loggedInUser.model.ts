@@ -1,18 +1,23 @@
-export interface LoginAuthentication {
+
+
+
+
+export interface UserLogin {
   username: string;
-  password: string;
+  password:string;
 }
 
-export interface UserRegistration {
+export interface UserRegister {
   username: string;
-  email: string;
-  password: string;
-  date: Date;
+  password:string;
+  email:string;
+  joinDate: Date;
 }
 
 export interface LoggedInUser {
   username?: string;
-  joinDate?: Date;
+  joinDate?: Date | string;
+  email?:string;
   customExercises?: CustomExercise[];
   customWorkouts?: CustomWorkout;
   exerciseHistory?: ExerciseHistory[];

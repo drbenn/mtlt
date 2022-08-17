@@ -71,9 +71,14 @@
   </div>
 
   <div class="in-app-navigation">
-    <a routerLink="/workout">Workout</a>
-    <a routerLink="/dashboard">Dashboard</a>
-    <a routerLink="/landing">Landing</a>
+    <a routerLink="/workout" *ngIf="isUserLoggedIn">Workout</a>
+    <a routerLink="/dashboard" *ngIf="isUserLoggedIn">Dashboard</a>
+    <!-- <a routerLink="/landing">Landing</a> -->
+    <!-- <button (click)="dbTest()">Db test</button> -->
   </div>
   <div class="bottom-border nav-border-width"></div>
 </div>
+<!-- <div *ngFor="let item of dbData$ | async">
+  <div>{{ item.username }}</div>
+  <div>{{ item.email }}</div>
+</div> -->

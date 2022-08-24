@@ -1,16 +1,3 @@
-In general, main.ts > app.module > app.controller > app.service(which is injected into the app.controller)
-https://www.youtube.com/watch?v=_ZsECW9rkJI
-
-commands used
-
-1. nest g resource prod (which the folder & contents was later deleted)
-2. npm i mongoose @nestjs/mongoose
-3. In app.module import MongooseModule from nestjs/mongoose, add forRoot w URI and user/pass from mongoDB Atlas or other server
-4. npm run start:dev - this starts the node server that connects to the database
-5. In main.ts enableCors used for testing on localhost - usually front end can only interact with backend from same port, because we are in development and port 3000 is backend and port 4200 is frontend CORs must be enabled. This should be removed in production
-6. Angular front-end created in seperate equal root directory
-7. npm start
-
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>

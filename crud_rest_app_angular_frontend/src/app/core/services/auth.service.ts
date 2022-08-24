@@ -11,6 +11,7 @@ export class AuthService {
 
   getDisplay() {
     let response = this.httpClient.get('http://localhost:3000/');
+    // let response = this.httpClient.get('https://danbennett.dev/mtlt/');
     return response;
   }
 }

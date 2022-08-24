@@ -83,5 +83,3 @@ export class Exercise {
 }
 
 export const exerciseSchema = SchemaFactory.createForClass(Exercise);
-
-

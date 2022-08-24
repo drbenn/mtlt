@@ -1,5 +1,5 @@
 {
-  "name": "crud_rest_app",
+  "name": "nest-server",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -23,7 +23,6 @@
   "dependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
-    "@nestjs/mapped-types": "*",
     "@nestjs/mongoose": "^9.2.0",
     "@nestjs/platform-express": "^8.0.0",
     "mongoose": "^6.5.2",

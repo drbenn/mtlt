@@ -1,3 +1,54 @@
+CHANGES TO MAKE BETWEEN DEVELOPMENT, GIT PUSH, and BUILD
+
+<!-- FOR GIT PUSH -->
+1.  app.module.ts
+    At minimum remove password from mongodb data connection
+        MongooseModule.forRoot(
+      'mongodb+srv://dben:<password>@cluster0.6tczejo.mongodb.net/?retryWrites=true&w=majority',
+    ),
+
+
+
+<!-- FOR BUILD -->
+1. main.ts
+  disable/comment out   app.enableCors();
+  
+2. app.controller.ts
+    paths for live build should reflect the following
+
+                    export class AppController {
+                  constructor(private readonly appService: AppService) {}
+
+                  @Get('/mtlt')
+                  getHello(): string {
+                    return this.appService.getHello();
+                  }
+
+                  @Get('/mtlt/subtest')
+                  getSubMtltTest(): string {
+                    return this.appService.getSubMtltHello();
+                  }
+
+                  @Post('/mtlt/register')
+                  async createUser(@Body() userDto: UserRegister) {
+                    return this.appService.createUser(userDto);
+                  }
+
+                  @Post('/mtlt/login')
+                  async loginUser(@Body() userDto: User) {
+                    return this.appService.loginUser(userDto);
+                  }
+
+                  @Post('/mtlt/savex')
+                  async addExercise(@Body() exerciseDto: Exercise) {
+                    return this.appService.addExercise(exerciseDto);
+                  }
+                }
+
+
+
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>

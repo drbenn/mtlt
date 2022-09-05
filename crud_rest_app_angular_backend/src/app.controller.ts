@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { UserRegister, User, Exercise } from './user.models';
@@ -6,27 +7,42 @@ import { UserRegister, User, Exercise } from './user.models';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('/mtlt')
+  // BUILD PATH
+  // @Get('/mtlt')
+  // DEV PATH
+  @Get('/')
   getHello(): string {
     return this.appService.getHello();
   }
 
-  @Get('/mtlt/subtest')
+  // BUILD PATH
+  // @Get('/mtlt/subtest')
+  // DEV PATH
+  @Get('/subtest')
   getSubMtltTest(): string {
     return this.appService.getSubMtltHello();
   }
 
-  @Post('/mtlt/register')
+  // BUILD PATH
+  // @Post('/mtlt/register')
+  // DEV PATH
+  @Post('/register')
   async createUser(@Body() userDto: UserRegister) {
     return this.appService.createUser(userDto);
   }
 
-  @Post('/mtlt/login')
+  // BUILD PATH
+  // @Post('/mtlt/login')
+  // DEV PATH
+  @Post('/login')
   async loginUser(@Body() userDto: User) {
     return this.appService.loginUser(userDto);
   }
 
-  @Post('/mtlt/savex')
+  // BUILD PATH
+  // @Post('/mtlt/savex')
+  // DEV PATH
+  @Post('/savex')
   async addExercise(@Body() exerciseDto: Exercise) {
     return this.appService.addExercise(exerciseDto);
   }

@@ -16,7 +16,6 @@ export class UserService {
 
   registerUser(registrationInfo: UserRegister){
     const url = 'http://localhost:3000/register'
-    // const url = 'https://danbennett.dev/mtlt/register'
 
 
 
@@ -38,7 +37,6 @@ export class UserService {
 
   loginUser(loginInfo: UserLogin){
     const url = 'http://localhost:3000/login'
-    // const url = 'https://danbennett.dev/mtlt/login'
     return this.httpClient.post<UserLogin>(url, loginInfo)
     .subscribe((res)=>{
       console.log('response');
@@ -72,7 +70,6 @@ export class UserService {
 
   saveExercise(submittedExerciseData: ExerciseHistory){
     const url = 'http://localhost:3000/savex'
-    // const url = 'https://danbennett.dev/mtlt/savex'
     console.log(submittedExerciseData);
 
     return this.httpClient.post<ExerciseHistory>(url, submittedExerciseData)

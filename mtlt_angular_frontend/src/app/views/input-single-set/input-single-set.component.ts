@@ -2,11 +2,11 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-input-single-set',
+  templateUrl: './input-single-set.component.html',
+  styleUrls: ['./input-single-set.component.scss'],
 })
-export class InputComponent implements OnInit {
+export class InputSingleSetComponent implements OnInit {
   @Output() exerciseTotalVolume = new EventEmitter<string[]>();
   @Input() inputFormGroup = this.fb.group({});
   @Input() exerType: string;

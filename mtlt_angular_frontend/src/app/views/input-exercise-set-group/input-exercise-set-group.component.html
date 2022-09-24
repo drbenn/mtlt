@@ -94,12 +94,12 @@
   <div class="set-flex-wrapper">
     <div *ngFor="let s of setArray.controls; index as i">
       <span class="set-title">Set {{ i + 1 }}</span>
-      <app-input
+      <app-input-single-set
         [i]="i + 1"
         [exerType]="exerciseTypeToChild"
         [inputFormGroup]="$any(s)"
         (exerciseTotalVolume)="receiveSetVolume($event)"
-      ></app-input>
+      ></app-input-single-set>
       <button
         class="delete-button app-button"
         (click)="removeSet(i)"

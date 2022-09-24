@@ -1,8 +1,8 @@
 <div class="workout-panel-sizing" *ngFor="let e of exerciseInput; index as i">
-  <app-input-array
+  <app-input-exercise-set-group
     [exerciseIndexForCurrentWorkout]="exerciseInputIndex"
     (exerciseArrayForIteration)="receiveIterationExercise($event)"
-  ></app-input-array>
+  ></app-input-exercise-set-group>
   <button
     class="delete-button float-right-delete app-button"
     (click)="onRemoveExercise(i)"

@@ -10,12 +10,12 @@ import { UserService } from 'src/app/core/services/user.service';
 import { AddExerciseToState } from 'src/app/core/state/appState.actions';
 
 @Component({
-  selector: 'app-input-array',
-  templateUrl: './input-array.component.html',
-  styleUrls: ['./input-array.component.scss'],
+  selector: 'app-input-exercise-set-group',
+  templateUrl: './input-exercise-set-group.component.html',
+  styleUrls: ['./input-exercise-set-group.component.scss'],
   providers: [DefaultExercises],
 })
-export class InputArrayComponent implements OnInit {
+export class InputExerciseSetGroupComponent implements OnInit {
   lastToDelete: number = -1;
   usernameExerciseSubmit:string='';
   @Output() exerciseArrayForIteration = new EventEmitter<string[]>();

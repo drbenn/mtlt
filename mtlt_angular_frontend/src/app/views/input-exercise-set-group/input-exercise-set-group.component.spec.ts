@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputArrayComponent } from './input-array.component';
+import { InputExerciseSetGroupComponent } from './input-exercise-set-group.component';
 
 describe('InputArrayComponent', () => {
-  let component: InputArrayComponent;
-  let fixture: ComponentFixture<InputArrayComponent>;
+  let component: InputExerciseSetGroupComponent;
+  let fixture: ComponentFixture<InputExerciseSetGroupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InputArrayComponent ]
+      declarations: [ InputExerciseSetGroupComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InputArrayComponent);
+    fixture = TestBed.createComponent(InputExerciseSetGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

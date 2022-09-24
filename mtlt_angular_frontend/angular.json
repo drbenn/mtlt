@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "crud_rest_app_angular_frontend": {
+    "mtlt_angular_frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/crud_rest_app_angular_frontend",
+            "outputPath": "dist/mtlt_angular_frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "crud_rest_app_angular_frontend:build:production"
+              "browserTarget": "mtlt_angular_frontend:build:production"
             },
             "development": {
-              "browserTarget": "crud_rest_app_angular_frontend:build:development"
+              "browserTarget": "mtlt_angular_frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "crud_rest_app_angular_frontend:build"
+            "browserTarget": "mtlt_angular_frontend:build"
           }
         },
         "test": {
@@ -109,5 +109,5 @@
       }
     }
   },
-  "defaultProject": "crud_rest_app_angular_frontend"
+  "defaultProject": "mtlt_angular_frontend"
 }

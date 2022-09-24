@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'crud_rest_app_angular_frontend';
+  title = 'mtlt_angular_frontend';
 }

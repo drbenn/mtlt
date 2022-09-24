@@ -1,6 +1,6 @@
 {
-  "name": "crud-rest-app-angular-frontend",
-  "version": "0.0.0",
+  "name": "mtlt-angular-frontend",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

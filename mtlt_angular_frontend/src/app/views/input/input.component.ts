@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FormFactoryService } from 'src/app/core/services/exerciseInput.service';
 
 @Component({
   selector: 'app-input',
@@ -25,7 +24,6 @@ export class InputComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private formFactoryService: FormFactoryService
   ) {}
   ngOnInit() {
     // On init of new rep row, setNumber will auto-populate value based on index

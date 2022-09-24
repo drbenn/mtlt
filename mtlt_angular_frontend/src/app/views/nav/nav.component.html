@@ -5,7 +5,7 @@
   </div>
   <div class="login-register-status-container" *ngIf="!isUserLoggedIn">
     <div class="log-margin">
-      <a routerLink="/login" (click)="userLogIn()">Login</a>
+      <a routerLink="/login">Login</a>
     </div>
     <div *ngIf="innerWidth > 1000">|</div>
     <div class="log-margin"><a routerLink="/register">Register</a></div>
@@ -74,11 +74,7 @@
     <a routerLink="/workout" *ngIf="isUserLoggedIn">Workout</a>
     <a routerLink="/dashboard" *ngIf="isUserLoggedIn">Dashboard</a>
     <!-- <a routerLink="/landing">Landing</a> -->
-    <!-- <button (click)="dbTest()">Db test</button> -->
   </div>
   <div class="bottom-border nav-border-width"></div>
 </div>
-<!-- <div *ngFor="let item of dbData$ | async">
-  <div>{{ item.username }}</div>
-  <div>{{ item.email }}</div>
-</div> -->
+
